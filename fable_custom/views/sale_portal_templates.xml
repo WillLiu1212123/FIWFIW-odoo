@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="fable_sale_order_portal_content" inherit_id="sale.sale_order_portal_content">
+        <xpath expr="//div[@id='so_date']" position="inside">
+            <div class="mb-3 col-6">
+                <strong>工單維修建議:</strong> <span t-field="sale_order.workshop_advice"/>
+            </div>
+        </xpath>
+    </template>
+
+<!--    <template id="saiens_frontend_layout" name="Main Frontend Layout" inherit_id="portal.frontend_layout">-->
+<!--        <xpath expr="//header" position="before">-->
+<!--            <t t-set="no_header" t-value="True"/>-->
+<!--            <t t-set="no_footer" t-value="True"/>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+<!--    &lt;!&ndash;    把 portal_layout 中的  o_portal container mt-3 隱藏起來&ndash;&gt;-->
+<!--    <template id="saiens_portal_layout" name="saiens Portal Layout" inherit_id="portal.portal_layout">-->
+<!--        <xpath expr="//div[hasclass('o_portal')]" position="replace">-->
+<!--            <div></div>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+<!--    <template id="saiens_portal_record_sidebar" name="saiens My Portal Record Sidebar" inherit_id="portal.portal_record_sidebar">-->
+<!--        <xpath expr="//div[1]" position="replace">-->
+<!--            <div></div>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+<!--    <template id="saiens_sale_order_portal_content" inherit_id="sale.sale_order_portal_content">-->
+<!--        <xpath expr="//div[@id='introduction']" position="replace">-->
+<!--            <div id="introduction"  t-attf-class="container pb-2 pt-3 #{'card-header bg-white' if report_type == 'html' else ''}">-->
+<!--                <style type="text/css">-->
+<!--                    #sidebar_left {-->
+<!--                        text-align:center;-->
+<!--                    }-->
+<!--                    #sidebar_right {-->
+<!--                        text-align:right;-->
+<!--                    }-->
+<!--                    .rs1 {-->
+<!--                        font-size: 48px;-->
+<!--                        font-weight:bold;-->
+<!--                    }-->
+<!--                    .rs2 {-->
+<!--                        font-size: 34px;-->
+<!--                        font-weight:bold;-->
+<!--                    }-->
+<!--                    #sidebar_center {-->
+<!--                        text-align:left;-->
+<!--                    }-->
+<!--                    .cs1 {-->
+<!--                        font-size: 20px;-->
+<!--                        font-weight:bold;-->
+<!--                    }-->
+<!--                    .cs2 {-->
+<!--                        font-size: 12px;-->
+<!--                    }-->
+<!--                    .title {-->
+<!--                        font-size: 24px;-->
+<!--                        font-weight:bold;-->
+<!--                    }-->
+<!--                    div {-->
+<!--                        font-family: "微軟正黑體","Helvetica", "Arial","LiHei Pro","黑體-繁", sans-serif !important;-->
+<!--                    }-->
+<!--&lt;!&ndash;                @media(max-width: 767px){#sidebar_right{text-align:center}}#so_date>div:nth-child(2n+1){white-space:nowrap}#details .sale_tbody td{vertical-align:middle}#details .o_total{background-color:#fff}#portal_sale_content{padding-bottom:0 !important}a[data-target="#modalaccept"]{background-color:#f1a945}tr.tr-only-hide{color:#d20b2a;color:#000}table>:nth-child(1)>tr>th,table>:nth-child(1)>tr>td{border-top:1px solid #999}table>:last-child>tr>th,table>:last-child>tr>td{border-bottom:1px solid #999}table tr>:nth-child(1){border-left:1px solid #999}table tr>:last-child{border-right:1px solid #999}table tbody tr:nth-of-type(odd){background-color:#fff !important}@media(max-width: 736px){.d-mob-none{display:none !important}tr.tr-only-hide{display:none !important}#total>div:nth-child(1){-webkit-box-ordinal-group:4;-ms-flex-order:3;order:3}#total>div:nth-child(2){-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1;margin-bottom:0}.table-rwd{min-width:100%}.table-rwd tr{display:block;border:1px solid #ddd;margin-top:5px}.table-rwd td{text-align:left;font-size:15px;overflow:hidden;width:100%;display:block}.table-rwd td:before{content:attr(data-th) " : ";display:inline-block;text-transform:uppercase;font-weight:bolder;margin-right:10px;color:#d20b2a;color:#000}.table-rwd.table-bordered td,.table-rwd.table-bordered th,.table-rwd.table-bordered{border:0}}.table .textRightMobLeft{text-align:right}@media(max-width: 736px){.table .textRightMobLeft{text-align:left;width:32.3333% !important;width:49% !important;display:inline-block !important}.table .textRightMobLeft.mobForceRight{width:100% !important;padding-left:52%}.table .textRightMobLeft:before{text-align:center}}/*# sourceMappingURL=saiens.css.map */&ndash;&gt;-->
+<!--                    @media(max-width: 767px) {-->
+<!--                        #sidebar_right {-->
+<!--                            text-align:center-->
+<!--                        }-->
+<!--                    }-->
+
+<!--                    #so_date>div:nth-child(2n+1) {-->
+<!--                        white-space: nowrap-->
+<!--                    }-->
+
+<!--                    #details .sale_tbody td {-->
+<!--                        vertical-align: middle-->
+<!--                    }-->
+
+<!--                    #details .o_total {-->
+<!--                        background-color: #fff-->
+<!--                    }-->
+
+<!--                    #portal_sale_content {-->
+<!--                        padding-bottom: 0 !important-->
+<!--                    }-->
+
+<!--                    a[data-target="#modalaccept"] {-->
+<!--                        background-color: #f1a945-->
+<!--                    }-->
+
+<!--                    tr.tr-only-hide {-->
+<!--                        color: #d20b2a;-->
+<!--                        color: #000-->
+<!--                    }-->
+
+<!--                    table>:nth-child(1)>tr>th,table>:nth-child(1)>tr>td {-->
+<!--                        border-top: 1px solid #999-->
+<!--                    }-->
+
+<!--                    table>:last-child>tr>th,table>:last-child>tr>td {-->
+<!--                        border-bottom: 1px solid #999-->
+<!--                    }-->
+
+<!--                    table tr>:nth-child(1) {-->
+<!--                        border-left: 1px solid #999-->
+<!--                    }-->
+
+<!--                    table tr>:last-child {-->
+<!--                        border-right: 1px solid #999-->
+<!--                    }-->
+
+<!--                    table tbody tr:nth-of-type(odd) {-->
+<!--                        background-color: #fff !important-->
+<!--                    }-->
+
+<!--                    @media(max-width: 736px) {-->
+<!--                        .d-mob-none {-->
+<!--                            display:none !important-->
+<!--                        }-->
+
+<!--                        tr.tr-only-hide {-->
+<!--                            display: none !important-->
+<!--                        }-->
+
+<!--                        #total>div:nth-child(1) {-->
+<!--                            -webkit-box-ordinal-group: 4;-->
+<!--                            -ms-flex-order: 3;-->
+<!--                            order: 3-->
+<!--                        }-->
+
+<!--                        #total>div:nth-child(2) {-->
+<!--                            -webkit-box-ordinal-group: 2;-->
+<!--                            -ms-flex-order: 1;-->
+<!--                            order: 1;-->
+<!--                            margin-bottom: 0-->
+<!--                        }-->
+
+<!--                        .table-rwd {-->
+<!--                            min-width: 100%-->
+<!--                        }-->
+
+<!--                        .table-rwd tr {-->
+<!--                            display: block;-->
+<!--                            border: 1px solid #ddd;-->
+<!--                            margin-top: 5px-->
+<!--                        }-->
+
+<!--                        .table-rwd td {-->
+<!--                            text-align: left;-->
+<!--                            font-size: 15px;-->
+<!--                            overflow: hidden;-->
+<!--                            width: 100%;-->
+<!--                            display: block-->
+<!--                        }-->
+
+<!--                        .table-rwd td:before {-->
+<!--                            content: attr(data-th) " : ";-->
+<!--                            display: inline-block;-->
+<!--                            text-transform: uppercase;-->
+<!--                            font-weight: bolder;-->
+<!--                            margin-right: 10px;-->
+<!--                            color: #d20b2a;-->
+<!--                            color: #000-->
+<!--                        }-->
+
+<!--                        .table-rwd.table-bordered td,.table-rwd.table-bordered th,.table-rwd.table-bordered {-->
+<!--                            border: 0-->
+<!--                        }-->
+<!--                    }-->
+
+<!--                    .table .textRightMobLeft {-->
+<!--                        text-align: right-->
+<!--                    }-->
+
+<!--                    @media(max-width: 736px) {-->
+<!--                        .table .textRightMobLeft {-->
+<!--                            text-align:left;-->
+<!--                            width: 32.3333% !important;-->
+<!--                            width: 49% !important;-->
+<!--                            display: inline-block !important-->
+<!--                        }-->
+
+<!--                        .table .textRightMobLeft.mobForceRight {-->
+<!--                            width: 100% !important;-->
+<!--                            padding-left: 52%-->
+<!--                        }-->
+
+<!--                        .table .textRightMobLeft:before {-->
+<!--                            text-align: center-->
+<!--                        }-->
+<!--                    }-->
+<!--                </style>-->
+<!-- -->
+<!--                <div class="row align-items-start">-->
+
+<!--                    <div id="sidebar_left" class="col-3 d-md-block d-none">-->
+<!--                        <img t-if="sale_order.company_id.logo" t-att-src="image_data_uri(sale_order.company_id.logo)"-->
+<!--                             style="max-height: 120px;" alt="Logo"/>-->
+<!--                    </div>-->
+<!--                    <div id="sidebar_center" class="col-4 d-md-block d-none">-->
+<!--                        <span class="cs1">Saiens inc.</span><br/>-->
+<!--                        <span class="cs1">山恩實業股份有限公司</span><br/>-->
+<!--                        <span class="cs2">台北市松山區南京東路五段343號2樓之6</span><br/>-->
+<!--                        <span class="cs2">Tel:02-8792-9511 / Fax:02-8991-9911</span>-->
+<!--                    </div>-->
+
+<!--                    <div id="sidebar_right" class="col-12 col-md-5">-->
+<!--                        <span class="rs1">QUOTATION</span><br/>-->
+<!--                        <span class="rs2">專案報價單</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </xpath>-->
+<!--        <xpath expr="//div[@id='so_date']" position="replace">-->
+<!--             <div class="row" id="so_date">-->
+<!--                <div class="col-4 col-md-2">-->
+<!--                    <strong>客戶名稱：</strong>-->
+<!--                </div>-->
+<!--                <div class="col-8 col-md-4">-->
+<!--                    <span t-field="sale_order.partner_id"/>/<span t-field="sale_order.partner_vat"/>-->
+<!--                </div>-->
+<!--                <div class="col-4 col-md-2">-->
+<!--                    <strong>案件編號：</strong>-->
+<!--                </div>-->
+<!--                <div class="col-8 col-md-4">-->
+<!--                    <span t-field="sale_order.name"/>-->
+<!--                </div>-->
+<!--                <div class="col-4 col-md-2">-->
+<!--                    <strong>案件聯絡人：</strong>-->
+<!--                </div>-->
+<!--                <div class="col-8 col-md-4">-->
+<!--                    <span t-field="sale_order.contact_id.short_name"/>-->
+<!--                </div>-->
+<!--                <div class="col-4 col-md-2">-->
+<!--                    <strong>案件業務：</strong>-->
+<!--                </div>-->
+<!--                <div class="col-8 col-md-4">-->
+<!--                    <span t-field="sale_order.user_id"/>-->
+<!--                </div>-->
+<!--                <div class="col-4 col-md-2">-->
+<!--                    <strong>聯絡人電話：</strong>-->
+<!--                </div>-->
+<!--                <div class="col-8 col-md-4">-->
+<!--                    <span t-field="sale_order.contact_phone"/>-->
+<!--                </div>-->
+
+<!--                <div class="col-4 col-md-2">-->
+<!--                    <strong>報價日期：</strong>-->
+<!--                </div>-->
+<!--                <div class="col-8 col-md-4">-->
+<!--                    <span t-field="sale_order.date_order" t-options='{"widget": "date"}'/>-->
+<!--                </div>-->
+<!--                <div class="col-4 col-md-2">-->
+<!--                    <strong>案件名稱：</strong>-->
+<!--                </div>-->
+<!--                <div class="col-8 col-md-4">-->
+<!--                    <span t-field="sale_order.project_name"/>-->
+<!--                </div>-->
+<!--                <div class="col-4 col-md-2">-->
+<!--                    <strong>報價有效日期：</strong>-->
+<!--                </div>-->
+<!--                <div class="col-8 col-md-4">-->
+<!--                    <span t-field="sale_order.validity_date" t-options='{"widget": "date"}'/>-->
+<!--                </div>-->
+<!--                <div class="col-4 col-md-2">-->
+<!--                    <strong>案件地址：</strong>-->
+<!--                </div>-->
+<!--                <div class="col-8 col-md-4">-->
+<!--                    <span t-field="sale_order.project_addr"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </xpath>-->
+
+<!--        <xpath expr="//div[hasclass('row')]/div[hasclass('col-lg-6')]" position="replace">-->
+<!--        </xpath>-->
+
+<!--        <xpath expr="//section[@id='details']" position="replace">-->
+<!--            <section id="details" style="page-break-inside: auto;" class="mt32">-->
+
+<!--                <t t-if="sale_order.order_line_1">-->
+<!--                <table class="table table-sm table-striped table-bordered table-rwd" id="sales_order_table_1" >-->
+<!--                    <thead class="bg-100">-->
+<!--                        <tr class="tr-only-hide">-->
+<!--                            <th style="width:20%" class="text-center">檯面項目</th>-->
+<!--                            <th style="width:10%" class="text-center">花色</th>-->
+<!--                            <th style="width:40%" class="text-center">施作說明</th>-->
+<!--                            <th style="width:5%" class="text-center">長度</th>-->
+<!--                            <th style="width:5%" class="text-center">深度</th>-->
+<!--                            <th style="width:10%" class="text-center">單價</th>-->
+<!--                            <th style="width:10%" class="text-center" >總價</th>-->
+<!--                        </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody class="sale_tbody ">-->
+<!--                        <t t-set="current_total_1" t-value="0"/>-->
+<!--                        <t t-foreach="sale_order.order_line_1" t-as="line">-->
+<!--                            <t t-set="current_total_1" t-value="current_total_1 + line.price_subtotal" />-->
+<!--                            <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">-->
+<!--                                <t t-if="not line.display_type">-->
+<!--                                    <td data-th="檯面項目"><span t-field="line.p_name"/></td>-->
+<!--                                    <td data-th="花色"><span t-field="line.saiens_color"/></td>-->
+<!--                                    <td data-th="施作說明"><span t-field="line.name"/></td>-->
+<!--                                    <td data-th="長度" class="textRightMobLeft">-->
+<!--                                            <t t-esc="'{0:,.0f}'.format(line.product_uom_qty)" />-->
+<!--                                    </td>-->
+<!--                                    <td data-th="深度" class="textRightMobLeft">-->
+<!--                                        <t t-esc="'{0:,.0f}'.format(line.depth)" />-->
+<!--                                    </td>-->
+<!--                                    <td data-th="單價" class="textRightMobLeft">-->
+<!--                                        <t t-esc="'{0:,.0f}'.format(line.price_unit)" />-->
+<!--                                    </td>-->
+<!--                                    <td data-th="總價" class="textRightMobLeft">-->
+<!--                                        <t t-esc="'{0:,.0f}'.format(line.price_subtotal)" />-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                                <t t-if="line.display_type == 'line_section'">-->
+<!--                                    <td colspan="99">-->
+<!--                                        <span t-field="line.name"/>-->
+<!--                                    </td>-->
+<!--                                    <t t-set="current_section" t-value="line"/>-->
+<!--                                    <t t-set="current_subtotal" t-value="0"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="line.display_type == 'line_note'">-->
+<!--                                    <td colspan="99">-->
+<!--                                        <span t-field="line.name"/>-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                    </tbody>-->
+<!--                    <tbody >-->
+<!--                        <tr class="border-black o_total">-->
+<!--                            <td class="d-mob-none" colspan="4"></td>-->
+<!--                            <td class="d-mob-none" colspan="2"><strong>檯面總價</strong></td>-->
+<!--                            <td class="textRightMobLeft" data-th="檯面總價" >-->
+<!--                                <span class="oe_order_line_price_total"> <t t-esc="'{0:,.0f}'.format(current_total_1)" /> </span>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--                </t>-->
+<!--                <t t-if="sale_order.order_line_2">-->
+<!--                <table class="table table-sm table-striped table-bordered table-rwd" id="sales_order_table_2" >-->
+<!--                    <thead class="bg-100">-->
+<!--                        <tr class="tr-only-hide">-->
+<!--                            <th style="width:20%" class="text-center">材料項目</th>-->
+<!--                            <th style="width:10%" class="text-center">花色</th>-->
+<!--                            <th style="width:40%" class="text-center">施作說明</th>-->
+<!--                            <th style="width:10%" class="text-center">板材單價</th>-->
+<!--                            <th style="width:5%" class="text-center">數量</th>-->
+<!--                            <th style="width:10%" class="text-center" >總價</th>-->
+<!--                        </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody class="sale_tbody">-->
+<!--                        <t t-set="current_total_2" t-value="0"/>-->
+<!--                        <t t-foreach="sale_order.order_line_2" t-as="line">-->
+
+<!--                            <t t-set="current_total_2" t-value="current_total_2 + line.price_subtotal" />-->
+
+<!--                            <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">-->
+<!--                                <t t-if="not line.display_type">-->
+<!--                                    <td data-th="材料項目"><span t-field="line.p_name"/></td>-->
+<!--                                    <td data-th="花色"><span t-field="line.saiens_color"/></td>-->
+<!--                                    <td data-th="施作說明"><span t-field="line.name"/></td>-->
+<!--                                    <td data-th="板材單價" class="textRightMobLeft "><t t-esc="'{0:,.0f}'.format(line.price_unit)" /></td>-->
+<!--                                    <td data-th="數量" class="textRightMobLeft"><t t-esc="'{0:,.0f}'.format(line.product_uom_qty)" /></td>-->
+<!--                                    <td data-th="總價" class="textRightMobLeft mobForceRight"><t t-esc="'{0:,.0f}'.format(line.price_subtotal)" /></td>-->
+<!--                                </t>-->
+<!--                                <t t-if="line.display_type == 'line_section'">-->
+<!--                                    <td colspan="99"><span t-field="line.name"/></td>-->
+<!--                                    <t t-set="current_section" t-value="line"/>-->
+<!--                                    <t t-set="current_subtotal" t-value="0"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="line.display_type == 'line_note'">-->
+<!--                                    <td colspan="99"><span t-field="line.name"/></td>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                    </tbody>-->
+<!--                    <tbody >-->
+<!--                        <tr class="border-black o_total">-->
+<!--                            <td class="d-mob-none" colspan="3"></td>-->
+<!--                            <td class="d-mob-none" colspan="2"><strong>材料總價</strong></td>-->
+<!--                            <td class="textRightMobLeft" data-th="材料總價">-->
+<!--                                <span class="oe_order_line_price_total"> <t t-esc="'{0:,.0f}'.format(current_total_2)" /> </span>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--                <div class="row" style="page-break-inside: avoid;">-->
+<!--                    <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">-->
+<!--                        <table class="table table-sm">-->
+
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                </t>-->
+<!--                <t t-if="sale_order.order_line_3">-->
+
+<!--                <table class="table table-sm table-striped table-bordered table-rwd" id="sales_order_table_3" >-->
+<!--                    <thead class="bg-100">-->
+<!--                        <tr class="tr-only-hide">-->
+<!--                            <th style="width:30%" class="text-center">加工項目</th>-->
+<!--                            <th style="width:40%" class="text-center">說明</th>-->
+<!--                            <th style="width:10%" class="text-center">單價</th>-->
+<!--                            <th style="width:10%" class="text-center">數量</th>-->
+<!--                            <th style="width:10%" class="text-center">總價</th>-->
+<!--                        </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody class="sale_tbody">-->
+<!--                        <t t-set="current_total_3" t-value="0"/>-->
+<!--                        <t t-foreach="sale_order.order_line_3" t-as="line">-->
+
+<!--                            <t t-set="current_total_3" t-value="current_total_3 + line.price_subtotal" />-->
+
+<!--                            <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">-->
+<!--                                <t t-if="not line.display_type">-->
+<!--                                    <td data-th="加工項目"><span t-field="line.p_name"/></td>-->
+<!--                                    <td data-th="說明"><span t-field="line.name"/></td>-->
+<!--                                    <td data-th="單價" class="textRightMobLeft"><t t-esc="'{0:,.0f}'.format(line.price_unit)" /></td>-->
+<!--                                    <td data-th="數量" class="textRightMobLeft"><t t-esc="'{0:,.0f}'.format(line.product_uom_qty)" /></td>-->
+<!--                                    <td data-th="總價" class="textRightMobLeft mobForceRight"><t t-esc="'{0:,.0f}'.format(line.price_subtotal)" /></td>-->
+<!--                                </t>-->
+<!--                                <t t-if="line.display_type == 'line_section'">-->
+<!--                                    <td colspan="99">-->
+<!--                                        <span t-field="line.name"/>-->
+<!--                                    </td>-->
+<!--                                    <t t-set="current_section" t-value="line"/>-->
+<!--                                    <t t-set="current_subtotal" t-value="0"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="line.display_type == 'line_note'">-->
+<!--                                    <td colspan="99">-->
+<!--                                        <span t-field="line.name"/>-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                    </tbody>-->
+<!--                    <tbody>-->
+<!--                        <tr class="border-black o_total">-->
+<!--                            <td class="d-mob-none" colspan="2"></td>-->
+<!--                            <td colspan="2" class="d-mob-none"><strong>加工總價</strong></td>-->
+<!--                            <td class="textRightMobLeft" data-th="加工總價">-->
+<!--                                <span class="oe_order_line_price_total"> <t t-esc="'{0:,.0f}'.format(current_total_3)" /> </span>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+
+<!--                </t>-->
+<!--                <t t-if="sale_order.order_line_4">-->
+
+<!--                <table class="table table-sm table-striped table-bordered table-rwd" id="sales_order_table_4" >-->
+<!--                    <thead class="bg-100">-->
+<!--                        <tr class="tr-only-hide">-->
+<!--                            <th style="width:30%" class="text-center">其他項目</th>-->
+<!--                            <th style="width:40%" class="text-center">說明</th>-->
+<!--                            <th style="width:10%" class="text-center">單價</th>-->
+<!--                            <th style="width:10%" class="text-center">數量</th>-->
+<!--                            <th style="width:10%" class="text-center" >總價</th>-->
+<!--                        </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody class="sale_tbody">-->
+<!--                        <t t-set="current_total_4" t-value="0"/>-->
+<!--                        <t t-foreach="sale_order.order_line_4" t-as="line">-->
+
+<!--                            <t t-set="current_total_4" t-value="current_total_4 + line.price_subtotal" />-->
+
+<!--                            <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">-->
+<!--                                <t t-if="not line.display_type">-->
+<!--                                    <td data-th="其他項目"><span t-field="line.p_name"/></td>-->
+<!--                                    <td data-th="說明"><span t-field="line.name"/></td>-->
+<!--                                    <td data-th="單價" class="textRightMobLeft"><t t-esc="'{0:,.0f}'.format(line.price_unit)" /></td>-->
+<!--                                    <td data-th="數量" class="textRightMobLeft"><t t-esc="'{0:,.0f}'.format(line.product_uom_qty)" /></td>-->
+<!--                                    <td data-th="總價" class="textRightMobLeft mobForceRight"><t t-esc="'{0:,.0f}'.format(line.price_subtotal)" /></td>-->
+<!--                                </t>-->
+<!--                                <t t-if="line.display_type == 'line_section'">-->
+<!--                                    <td colspan="99">-->
+<!--                                        <span t-field="line.name"/>-->
+<!--                                    </td>-->
+<!--                                    <t t-set="current_section" t-value="line"/>-->
+<!--                                    <t t-set="current_subtotal" t-value="0"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="line.display_type == 'line_note'">-->
+<!--                                    <td colspan="99">-->
+<!--                                        <span t-field="line.name"/>-->
+<!--                                    </td>-->
+<!--                                </t>-->
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                        <tr class="border-black o_total">-->
+<!--                            <td class="d-mob-none" colspan="2"></td>-->
+<!--                            <td colspan="2" class="d-mob-none"><strong>其他總價</strong></td>-->
+<!--                            <td class="textRightMobLeft" data-th="其他總價">-->
+<!--                                <span class="oe_order_line_price_total"> <t t-esc="'{0:,.0f}'.format(current_total_4)" /> </span>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--                </t>-->
+
+
+<!--&lt;!&ndash;                <t t-set="display_discount" t-value="True in [line.discount > 0 for line in sale_order.order_line]"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <table t-att-data-order-id="sale_order.id" t-att-data-token="sale_order.access_token" class="table table-sm table-striped table-bordered table-rwd" id="sales_order_table" >&ndash;&gt;-->
+<!--&lt;!&ndash;                    <thead class="bg-100">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <tr class="tr-only-hide">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <th style="width:20%" class="text-center">項目名稱</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <th style="width:10%" class="text-center">花色</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <th style="width:5%" class="text-center">規格</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <th style="width:35%" class="text-center">說明</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <th style="width:5%" class="text-center">單位</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <th style="width:5%" class="text-center">數量</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <th style="width:10%" class="text-center">單價</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <th style="width:10%" class="text-center" >&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span>小計</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </th>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </thead>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tbody class="sale_tbody">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <t t-set="current_subtotal" t-value="0"/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <t t-foreach="sale_order.order_line" t-as="line">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-if="not line.display_type">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <td data-th="項目名稱" id="product_name"><span t-field="line.product_id"/></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <td data-th="花色"><span t-field="line.saiens_color"/></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <td data-th="規格"><span t-field="line.standard"/></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <td data-th="備註" id="line_name"><span t-field="line.name"/></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <td data-th="單位" id="product_uom"><span t-field="line.product_uom"/></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <td data-th="數量" class="textRightMobLeft">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <t t-esc="'{0:,.1f}'.format(line.product_uom_qty)" />&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <td data-th="單價" class="textRightMobLeft">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <t t-esc="'{0:,.1f}'.format(line.price_unit)" />&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <td data-th="小計" class="textRightMobLeft">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <t t-esc="'{0:,.0f}'.format(line.price_total)" />&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </td>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                                </t>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-if="line.display_type == 'line_section'">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <td colspan="99">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <span t-field="line.name"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-set="current_section" t-value="line"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-set="current_subtotal" t-value="0"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </t>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-if="line.display_type == 'line_note'">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <td colspan="99">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <span t-field="line.name"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </t>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        </t>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;                </table>&ndash;&gt;-->
+
+<!--                <div id="total" class="row" name="total" style="page-break-inside: avoid;">-->
+<!--                    <div class="col-md-8 mb-3">-->
+<!--                        <spend class="title">訂單說明事項</spend>-->
+<!--                        <hr class="mt-0 mb-1"/>-->
+<!--                        <t t-if="sale_order.terms_type == 'html'">-->
+<!--                            <t t-set="tc_url" t-value="'%s/terms' % (sale_order.get_base_url())"/>-->
+<!--                            <em>訂單說明事項: <a href="/terms"><t t-esc="tc_url"/></a></em>-->
+<!--                        </t>-->
+<!--                        <t t-else="">-->
+<!--                            <em t-field="sale_order.note"/>-->
+<!--                        </t>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-4 mb-3 ml-auto">-->
+<!--                        <table class="table table-sm ml-auto">-->
+<!--                            <tr class="border-black o_total">-->
+<!--                                <td><strong>項目加總:</strong></td>-->
+<!--                                <td class="text-right">-->
+<!--                                    <span class="oe_order_line_price_total" t-field="sale_order.amount_untaxed"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr class="border-black o_total">-->
+<!--                                <td><strong>營業稅:</strong></td>-->
+<!--                                <td class="text-right">-->
+<!--                                    <span class="oe_order_line_price_total" t-field="sale_order.amount_tax"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr class="border-black o_total">-->
+<!--                                <td><strong>含稅總價</strong></td>-->
+<!--                                <td style="font-weight:bold;"  class="text-right">-->
+<!--                                    <span class="oe_order_line_price_total" t-field="sale_order.amount_total"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr class="border-black o_total">-->
+<!--                                <td style="color: #D3D3D3;"><strong>建議售價</strong></td>-->
+<!--                                <td style="color: #D3D3D3;" class="text-right">-->
+<!--                                    <span class="oe_order_line_price_total" t-field="sale_order.suggested_price"/>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </section>-->
+<!--        </xpath>-->
+
+<!--        <xpath expr="//section[@id='terms']" position="replace">-->
+<!--        </xpath>-->
+<!--        <xpath expr="//section[@t-if='sale_order.payment_term_id']" position="replace">-->
+<!--            <div class="row d-none">-->
+<!--                <div class="col-md-6 mb-3">-->
+<!--                    <spend class="title">專業業務</spend><br/><br/><br/>-->
+<!--                    <hr class="mt-0 mb-1"/>-->
+<!--                </div>-->
+<!--                <div class="col-md-6 mb-3">-->
+<!--                    <spend class="title">客戶回簽確認</spend><br/><br/><br/>-->
+<!--                    <hr class="mt-0 mb-1"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+<!--        &lt;!&ndash;更改門戶中的銷售訂單名稱&ndash;&gt;-->
+<!--        <template id="portal_my_orders_saiens" inherit_id="sale.portal_my_orders">-->
+<!--            <xpath expr="//t[@t-esc='order.name']" position="replace">-->
+<!--                <t t-esc="order.project_name"/>-->
+<!--            </xpath>-->
+<!--        </template>-->
+<!--        <template id="portal_my_home_menu_sale_saiens" inherit_id="sale.portal_my_home_menu_sale">-->
+<!--            <xpath expr="//t[@t-esc='sale_order.name']" position="replace">-->
+<!--                <t t-esc="sale_order.project_name"/>-->
+<!--            </xpath>-->
+<!--        </template>-->
+
+<!--        <template id="sale_order_portal_template_saiens" inherit_id="sale.sale_order_portal_template">-->
+<!--            <xpath expr="//t[@t-if='sale_order.has_to_be_signed(True)']" position="replace">-->
+<!--                <t t-if="sale_order.has_to_be_signed(True)">-->
+<!--                    <div class="col-sm-auto mt8">-->
+<!--                        <a role="button" class="btn btn-primary" data-toggle="modal" data-target="#modalaccept" href="#"><i class="fa fa-check"/><t t-if="sale_order.has_to_be_paid(True)"> 同意並付款</t><t t-else=""> 同意並簽名</t></a>-->
+<!--                    </div>-->
+<!--&lt;!&ndash;                    <div class="col-sm-auto mt8">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <a role="button" class="btn btn-secondary" href="#discussion"><i class="fa fa-comment"/> Feedback</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="col-sm-auto mt8">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <a role="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldecline" href="#"> <i class="fa fa-times"/> Reject</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                </t>-->
+<!--            </xpath>-->
+<!--        </template>-->
+
+
+
+</odoo>

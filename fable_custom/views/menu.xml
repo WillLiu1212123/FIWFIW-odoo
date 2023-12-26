@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="fable_sol_root" name="訂單維修管理" sequence="50" action="fable_sol_kanban_action"/>
+        
+        <menuitem id="fable_sol" name="訂單進度管理" parent="fable_sol_root" sequence="10"/>
+        <menuitem id="fable_sol_categ" name="訂單進度管理" parent="fable_sol" sequence="10" action="fable_sol_free_action"/>
+        <menuitem id="fable_sol_kanban" name="訂單進度看板" parent="fable_sol" sequence="10" action="fable_sol_kanban_action"/>
+
+
+        <menuitem id="fable_sol_mo_menu" name="個人維修管理排程" parent="fable_sol_root" action="fable_sol_mo_free_action"
+                  sequence="20"/>
+        <menuitem id="fable_sol_accept_menu" name="維修驗收" parent="fable_sol_root" action="fable_sol_accept_action"
+                  sequence="30"/>
+        <menuitem id="fable_sol_ship_menu" name="訂單出貨" parent="fable_sol_root" action="fable_sol_ship_action"
+                  sequence="40"/>
+        
+<!--        20230513 產線生產運作此功能先隱藏-->
+<!--
+        <menuitem id="p_mrp_sol_mo_production_menu" name="產線生產運作" parent="al_industry_root" action="p_mrp_sol_mo_production_free_action"
+                  sequence="30"/>
+-->
+
+<!--        <menuitem id="project_task_mo_link_menu" name="製造生產日報表" parent="al_industry_root" action="project_task_mo_link_view_action"-->
+<!--                  sequence="35"/>-->
+
+
+<!--        <menuitem id="p_mrp_sol_sp_menu" name="包裝與出貨進度表" parent="al_industry_root" action="p_mrp_sol_sp_action"-->
+<!--                  sequence="40"/>-->
+
+<!--        <menuitem id="p_mrp_sol_pack_menu" name="出貨清單" parent="al_industry_root" action="project_task_pack_link_view_action"-->
+<!--                  sequence="45"/>-->
+
+
+<!--        <menuitem id="mold_management_menu" name="模具管理" parent="al_industry_root" sequence="50"/>-->
+
+
+<!--        <menuitem id="configuration_mold_management_menu" name="模具列表" parent="mold_management_menu" action="mold_management_view_action"-->
+<!--                  sequence="10"/>-->
+<!--        <menuitem id="mold_move_view_menu" name="模具進出單" parent="mold_management_menu" action="mold_move_view_action"-->
+<!--                  sequence="20"/>    -->
+<!--        <menuitem id="mold_move_line_view_menu" name="模具進出明細" parent="mold_management_menu" action="mold_move_line_view_action"-->
+<!--                  sequence="30"/>-->
+
+<!--
+
+        <menuitem id="p_mrp_sol_po_menu" name="委外生產紀錄表" parent="p_mrp_sol_mo_categ" action="p_mrp_sol_po_free_action"
+                  sequence="20"/>
+-->
+
+
+
+<!--        <menuitem id="p_mrp_sol_configuration_categ" name="設置" parent="al_industry_root" sequence="90"/>-->
+
+<!--        <menuitem id="configuration_production_line_menu" name="產線" parent="p_mrp_sol_configuration_categ" action="production_line_view_action"-->
+<!--                  sequence="20"/>-->
+
+    </data>
+</odoo>

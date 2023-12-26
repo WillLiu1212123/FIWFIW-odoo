@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Add fields into form -->
+        <record id="view_product_form_from_repair_project" model="ir.ui.view">
+            <field name="name">product.product_template_form_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='general_information']" position="after">
+                    <page name="project" string="Project &amp; Repair">
+                        <group>
+                            <group>
+                                <field name="skill_id"/>
+                                <label for="minimal_skill_level_progress" attrs="{'invisible': [('detailed_type', '!=', 'service')]}"/>
+                                <div>
+                                    <field name="minimal_skill_level_progress"  class="oe_inline" attrs="{'invisible': [('detailed_type', '!=', 'service')]}"/>%
+                                </div>
+                                <field name="time_mode" optional="show"/>
+                                <label for="time_mode_batch" attrs="{'invisible': [('time_mode', '=', 'manual')]}"/>
+                                <div attrs="{'invisible': [('time_mode', '=', 'manual')]}">
+                                    last
+                                    <field name="time_mode_batch" class="oe_inline" width="1.5"/>
+                                    tasks
+                                </div>
+                                <label for="time_cycle_manual" attrs="{'invisible': [('time_mode', '=', 'auto')]}" string="Default Duration"/>
+                                <div attrs="{'invisible':  [('time_mode', '=', 'auto')]}">
+                                    <field name="time_cycle_manual" widget="float_time" class="oe_inline" attrs="{'invisible':  [('time_mode', '=', 'auto')]}"/> minutes
+                                </div>
+                                <label for="time_cycle"/>
+                                <div>
+                                    <field name="time_cycle"/>
+                                    minutes
+                                </div>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="product_normal_form_view_fable" model="ir.ui.view">
+            <field name="name">product.product_product_form_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='general_information']" position="after">
+                    <page name="project" string="Project &amp; Repair">
+                        <group>
+                            <group>
+                                <field name="skill_id"/>
+                                <label for="minimal_skill_level_progress" attrs="{'invisible': [('detailed_type', '!=', 'service')]}"/>
+                                <div>
+                                    <field name="minimal_skill_level_progress"  class="oe_inline" attrs="{'invisible': [('detailed_type', '!=', 'service')]}"/>%
+                                </div>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

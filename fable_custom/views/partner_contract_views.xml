@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<odoo>
+ <record id="view_form_partner_contract" model="ir.ui.view">
+    <field name="name">partner contract</field>
+    <field name="model">partner.contract</field>
+    <field name="arch" type="xml">
+      <form string="partner DEPT">
+          <header>
+                <field name="state" widget="statusbar" nolabel="1"/>
+           </header>
+        <sheet>
+        <group>
+            <field name="name"/>
+            <field name="code"/>
+            <field name="project_id"/>
+            <field name="date_start"/>
+            <field name="date_end"/>
+            <field name="date_1"/>
+            <field name="date_2"/>
+            <field name="date_3"/>
+            <field name="partner_id"/>
+            <field name="partner_ids"/>
+        </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+   <record id="view_cust_dept_search" model="ir.ui.view">
+    <field name="name">partner DEPT search</field>
+    <field name="model">partner.contract</field>
+    <field name="arch" type="xml">
+      <search string="Search">
+            <field name="name"/>
+            <field name="code"/>
+      </search>
+    </field>
+  </record>
+
+  <record id="view_tree_partner_contract" model="ir.ui.view">
+    <field name="name">ppartner contract List</field>
+    <field name="model">partner.contract</field>
+    <field name="arch" type="xml">
+      <tree>
+            <field name="state"/>
+            <field name="name"/>
+            <field name="code"/>
+            <field name="project_id"/>
+            <field name="date_start"/>
+            <field name="date_end"/>
+            <field name="date_1"/>
+            <field name="date_2"/>
+            <field name="date_3"/>
+            <field name="partner_id"/>
+            <field name="partner_ids"/>
+      </tree>
+    </field>
+  </record>
+
+    <record id="action_partner_contract" model="ir.actions.act_window">
+        <field name="name">客戶合約</field>
+        <field name="res_model">partner.contract</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+<!--    <menuitem id="menu_partner_contract"-->
+<!--                name="客戶合約"-->
+<!--	            action="action_partner_contract"-->
+<!--                parent="contacts.menu_contacts"-->
+<!--                sequence="2"-->
+<!--                />-->
+<!--    <menuitem id="menu_partner_contract_project"-->
+<!--                name="客戶合約"-->
+<!--	            action="action_partner_contract"-->
+<!--                parent="project.menu_main_pm"-->
+<!--                sequence="30"-->
+<!--                />-->
+</odoo>

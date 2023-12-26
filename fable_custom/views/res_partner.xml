@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_inherit" model="ir.ui.view">
+		<field name="name">view.partner.form.inherit</field>
+		<field name="model">res.partner</field>
+        <field name="priority" eval="16"/>
+		<field name="inherit_id" ref="base.view_partner_form"/>
+		<field name="arch" type="xml">
+            <xpath expr="//field[@name='function']" position="before">
+                <field name="contract_type"/>
+                <field name="contract_num"/>
+                <field name="contract_id"/>
+                <field name="contract_master"/>
+
+                <field name="principal"/>
+                <field name="principal_email"/>
+                <field name="fax"/>
+
+            </xpath>
+
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="safe_num"/>
+                <field name="health_num"/>
+                <field name="retire_num"/>
+                <field name="workblow_num"/>
+                <field name="employe_count"/>
+
+                <field name="isuse_fingerprint"/>
+                <field name="isuse_system"/>
+                <field name="system_admin"/>
+                <field name="system_memo"/>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="phone_num"/>
+            </xpath>
+		</field>
+	</record>
+
+    <record id="res_partner_view_tree_ctlm" model="ir.ui.view">
+        <field name="name">res partner view tree ctlm</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="fax" optional="hide"/>
+                <field name="contract_type" optional="hide"/>
+                <field name="contract_num" optional="hide"/>
+                <field name="contract_master" optional="hide"/>
+                <field name="principal" optional="hide"/>
+                <field name="principal_email" optional="hide"/>
+                <field name="safe_num" optional="hide"/>
+                <field name="health_num" optional="hide"/>
+                <field name="retire_num" optional="hide"/>
+                <field name="employe_count" optional="hide"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="model">res.partner</field>
+        <field type="xml" name="arch">
+            <filter name="inactive" position="after">
+                <separator />
+                <filter
+                    name="filter_not_user"
+                    string="排除內部人員"
+                    domain="[('user_ids', '=', False)]"
+                />
+            </filter>
+        </field>
+    </record>
+
+</odoo>

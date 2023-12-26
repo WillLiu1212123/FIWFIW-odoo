@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_project_workitem_form" model="ir.ui.view">
+        <field name="name">view.project.workitem.form</field>
+        <field name="model">project.workitem</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="lpoint"/>
+                        <field name="hpoint"/>
+                        <field name="unit"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_project_workitem_tree" model="ir.ui.view">
+        <field name="name">view.project.workitem.tree</field>
+        <field name="model">project.workitem</field>
+        <field name="arch" type="xml">
+            <tree string="專案服務項目" editable="bottom">
+                <field name="name"/>
+                <field name="lpoint"/>
+                <field name="hpoint"/>
+                <field name="unit"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_project_workitem" model="ir.actions.act_window">
+        <field name="name">專案服務項目</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.workitem</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem id="menu_project_workitem" name="專案服務項目" action="action_project_workitem" parent="project.menu_project_config" sequence="20"/>
+
+ </odoo>

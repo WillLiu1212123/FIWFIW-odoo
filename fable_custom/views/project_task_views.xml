@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+   
+    <record id="view_task_form_ctlm" model="ir.ui.view">
+        <field name="name">project.task.form.ctlm</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_ids']" position="before">
+                <field name="workitem_id"/>
+            </xpath>
+<!--            <xpath expr="//div[@name='button_box']" position="inside">-->
+<!--                <button name="action_schedule_meeting" type="object" class="oe_stat_button" icon="fa-calendar" context="{'partner_id': partner_id}" attrs="{'invisible': [('type', '=', 'lead')]}">-->
+<!--                    <div class="o_stat_info">-->
+<!--                        <field name="calendar_event_count" class="o_stat_value"/>-->
+<!--                        <span class="o_stat_text" attrs="{'invisible': [('calendar_event_count', '&lt;', 2)]}"> Meetings</span>-->
+<!--                        <span class="o_stat_text" attrs="{'invisible': [('calendar_event_count', '&gt;', 1)]}"> Meeting</span>-->
+<!--                    </div>-->
+<!--                </button>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+
+    <record id="view_project_form_ctlm" model="ir.ui.view">
+        <field name="name">project.project.form.ctlm</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+
+             <xpath expr="//field[@name='company_id']" position="after">
+                <label for="project_task_template_id"/>
+                        <div class="o_row">
+                            <field name="project_task_template_id" options="{'no_open':True,'no_create': True}"/>
+                            <button name="update_project_task_templete" type="object"
+                                string="載入範本任務"
+                                class="btn-link mb-1 px-0" icon="fa-refresh"
+                                confirm="是否載入專案範本任務."/>
+                        </div>
+            </xpath>
+
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="code"/>
+                <field name="date_1"/>
+                <field name="date_2"/>
+                <field name="date_3"/>
+
+            </xpath>
+        </field>
+    </record>
+
+    <record id="quick_create_task_form_ctlm" model="ir.ui.view">
+        <field name="name">quick create task form ctlm</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.quick_create_task_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="workitem_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

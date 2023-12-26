@@ -1,0 +1,412 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* repair_project
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0-20231010\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-29 02:41+0000\n"
+"PO-Revision-Date: 2023-10-29 02:41+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: repair_project
+#: code:addons/repair_project/models/product.py:0
+#, python-format
+msgid "%i tasks"
+msgstr "%i 個任務"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_repair_order_customer_preview
+msgid "<strong>Order Date:</strong>"
+msgstr "<strong>訂單日期：</strong>"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_repair_order_customer_preview
+msgid "<strong>Product:</strong>"
+msgstr "<strong>產品：</strong>"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_repair_order_customer_preview
+msgid "<strong>Quotation Notes:</strong>"
+msgstr "<strong>報價單備註：</strong>"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_repair_order_customer_preview
+msgid "<strong>Repair Notes:</strong>"
+msgstr "<strong>維修說明：</strong>"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_res_users__assign_task_ids
+msgid "Assign Tasks"
+msgstr "指派任務"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_product_product__time_mode_batch
+#: model:ir.model.fields,field_description:repair_project.field_product_template__time_mode_batch
+msgid "Based on"
+msgstr "根據"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_make_sale_order
+msgid "Cancel"
+msgstr "取消"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_fee__stage
+msgid "Check Stage"
+msgstr "檢查階段"
+
+#. module: repair_project
+#: model:ir.model.fields.selection,name:repair_project.selection__product_template__time_mode__auto
+msgid "Compute based on tracked time"
+msgstr "根據追踪時間計算"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_product_product__time_computed_on
+#: model:ir.model.fields,field_description:repair_project.field_product_template__time_computed_on
+msgid "Computed on last"
+msgstr "最後計算"
+
+#. module: repair_project
+#: model:ir.model,name:repair_project.model_repair_order_make_sale_order
+msgid "Create Mass Sale Order(repair)"
+msgstr "建立大量訂單（維修）"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_make_sale_order
+msgid "Create Sales Order"
+msgstr "建立訂單"
+
+#. module: repair_project
+#: model:ir.actions.act_window,name:repair_project.act_repair_order_make_sale_order
+#: model_terms:ir.ui.view,arch_db:repair_project.view_make_sale_order
+msgid "Create sales orders"
+msgstr "建立訂單"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_order__created_sale_order_id
+msgid "Created Sales Order"
+msgstr "建立訂單"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_order_make_sale_order__create_uid
+msgid "Created by"
+msgstr "建立者"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_order_make_sale_order__create_date
+msgid "Created on"
+msgstr "建立於"
+
+#. module: repair_project
+#: model:ir.model.fields,help:repair_project.field_repair_order__access_url
+msgid "Customer Portal URL"
+msgstr "客戶門戶網址"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_product_form_from_repair_project
+msgid "Default Duration"
+msgstr "預設工時"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_order_make_sale_order__display_name
+msgid "Display Name"
+msgstr "顯示名稱"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_make_sale_order
+msgid "Do you really want to create the sales order(s)?"
+msgstr "您確定要建立訂單嗎？"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_product_product__time_cycle
+#: model:ir.model.fields,field_description:repair_project.field_product_template__time_cycle
+msgid "Duration"
+msgstr "工時"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_product_product__time_mode
+#: model:ir.model.fields,field_description:repair_project.field_product_template__time_mode
+msgid "Duration Computation"
+msgstr "工時計算"
+
+#. module: repair_project
+#: model:ir.model.fields.selection,name:repair_project.selection__repair_fee__stage__fail
+msgid "Fail"
+msgstr "失敗"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_order_make_sale_order__group
+msgid "Group by customer"
+msgstr "按客戶分組"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_product_product__has_skill_user_ids
+#: model:ir.model.fields,field_description:repair_project.field_product_template__has_skill_user_ids
+msgid "Has Skill User"
+msgstr "擁有技能的員工"
+
+#. module: repair_project
+#: model:ir.model.fields.selection,name:repair_project.selection__repair_fee__stage__init
+msgid "Haven't check"
+msgstr "尚未檢查"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_repair_order_customer_preview
+msgid "History"
+msgstr "歷史"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_order_make_sale_order__id
+msgid "ID"
+msgstr "ID"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_order_make_sale_order____last_update
+msgid "Last Modified on"
+msgstr "最後修改於"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_order_make_sale_order__write_uid
+msgid "Last Updated by"
+msgstr "最後更新者"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_order_make_sale_order__write_date
+msgid "Last Updated on"
+msgstr "最後更新於"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_product_product__time_cycle_manual
+#: model:ir.model.fields,field_description:repair_project.field_product_template__time_cycle_manual
+msgid "Manual Duration"
+msgstr "手動設定工時"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_product_product__minimal_skill_level_progress
+#: model:ir.model.fields,field_description:repair_project.field_product_template__minimal_skill_level_progress
+msgid "Minimal Progress of Skill"
+msgstr "最少需要熟練度"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_repair_order_customer_preview
+msgid "Note"
+msgstr "備註"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_repair_order_customer_preview
+msgid "Operations"
+msgstr "維修操作"
+
+#. module: repair_project
+#: code:addons/repair_project/models/repair.py:0
+#, python-format
+msgid "Order:%s has created a project before."
+msgstr "訂單：%s 之前已建立過專案。"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_sale_order_line__sale_order_line_parent_id
+msgid "Parent Sales Order"
+msgstr "母訂單"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_repair_order_customer_preview
+msgid "Parts"
+msgstr "零件"
+
+#. module: repair_project
+#: model:ir.model.fields.selection,name:repair_project.selection__repair_fee__stage__pass
+msgid "Pass"
+msgstr "通過"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_order__access_url
+msgid "Portal Access URL"
+msgstr "客戶專用URL"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_fee__priority
+msgid "Priority"
+msgstr "優先"
+
+#. module: repair_project
+#: model:ir.model,name:repair_project.model_product_template
+msgid "Product Template"
+msgstr "產品模板"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_repair_order_customer_preview
+msgid "Products"
+msgstr "產品"
+
+#. module: repair_project
+#: model:ir.model,name:repair_project.model_project_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_order__project_id
+msgid "Project"
+msgstr "專案"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_product_form_from_repair_project
+msgid "Project & Repair"
+msgstr "專案＆維修"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_repair_order_customer_preview
+msgid "Quantity"
+msgstr "數量"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.portal_my_home_menu_repair
+msgid "Quotations"
+msgstr "報價單"
+
+#. module: repair_project
+#: model:ir.model.fields.selection,name:repair_project.selection__repair_fee__stage__passed_after_re_examination
+msgid "Passed after re-examination"
+msgstr "複檢後通過"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_order__sale_order_line_id
+msgid "Reference Sales Order Line(Section)"
+msgstr "參考訂單項目（段落）"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_fee__sale_order_line_id
+#: model:ir.model.fields,field_description:repair_project.field_repair_line__sale_order_line_id
+msgid "Related Sales Order Line"
+msgstr "參考訂單項目"
+
+#. module: repair_project
+#: model:ir.model,name:repair_project.model_repair_fee
+msgid "Repair Fees"
+msgstr "維修費"
+
+#. module: repair_project
+#: model:ir.model,name:repair_project.model_repair_line
+msgid "Repair Line (parts)"
+msgstr "維修明細(零件)"
+
+#. module: repair_project
+#: model:ir.model,name:repair_project.model_repair_order
+#: model_terms:ir.ui.view,arch_db:repair_project.portal_my_home_menu_repair
+msgid "Repair Order"
+msgstr "維修單"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_project_task__repair_order_fees_line_id
+msgid "Repair Order Fees Line"
+msgstr "維修項目列"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_project_project__repair_order_ids
+#: model:ir.model.fields,field_description:repair_project.field_sale_order__repair_orders
+msgid "Repair Orders"
+msgstr "維修單"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.sale_order_portal_template_add_repair_order_list
+msgid "Repair orders"
+msgstr "維修單"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_fee__user_id
+msgid "Responsible"
+msgstr "負責人"
+
+#. module: repair_project
+#: code:addons/repair_project/models/repair.py:0
+#, python-format
+msgid "Responsible user don't have the skill for the product(%s)"
+msgstr "負責人沒有修復產品所需技能(%s)"
+
+#. module: repair_project
+#: model:ir.model,name:repair_project.model_sale_order
+msgid "Sales Order"
+msgstr "訂單"
+
+#. module: repair_project
+#: model:ir.model,name:repair_project.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "訂單明細"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_order__access_token
+msgid "Security Token"
+msgstr "安全權杖"
+
+#. module: repair_project
+#: model:ir.model.fields.selection,name:repair_project.selection__product_template__time_mode__manual
+msgid "Set duration manually"
+msgstr "設定預設工時"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_product_product__skill_id
+#: model:ir.model.fields,field_description:repair_project.field_product_template__skill_id
+#: model:ir.model.fields,field_description:repair_project.field_repair_fee__skill_ids
+#: model:ir.model.fields,field_description:repair_project.field_res_users__skill_ids
+msgid "Skill"
+msgstr "技能"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_repair_order_customer_preview
+msgid "Stage"
+msgstr "階段"
+
+#. module: repair_project
+#: model:ir.model.fields,field_description:repair_project.field_repair_fee__suitable_user_ids
+msgid "Suitable User"
+msgstr "適合員工"
+
+#. module: repair_project
+#: model:ir.model,name:repair_project.model_project_task
+#: model:ir.model.fields,field_description:repair_project.field_repair_fee__task_id
+msgid "Task"
+msgstr "任務"
+
+#. module: repair_project
+#: model:ir.model.fields,help:repair_project.field_product_product__minimal_skill_level_progress
+#: model:ir.model.fields,help:repair_project.field_product_template__minimal_skill_level_progress
+msgid ""
+"The minimal skill progress from zero knowledge (0%) to fully mastered "
+"(100%)."
+msgstr "最少熟練度從一無所知(0%)到精通(100%)"
+
+#. module: repair_project
+#: model:ir.model.fields,help:repair_project.field_repair_order__project_id
+msgid "The project which was created by this."
+msgstr "由此建立的專案"
+
+#. module: repair_project
+#: model:ir.model.fields,help:repair_project.field_product_product__time_cycle_manual
+#: model:ir.model.fields,help:repair_project.field_product_template__time_cycle_manual
+msgid ""
+"Time in minutes:- In manual mode, time used- In automatic mode, supposed "
+"first time when there aren't any work orders yet"
+msgstr "時間以分鐘為單位：- 在手動模式下，使用時間- 在自動模式下，假設第一次沒有任何工單"
+
+#. module: repair_project
+#: model:ir.model,name:repair_project.model_res_users
+msgid "Users"
+msgstr "使用者"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_product_form_from_repair_project
+msgid "last"
+msgstr "最後"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_product_form_from_repair_project
+msgid "minutes"
+msgstr "分鐘"
+
+#. module: repair_project
+#: model_terms:ir.ui.view,arch_db:repair_project.view_product_form_from_repair_project
+msgid "tasks"
+msgstr "任務"
+

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="fable_sol_ship_view_tree" model="ir.ui.view">
+            <field name="name">fable.sol.ship.view.tree</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <tree string="出貨進度表" multi_edit="1" expand="context.get('expand', False)" editable="bottom"
+                      create="false" delete="false" default_order='take_date,tobe_date desc'>
+                    <button name="ship_sol" type="object" string="出貨" class="oe_highlight"/>
+                    <field name="company_id" invisible="1"/>
+                    <!--基礎欄位-->
+<!--                    <field name="production_no" string="編號" optional="show" readonly="1"/>-->
+                    <field name="order_line_state" string="訂單編號" optional="show" readonly="1"/>
+                    <field name="order_id" string="訂單編號" optional="show" readonly="1"/>
+                    <field name="product_id" optional="show" readonly="1"/>
+                    <field name="user_id" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
+                    <field name="suitable_user_ids" widget="many2many_tags" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
+                    <field name="sales_delay" optional="show" readonly="1"/>
+                    <field name="take_date" optional="show" readonly="1"/>
+                    <field name="tobe_date" optional="show" readonly="1"/>
+                    <field name="done_date" optional="show" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="fable_sol_ship_search" model="ir.ui.view">
+            <field name="name">fable.sol.ship.search</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <search string="">
+                    <searchpanel>
+<!--                        <field name="production_state" icon="fa-building"/>-->
+                        <field name="order_line_state" icon="fa-building"/>
+<!--                        <field name="shipping_state" icon="fa-building"/>-->
+                    </searchpanel>
+                    <group expand="0" string="Group By...">
+                        <filter string="銷售訂單" name="group_by_sale_order" domain="[]"
+                                context="{'group_by': 'order_id'}"/>
+                        <filter string="產品" name="group_by_product" domain="[]" context="{'group_by': 'product_id'}"/>
+<!--                        <filter string="訂單狀態" name="group_by_status" domain="[]" context="{'group_by': 'state'}"/>-->
+                        <filter string="客戶" name="group_by_partner" domain="[]"
+                                context="{'group_by': 'order_partner_id'}"/>
+<!--                        <filter string="排單日" name="group_by_schedule_mo_date" domain="[]" context="{'group_by': 'schedule_mo_date:day'}"/>-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="fable_sol_mo_production_free_search" model="ir.ui.view">
+            <field name="name">fable.sol.ship.search</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <search string="">
+                    <group expand="0" string="Group By...">
+                        <filter string="銷售訂單" name="group_by_sale_order" domain="[]"
+                                context="{'group_by': 'order_id'}"/>
+                        <filter string="產品" name="group_by_product" domain="[]" context="{'group_by': 'product_id'}"/>
+<!--                        <filter string="訂單狀態" name="group_by_status" domain="[]" context="{'group_by': 'state'}"/>-->
+                        <filter string="客戶" name="group_by_partner" domain="[]"
+                                context="{'group_by': 'order_partner_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        
+
+        <record id="fable_sol_ship_action" model="ir.actions.act_window">
+            <field name="name">出貨管理排程</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('fable_sol_ship_view_tree')})]"/>
+            <field name="search_view_id" ref="fable_sol_ship_search"/>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('order_line_state', '=', 5)]</field>
+<!--            <field name="context">{'search_default_group_by_schedule_mo_date': 1, 'expand': 1}</field>-->
+        </record>
+        
+    </data>
+</odoo>

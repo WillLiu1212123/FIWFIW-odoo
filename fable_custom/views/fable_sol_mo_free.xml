@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="fable_sol_mo_free_view_tree" model="ir.ui.view">
+            <field name="name">fable.sol.mo.free.view.tree</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <tree string="維修進度表" multi_edit="1" expand="context.get('expand', False)" editable="bottom"
+                      create="false" delete="false" default_order='take_date,tobe_date desc'>
+                    <button name="take_sol" type="object" string="領件" class="oe_highlight"/>
+                    <button name="done_sol" type="object" string="完成" class="oe_highlight"/>
+                    <field name="test_state"/>
+                    <field name="company_id" invisible="1"/>
+                    <!--基礎欄位-->
+<!--                    <field name="production_no" string="編號" optional="show" readonly="1"/>-->
+                    <field name="order_line_state" string="訂單編號" optional="show" readonly="1"/>
+                    <field name="order_id" string="訂單編號" optional="show" readonly="1"/>
+                    <field name="product_id" optional="show" readonly="1"/>
+                    <field name="user_id" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
+                    <field name="suitable_user_ids" widget="many2many_tags" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
+                    <field name="sales_delay" optional="show" readonly="1"/>
+                    <field name="take_date" optional="show" readonly="1"/>
+                    <field name="tobe_date" optional="show" readonly="1"/>
+                    <field name="done_date" optional="show" readonly="1"/>
+<!--                    &lt;!&ndash;規劃用欄位&ndash;&gt;-->
+<!--                    <field name="product_material" string="材質" optional="show" attrs="{'readonly': [('production_state', 'not in', ['draft', 'plan', 'ready'])]}"/>-->
+<!--                    <field name="extrusion_no" optional="show" readonly="1"/>	-->
+<!--                    <field name="holes" optional="show" readonly="1"/>-->
+<!--                    <field name="delivery_date" optional="show" readonly="1"/>-->
+<!--                    <field name="delivery_note" optional="hide" readonly="1"/>-->
+<!--                    &lt;!&ndash;訂單資訊&ndash;&gt;-->
+<!--                    <field name="order_partner_id" optional="show" readonly="1"/>-->
+<!--                    <field name="customer_product_name" optional="show" readonly="1"/>-->
+<!--                    <field name="name" optional="hide" readonly="1"/>-->
+<!--                    <field name="al_length" string="長度m" optional="show" readonly="1"/>-->
+<!--                    <field name="al_count" optional="show" readonly="1"/>-->
+<!--                    &lt;!&ndash;20230509 新增產線&ndash;&gt;-->
+<!--                    <field name="production_line_id" required="0" optional="show" attrs="{'readonly': [('production_state', 'not in', ['draft', 'plan', 'ready'])]}" options="{'no_open':True,'no_create': True}"/>-->
+<!--                    <field name="mold_ids" required="1" attrs="{'readonly': [('production_state', 'not in', ['draft', 'plan', 'ready'])]}" domain="[('sale_product', '=', product_id), ('state', 'in', ('A', 'B'))]" options="{'no_open':True,'no_create': True}" string="規劃維修模具" widget="many2many_tags" optional="show"/>-->
+<!--                    <button name="prepare_al_production_parameter" attrs="{'invisible': [('production_state', 'not in', ['draft', 'plan', 'ready'])]}" type="object" string="試算" class="oe_highlight"/>-->
+<!--                    <field name="project_task_id" invisible="1"/>-->
+<!--                    <field name="mold_weight" string="規劃米重" attrs="{'readonly': [('production_state', 'not in', ['draft', 'plan', 'ready'])]}" optional="show"/>-->
+<!--                    <field name="number_of_schedule" optional="show" attrs="{'readonly': [('production_state', 'not in', ['draft', 'plan', 'ready'])]}"/>-->
+<!--                    <field name="cutting_number" optional="hide" attrs="{'readonly': [('production_state', 'not in', ['draft', 'plan', 'ready'])]}"/>-->
+<!--                    <field name="al_anchor_length" optional="show" attrs="{'readonly': [('production_state', 'not in', ['draft', 'plan', 'ready'])]}"/>-->
+<!--                    <field name="thick_cake" optional="hide" attrs="{'readonly': [('production_state', 'not in', ['draft', 'plan', 'ready'])]}"/>-->
+<!--                    <field name="head_and_tail" optional="hide" attrs="{'readonly': [('production_state', 'not in', ['draft', 'plan', 'ready'])]}"/>-->
+<!--                    <field name="estimated_production_weight" optional="show" attrs="{'readonly': [('production_state', 'not in', ['draft', 'plan', 'ready'])]}"/>-->
+<!--                    <field name="estimated_production_begin" optional="hide" attrs="{'readonly': [('production_state', 'not in', ['draft', 'plan', 'ready'])]}"/>-->
+<!--                    <field name="estimated_production_end" optional="hide" attrs="{'readonly': [('production_state', 'not in', ['draft', 'plan', 'ready'])]}"/>-->
+<!--                    &lt;!&ndash;維修流程資訊&ndash;&gt;-->
+<!--                    <field name="production_state" decoration-success="production_state == 'done'" decoration-info="production_state in ['in_production', 'ready']" decoration-warning="production_state in ['draft', 'plan']" widget="badge" optional="show"/>-->
+<!--                    <field name="prod_pct" optional="hide" readonly="1"/>-->
+<!--                    <field name="prod_total_count" optional="hide" readonly="1"/>-->
+<!--                    <field name="production_memo" string="維修備註" optional="show"/>-->
+<!--&lt;!&ndash;                    <field name="production_progress" optional="hide" readonly="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="total_production_weight" optional="hide" readonly="1"/>&ndash;&gt;-->
+
+<!--                    <button name="actual_production_parameters_form" type="object" string="明細" class="oe_highlight"/>-->
+
+                    <!--<button name="project_task_mo_link_wizard"-->
+                        <!--string="開啟內部維修履歷" type="object" class="oe_highlight"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="fable_sol_mo_free_kanban" model="ir.ui.view">
+            <field name="name">fable.sol.mo.free.kanban</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <kanban create="false">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="product_uom_qty"/>
+<!--                    <field name="al_count"/>-->
+<!--                    <field name="production_state"/>-->
+<!--                    <field name="shipping_state"/>-->
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="row mb4">
+<!--                                    <div class="col-5">-->
+<!--                                        <h2><strong><span><field name="extrusion_no"/></span></strong></h2>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-7">-->
+<!--                                        <strong><span>預計重量(KG)：<field name="product_uom_qty"/></span></strong>-->
+<!--                                    </div>-->
+                                    <div class="col-5">
+                                        <strong><span>客戶：<field name="order_partner_id"/></span></strong>
+                                    </div>
+<!--                                    <div class="col-7">    -->
+<!--                                        <strong><span>訂單支數：<field name="al_count"/></span></strong>-->
+<!--                                    </div>-->
+                                </div>
+                            <hr class="mt4 mb4"/>
+                            <div class="o_kanban_record_bottom d-block mx-2">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <span class="float-right">
+                                          <field name="order_line_state" decoration-success="order_line_state == 'done'" decoration-info="order_line_state in ['producing', 'package', 'shipping']" decoration-warning="order_line_state in ['draft', 'plan']" widget="badge" optional="show"/>
+<!--                                          <field name="production_state" decoration-success="production_state == 'done'" decoration-info="production_state in ['in_production', 'ready']" decoration-warning="production_state in ['draft', 'plan']" widget="badge" optional="show"/>-->
+<!--                                          <field name="shipping_state" decoration-success="shipping_state == 'done'" decoration-info="shipping_state in ['shipping',]" decoration-warning="shipping_state in ['waiting',]" widget="badge" optional="show"/>-->
+                                        </span>
+                                    </div>
+                                    <div class="col-7">
+                                        <span class="float-laft">
+<!--                                          <strong><div>送貨進度：<field name="packout_pct"/>%</div></strong>-->
+<!--                                          <strong><div>包裝進度：<field name="pack_pct"/>%</div></strong>-->
+<!--                                          <strong><div>維修進度：<field name="prod_pct"/>%</div></strong>-->
+                                        </span>
+                                    </div>
+                                </div>
+                                    </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="fable_sol_mo_free_pivot" model="ir.ui.view">
+            <field name="name">fable.sol.mo.free.pivot</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <pivot string="" disable_linking="True">
+
+                </pivot>
+            </field>
+        </record>
+
+        <record id="fable_sol_mo_free_calendar" model="ir.ui.view">
+            <field name="name">fable.sol.mo.free.calendar</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendar View" date_start="tobe_date" event_limit="5">
+<!--                    <field name="production_state" filters="1"/>-->
+<!--
+                    <field name="origin"/>
+                    <field name="picking_type_id"/>
+                    <field name="state"/>
+-->
+                </calendar>                    
+            </field>
+        </record>
+
+
+
+        <record id="fable_sol_mo_free_search" model="ir.ui.view">
+            <field name="name">fable.sol.mo.free.search</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <search string="">
+                    <searchpanel>
+<!--                        <field name="production_state" icon="fa-building"/>-->
+                        <field name="order_line_state" icon="fa-building"/>
+<!--                        <field name="shipping_state" icon="fa-building"/>-->
+                    </searchpanel>
+                    <group expand="0" string="Group By...">
+                        <filter string="銷售訂單" name="group_by_sale_order" domain="[]"
+                                context="{'group_by': 'order_id'}"/>
+                        <filter string="產品" name="group_by_product" domain="[]" context="{'group_by': 'product_id'}"/>
+<!--                        <filter string="訂單狀態" name="group_by_status" domain="[]" context="{'group_by': 'state'}"/>-->
+                        <filter string="客戶" name="group_by_partner" domain="[]"
+                                context="{'group_by': 'order_partner_id'}"/>
+<!--                        <filter string="排單日" name="group_by_schedule_mo_date" domain="[]" context="{'group_by': 'schedule_mo_date:day'}"/>-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="fable_sol_mo_production_free_search" model="ir.ui.view">
+            <field name="name">fable.sol.mo.free.search</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <search string="">
+                    <group expand="0" string="Group By...">
+                        <filter string="銷售訂單" name="group_by_sale_order" domain="[]"
+                                context="{'group_by': 'order_id'}"/>
+                        <filter string="產品" name="group_by_product" domain="[]" context="{'group_by': 'product_id'}"/>
+<!--                        <filter string="訂單狀態" name="group_by_status" domain="[]" context="{'group_by': 'state'}"/>-->
+                        <filter string="客戶" name="group_by_partner" domain="[]"
+                                context="{'group_by': 'order_partner_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        
+
+        <record id="fable_sol_mo_free_action" model="ir.actions.act_window">
+            <field name="name">維修管理排程</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('fable_sol_mo_free_view_tree')}),
+                          (0, 0, {'view_mode': 'pivot', 'view_id': ref('fable_sol_mo_free_pivot')}),]"/>
+            <field name="search_view_id" ref="fable_sol_mo_free_search"/>
+            <field name="view_mode">tree,form,pivot,calendar</field>
+<!--            <field name="domain">[('project_ok', '=', True), ('production_task', '=', True),('state', 'in', ['sale','done'])]]</field>-->
+<!--            <field name="context">{'search_default_group_by_schedule_mo_date': 1, 'expand': 1}</field>-->
+        </record>
+
+<!--        <record id="fable_sol_mo_production_free_action" model="ir.actions.act_window">-->
+<!--            <field name="name">產線維修運作</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">sale.order.line</field>-->
+<!--            <field name="view_ids"-->
+<!--                   eval="[(5, 0, 0),-->
+<!--                          (0, 0, {'view_mode': 'kanban', 'view_id': ref('fable_sol_mo_free_kanban')})]"/>-->
+<!--            <field name="search_view_id" ref="fable_sol_mo_production_free_search"/>-->
+<!--            <field name="view_mode">kanban</field>-->
+<!--            <field name="domain">[('project_ok', '=', True), ('production_task', '=', True),('state', 'in', ['sale','done'])]]</field>-->
+<!--            <field name="context">{'search_default_group_by_production_line': 1, 'expand': 1}</field>-->
+<!--        </record>-->
+
+
+    </data>
+</odoo>

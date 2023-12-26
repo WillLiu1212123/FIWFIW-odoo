@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="fable_sol_free_view_tree" model="ir.ui.view">
+            <field name="name">fable.sol.free.view.tree</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <tree string="訂單生產管理"  multi_edit="1" expand="context.get('expand', False)" editable="bottom" create="false" delete="false" default_order='order_id desc'>
+                    <field name="company_id" invisible="1"/>
+                    <!--基礎欄位-->
+<!--                    <field name="validity_date" string="訂單日" optional="show" readonly="1" widget="date"/>-->
+<!--                    <field name="delivery_date" optional="show" readonly="0"/>-->
+
+                    <field name="order_id" string="訂單編號" optional="hide" readonly="1"/>
+                    <field name="order_line_state" string="維修狀態" optional="show" readonly="1"/>
+                    <field name="test_state" string="驗收狀態" optional="show" readonly="1"/>
+
+                    <field name="state" string="訂單狀態" optional="hide" readonly="1"/>
+                    <field name="order_partner_id" optional="show" readonly="1"/>
+                    <field name="customer_ref" optional="show" readonly="1" string="顧客單號"/>
+                    <field name="product_id" optional="show" readonly="1"/>
+                    <field name="name" optional="show" readonly="1"/>
+                    <field name="team_id" optional="show" readonly="1"/>
+                    <field name="sales_delay" optional="show" />
+                    <field name="take_date" optional="show" />
+                    <field name="tobe_date" optional="show" />
+                    <field name="done_date" optional="show" />
+
+                    <field name="user_id" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
+                    <field name="suitable_user_ids" widget="many2many_tags" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sale_order_line_view_form" model="ir.ui.view">
+            <field name="name">sale.order.line.form</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <form string="生產進度表">
+                    <sheet>
+                        <group col="6">
+                            <group string="生管" colspan="2">
+                                <field name="name" readonly="True"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="fable_sol_free_kanban" model="ir.ui.view">
+            <field name="name">fable.sol.free.kanban</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+               <kanban create="false">
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="product_uom_qty"/>
+                <field name="order_line_state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click" t-att-style="'background-color: ' + (record.order_line_state.value == '訂單完成' ? '#BEBEBE' : '')">
+                                <div class="row mb4">
+<!--                                    <div class="col-5">-->
+<!--                                        <h2><strong><span><field name="extrusion_no"/></span></strong></h2>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-7">-->
+<!--                                        <strong><span>預計重量(KG)：<field name="product_uom_qty"/></span></strong>-->
+<!--                                    </div>-->
+                                    <div class="col-5">
+                                        <strong><span>客戶：<field name="order_partner_id"/></span></strong>
+                                    </div>
+<!--                                    <div class="col-7">    -->
+<!--                                        <strong><span>訂單支數：<field name="al_count"/></span></strong>-->
+<!--                                    </div>-->
+                                </div>
+                            <hr class="mt4 mb4"/>
+                            <div class="o_kanban_record_bottom d-block mx-2">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <span class="float-right">
+                                          <field name="order_line_state" attrs="{'invisible': [('order_line_state','not in',('1','6','7'))]}" decoration-success="order_line_state == '6'" decoration-info="order_line_state in ['3', '4', '5']" decoration-warning="order_line_state in ['1', '2']" widget="badge" optional="show"/>
+<!--                                          <field name="production_state" attrs="{'invisible': [('order_line_state','not in',('2','3'))]}" decoration-success="production_state == 'done'" decoration-info="production_state in ['in_production', 'ready']" decoration-warning="production_state in ['draft', 'plan']" widget="badge" optional="show"/>-->
+<!--                                          <field name="shipping_state" attrs="{'invisible': [('order_line_state','not in',('4','5'))]}" decoration-success="shipping_state == 'done'" decoration-info="shipping_state in ['shipping',]" decoration-warning="shipping_state in ['waiting',]" widget="badge" optional="show"/>-->
+                                        </span>
+                                    </div>
+                                    <div class="col-7">
+                                        <span class="float-laft">
+<!--                                          <strong><div>生產進度：<field name="prod_pct"/>%</div></strong>-->
+<!--                                          <strong><div>包裝進度：<field name="pack_pct"/>%</div></strong>-->
+<!--                                          <strong><div>送貨進度：<field name="packout_pct"/>%</div></strong>-->
+                                          </span>
+                                    </div>
+                                </div>
+                                    </div>
+                            </div>
+                        </t>
+                    </templates>
+            </kanban>
+            </field>
+        </record>
+
+        <record id="fable_sol_free_pivot" model="ir.ui.view">
+            <field name="name">fable.sol.free.pivot</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <pivot string="" disable_linking="True">
+
+                </pivot>
+            </field>
+        </record>
+
+        <record id="fable_sol_free_search" model="ir.ui.view">
+           <field name="name">fable.sol.free.search</field>
+           <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <search string="">                                    
+<!--                    <filter string="排單日" name="filter_schedule_mo_date" date="schedule_mo_date"/>-->
+                      <separator/>
+                    <group expand="0" string="Group By...">
+                        <filter string="銷售訂單" name="group_by_sale_order" domain="[]" context="{'group_by': 'order_id'}"/>
+                        <filter string="產品" name="group_by_product" domain="[]" context="{'group_by': 'product_id'}"/>
+                        <filter string="訂單狀態" name="group_by_order_line_state" domain="[]" context="{'group_by': 'order_line_state'}"/>
+                        <filter string="客戶" name="group_by_partner" domain="[]" context="{'group_by': 'order_partner_id'}"/>
+                    </group>
+            </search>
+           </field>
+        </record>
+        
+        <record id="fable_sol_kanban_search" model="ir.ui.view">
+           <field name="name">fable.sol.free.search</field>
+           <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <search string="">
+                    <group expand="0" string="Group By...">
+                        <filter string="銷售訂單" name="group_by_sale_order" domain="[]" context="{'group_by': 'order_id'}"/>
+                        <filter string="產品" name="group_by_product" domain="[]" context="{'group_by': 'product_id'}"/>
+                        <filter string="訂單狀態" name="group_by_order_line_state" domain="[]" context="{'group_by': 'order_line_state'}"/>
+                        <filter string="客戶" name="group_by_partner" domain="[]" context="{'group_by': 'order_partner_id'}"/>
+                    </group>
+            </search>
+           </field>
+        </record>
+        
+
+        <record id="fable_sol_free_action" model="ir.actions.act_window">
+            <field name="name">訂單進度管理</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('fable_sol_free_view_tree')}),
+                          (0, 0, {'view_mode': 'pivot', 'view_id': ref('fable_sol_free_pivot')}),
+                          ]"/>
+            <field name="search_view_id" ref="fable_sol_free_search"/>
+            <field name="domain">[('state', 'in', ['sale','done'])]</field>
+            <field name="context">{'search_default_group_by_sale_order': 1, 'expand': 1}</field>
+        </record>
+
+        <record id="fable_sol_kanban_action" model="ir.actions.act_window">
+            <field name="name">訂單進度看板</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'kanban', 'view_id': ref('fable_sol_free_kanban')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('sale_order_line_view_form')}),
+                          ]"/>
+            <field name="search_view_id" ref="fable_sol_kanban_search"/>
+            <field name="domain">[('state', 'in', ['sale','done'])]</field>
+            <field name="context">{'search_default_group_by_order_line_state': 1, 'expand': 1}</field>
+        </record>
+
+
+    </data>
+</odoo>
