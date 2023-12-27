@@ -13,6 +13,7 @@
             <attribute name="string">顧客資訊</attribute>
           </xpath>
           <xpath expr="//field[@name='partner_invoice_id']" position="after">
+            <xpath expr="//field[@name='partner_shipping_id']" position="move"/>
             <xpath expr="//field[@name='team_id']" position="move"/>
 
             <xpath expr="//field[@name='tag_ids']" position="move"/>
@@ -26,6 +27,7 @@
           </xpath>
           <xpath expr="//field[@name='validity_date']" position="before">
             <field name="receipt_date" string="收貨日期" attrs="{}"/>
+            <field name="urgent_delivery_date" string="急件交貨日" widget="date"/>
             <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='other_information']/group[1]/group[@name='sales_person']/field[@name='company_id']" position="move"/>
           </xpath>
           <xpath expr="//field[@name='validity_date']" position="attributes">
@@ -58,6 +60,7 @@
           </xpath>
           <xpath expr="//group[@name='studio_group_EsERa_left']" position="inside">
             <xpath expr="//field[@name='client_order_ref']" position="move"/>
+            <xpath expr="//field[@name='tag_ids']" position="move"/>
             <field name="customer_name" string="顧客姓名" placeholder="如維修單上有顧客資訊請填寫"/>
             <field name="cost_category" string="費用類別" attrs="{}"/>
             <field name="description" attrs="{}" required="1" string="顧客/品牌指示需求" placeholder="顧客/品牌維修單原單說明"/>

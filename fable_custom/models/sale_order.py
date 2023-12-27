@@ -115,7 +115,8 @@ class SaleOrder(models.Model):
     shipping_method = fields.Selection(selection=[('GBG 全球', 'GBG 全球快遞'),('便利袋', '便利箱'),('匯宇', '匯宇'),
             ('大榮', 'KTJ嘉里大榮'),('快遞', 'STYLUX 行得利'), ('迪', '迪生 行得利'),('郵局', '郵局'), ('顧客', '顧客親取'),('馥馥', '馥馥親送'), ('黑貓宅急便', '黑貓宅急便')
         ],        string="寄件方式"    )
-    cost_category = fields.Selection(selection=[('技改', '技改'),('寄改', '寄改'),('倉庫', '倉庫'),('客修', '客修 (顧客付費)'),('店修', '保固/店修'),('新品', '新品')],
+    cost_category = fields.Selection(
+        selection=[('新品', '新品'), ('保固', '保固'), ('倉庫', '倉庫'), ('客修', '客修自費')],
         string="費用類別")
     item_type = fields.Selection(selection=[('CRM', 'CRM'),('FUR皮草', 'FUR皮草'),('FRN 家具', 'FRN 家具'),('LUG 行李箱', 'LUG 旅箱'),('RTW 服飾', 'RTW 服飾'),
             ('SOX 鞋履', 'SOX 鞋履'),('GLS眼鏡', 'GLS眼鏡'),('ACC 飾品', 'ACC 飾品'),('背帶', 'STRAP 背帶'),('BELT 皮帶', 'BELT 皮帶'),
