@@ -151,6 +151,9 @@
             <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
                 <search string="">
+
+                    <filter string="我的訂單" name="my_order" domain="[('user_id', '=', uid)]"/>
+                    <separator/>
                     <searchpanel>
 <!--                        <field name="production_state" icon="fa-building"/>-->
                         <field name="order_line_state" icon="fa-building"/>
@@ -173,6 +176,8 @@
             <field name="name">fable.sol.mo.free.search</field>
             <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
+                <filter string="我的訂單" name="my_order" domain="[('user_id', '=', uid)]"/>
+                    <separator/>
                 <search string="">
                     <group expand="0" string="Group By...">
                         <filter string="銷售訂單" name="group_by_sale_order" domain="[]"
@@ -199,7 +204,7 @@
             <field name="search_view_id" ref="fable_sol_mo_free_search"/>
             <field name="view_mode">tree,form,pivot,calendar</field>
 <!--            <field name="domain">[('project_ok', '=', True), ('production_task', '=', True),('state', 'in', ['sale','done'])]]</field>-->
-<!--            <field name="context">{'search_default_group_by_schedule_mo_date': 1, 'expand': 1}</field>-->
+            <field name="context">{'search_default_my_order': 1}</field>
         </record>
 
 <!--        <record id="fable_sol_mo_production_free_action" model="ir.actions.act_window">-->

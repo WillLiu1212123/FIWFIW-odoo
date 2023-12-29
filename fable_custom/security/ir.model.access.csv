@@ -1,7 +1,10 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_project_workitem,project workitem User Access,model_project_workitem,base.group_user,1,1,1,1
-access_partner_contract,partner contract User Access,model_partner_contract,base.group_user,1,1,1,1
-access_sale_order_note_template,access sale order note template,model_sale_order_note_template,base.group_user,1,1,1,1
+access_product_kind,access product_kind,model_product_kind,base.group_user,1,1,1,1
+access_product_servicetype,access product servicetype,model_product_servicetype,base.group_user,1,1,1,1
+access_product_servicecontent,access product servicecontent,model_product_servicecontent,base.group_user,1,1,1,1
+access_product_property,access product property,model_product_property,base.group_user,1,1,1,1
+access_product_size,access product size,model_product_size,base.group_user,1,1,1,1
+
 
 
 

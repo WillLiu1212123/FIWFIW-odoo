@@ -33,6 +33,64 @@ class SaleOrderLine(models.Model):
 
     skill_ids = fields.Many2one('hr.skill', 'Skill', related='product_id.skill_id')
 
+    product_kind_id = fields.Many2one(comodel_name="product.kind", string="類型", required=False, )
+    product_servicetype_id = fields.Many2one(comodel_name="product.servicetype", string="服務類別(部門)", required=False, )
+    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="服務內容", required=False, )
+    product_property_id = fields.Many2one(comodel_name="product.property", string="產品屬性", required=False, )
+    product_size_id = fields.Many2one(comodel_name="product.size", string="產品尺吋", required=False, )
+    # filtered_product_id = fields.Many2one(comodel_name="product.product", string="產品", required=False, )
+    filtered_product_id = fields.Char(string="", required=False, )
+
+    @api.onchange('product_kind_id', 'product_servicetype_id', 'product_servicecontent_id', 'product_property_id', 'product_size_id')
+    def _onchange_filtered_product(self):
+        self.ensure_one()
+        domain = []
+
+        if self.product_kind_id:
+            domain.append(('product_kind_id', '=', self.product_kind_id.id))
+        if self.product_servicetype_id:
+            domain.append(('product_servicetype_id', '=', self.product_servicetype_id.id))
+        if self.product_servicecontent_id:
+            domain.append(('product_servicecontent_id', '=', self.product_servicecontent_id.id))
+        if self.product_property_id:
+            domain.append(('product_property_id', '=', self.product_property_id.id))
+        if self.product_size_id:
+            domain.append(('product_size_id', '=', self.product_size_id.id))
+
+        # found_products = self.env['product.product'].search(domain).ids
+        found_products = self.env['product.product'].search(domain)
+
+        if found_products:
+
+            found_product_kind_id = found_products.mapped('product_kind_id')
+            found_product_servicetype_id = found_products.mapped('product_servicetype_id')
+            found_product_servicecontent_id = found_products.mapped('product_servicecontent_id')
+            found_product_property_id = found_products.mapped('product_property_id')
+            found_product_size_id = found_products.mapped('product_size_id')
+            return {'domain': {'product_id': [('id', 'in', found_products.ids)],
+                               'product_kind_id': [('id', 'in', found_product_kind_id.ids)],
+                               'product_servicetype_id': [('id', 'in', found_product_servicetype_id.ids)],
+                               'product_servicecontent_id': [('id', 'in', found_product_servicecontent_id.ids)],
+                               'product_property_id': [('id', 'in', found_product_property_id.ids)],
+                               'product_size_id': [('id', 'in', found_product_size_id.ids)]}}
+        else:
+            return {'domain': {'product_id': [('id', '=', False)],
+                               'product_kind_id': [('id', '=', False)],
+                               'product_servicetype_id': [('id', '=', False)],
+                               'product_servicecontent_id': [('id', '=', False)],
+                               'product_property_id': [('id', '=', False)],
+                               'product_size_id': [('id', '=', False)]}}
+    def button_clear(self):
+        self.product_id = False
+        self.product_kind_id = False
+        self.product_servicetype_id = False
+        self.product_servicecontent_id = False
+        self.product_property_id = False
+        self.product_size_id = False
+
+
+
+
     def take_sol(self):
         self.order_line_state = '3'
         self.take_date = fields.Date.today()

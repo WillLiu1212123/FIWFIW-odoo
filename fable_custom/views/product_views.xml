@@ -11,6 +11,13 @@
                     <page name="project" string="Project &amp; Repair">
                         <group>
                             <group>
+                                <field name="product_kind_id"/>
+                                <field name="product_servicetype_id"/>
+                                <field name="product_servicecontent_id"/>
+                                <field name="product_property_id"/>
+                                <field name="product_size_id"/>
+                            </group>
+                            <group>
                                 <field name="skill_id"/>
                                 <label for="minimal_skill_level_progress" attrs="{'invisible': [('detailed_type', '!=', 'service')]}"/>
                                 <div>
@@ -58,5 +65,42 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="action_product_kind" model="ir.actions.act_window">
+            <field name="name">類型</field>
+            <field name="res_model">product.kind</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_product_servicetype" model="ir.actions.act_window">
+            <field name="name">服務類別</field>
+            <field name="res_model">product.servicetype</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_product_servicecontent" model="ir.actions.act_window">
+            <field name="name">服務內容</field>
+            <field name="res_model">product.servicecontent</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_product_property" model="ir.actions.act_window">
+            <field name="name">產品屬性</field>
+            <field name="res_model">product.property</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_product_size" model="ir.actions.act_window">
+            <field name="name">產品大小</field>
+            <field name="res_model">product.size</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_product_kind" name="類型" parent="sale.menu_sales_config" action="action_product_kind"/>
+        <menuitem id="menu_product_servicetype" name="服務類別" parent="sale.menu_sales_config" action="action_product_servicetype"/>
+        <menuitem id="menu_product_servicecontent" name="服務內容" parent="sale.menu_sales_config" action="action_product_servicecontent"/>
+        <menuitem id="menu_product_property" name="產品屬性" parent="sale.menu_sales_config" action="action_product_property"/>
+        <menuitem id="menu_product_size" name="產品大小" parent="sale.menu_sales_config" action="action_product_size"/>
+
     </data>
 </odoo>

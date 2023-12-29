@@ -30,6 +30,8 @@
             <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
                 <search string="">
+                     <filter string="我的訂單" name="my_order" domain="[('user_id', '=', uid)]"/>
+                    <separator/>
                     <searchpanel>
 <!--                        <field name="production_state" icon="fa-building"/>-->
                         <field name="order_line_state" icon="fa-building"/>
@@ -53,6 +55,8 @@
             <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
                 <search string="">
+                    <filter string="我的訂單" name="my_order" domain="[('user_id', '=', uid)]"/>
+                    <separator/>
                     <group expand="0" string="Group By...">
                         <filter string="銷售訂單" name="group_by_sale_order" domain="[]"
                                 context="{'group_by': 'order_id'}"/>
@@ -76,8 +80,8 @@
                           (0, 0, {'view_mode': 'tree', 'view_id': ref('fable_sol_accept_view_tree')})]"/>
             <field name="search_view_id" ref="fable_sol_accept_search"/>
             <field name="view_mode">tree</field>
-            <field name="domain">[('order_line_state', '=', 4)]</field>
-<!--            <field name="context">{'search_default_group_by_schedule_mo_date': 1, 'expand': 1}</field>-->
+            <field name="domain">[('order_line_state', '=', 4),]</field>
+            <field name="context">{'search_default_my_order': 1}</field>
         </record>
 
     </data>

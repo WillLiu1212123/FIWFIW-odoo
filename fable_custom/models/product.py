@@ -13,20 +13,13 @@ from odoo.exceptions import ValidationError
 
 
 class Product(models.Model):
-    """
-    [] 增加 Portal View
-    [] 增加負責人欄位
-    [] *選擇多張 Repair Order 可以產生一筆 Sale Order
-
-    增加欄位
-    -
-
-    修改欄位
-    -
-
-    [product.template]
-    """
     _inherit = 'product.template'
+
+    product_kind_id = fields.Many2one(comodel_name="product.kind", string="類型", required=False, )
+    product_servicetype_id = fields.Many2one(comodel_name="product.servicetype", string="服務類別(部門)", required=False, )
+    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="服務內容", required=False, )
+    product_property_id = fields.Many2one(comodel_name="product.property", string="產品屬性", required=False, )
+    product_size_id = fields.Many2one(comodel_name="product.size", string="產品尺吋", required=False, )
 
     skill_id = fields.Many2one('hr.skill', 'Skill')
     minimal_skill_level_progress = fields.Integer('Minimal Progress of Skill', default=60,
@@ -92,3 +85,44 @@ class Product(models.Model):
                 service.time_cycle = total_duration / cycle_number
             else:
                 service.time_cycle = service.time_cycle_manual
+
+class ProductKind(models.Model):
+    _name = 'product.kind'
+    _rec_name = 'name'
+    _description = '類型'
+
+    name = fields.Char(string="類型",required=True)
+    code = fields.Char(string="代號", required=False)
+
+class ProductServicetype(models.Model):
+    _name = 'product.servicetype'
+    _rec_name = 'name'
+    _description = '服務類別'
+
+    name = fields.Char(string="服務類別",required=True)
+    code = fields.Char(string="代號", required=False)
+
+class ProductServiceContent(models.Model):
+    _name = 'product.servicecontent'
+    _rec_name = 'name'
+    _description = '服務內容'
+
+    name = fields.Char(string="服務內容",required=True)
+    code = fields.Char(string="代號", required=False)
+    note = fields.Char(string="備註", required=False)
+
+class ProductProperty(models.Model):
+    _name = 'product.property'
+    _rec_name = 'name'
+    _description = '產品屬性'
+
+    name = fields.Char(string="產品屬性",required=True)
+    note = fields.Char(string="備註", required=False)
+
+class ProductSize(models.Model):
+    _name = 'product.size'
+    _rec_name = 'name'
+    _description = '產品大小'
+
+    name = fields.Char(string="產品大小",required=True)
+    note = fields.Char(string="備註", required=False)

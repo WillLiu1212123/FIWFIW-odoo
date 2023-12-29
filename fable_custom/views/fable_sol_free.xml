@@ -116,6 +116,8 @@
            <field name="name">fable.sol.free.search</field>
            <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
+                <filter string="我的訂單" name="my_order" domain="[('user_id', '=', uid)]"/>
+                    <separator/>
                 <search string="">                                    
 <!--                    <filter string="排單日" name="filter_schedule_mo_date" date="schedule_mo_date"/>-->
                       <separator/>
@@ -133,6 +135,8 @@
            <field name="name">fable.sol.free.search</field>
            <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
+                <filter string="我的訂單" name="my_order" domain="[('user_id', '=', uid)]"/>
+                    <separator/>
                 <search string="">
                     <group expand="0" string="Group By...">
                         <filter string="銷售訂單" name="group_by_sale_order" domain="[]" context="{'group_by': 'order_id'}"/>
@@ -157,7 +161,7 @@
                           ]"/>
             <field name="search_view_id" ref="fable_sol_free_search"/>
             <field name="domain">[('state', 'in', ['sale','done'])]</field>
-            <field name="context">{'search_default_group_by_sale_order': 1, 'expand': 1}</field>
+            <field name="context">{'search_default_group_by_sale_order': 1, 'expand': 1, 'search_default_my_order': 1}</field>
         </record>
 
         <record id="fable_sol_kanban_action" model="ir.actions.act_window">
@@ -172,7 +176,7 @@
                           ]"/>
             <field name="search_view_id" ref="fable_sol_kanban_search"/>
             <field name="domain">[('state', 'in', ['sale','done'])]</field>
-            <field name="context">{'search_default_group_by_order_line_state': 1, 'expand': 1}</field>
+            <field name="context">{'search_default_group_by_order_line_state': 1, 'expand': 1, 'search_default_my_order': 1}</field>
         </record>
 
 
