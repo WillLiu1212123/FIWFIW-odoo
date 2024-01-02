@@ -116,9 +116,10 @@
            <field name="name">fable.sol.free.search</field>
            <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
+                <search string="">
                 <filter string="我的訂單" name="my_order" domain="[('user_id', '=', uid)]"/>
                     <separator/>
-                <search string="">                                    
+
 <!--                    <filter string="排單日" name="filter_schedule_mo_date" date="schedule_mo_date"/>-->
                       <separator/>
                     <group expand="0" string="Group By...">
@@ -135,9 +136,10 @@
            <field name="name">fable.sol.free.search</field>
            <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
+                <search string="">
                 <filter string="我的訂單" name="my_order" domain="[('user_id', '=', uid)]"/>
                     <separator/>
-                <search string="">
+
                     <group expand="0" string="Group By...">
                         <filter string="銷售訂單" name="group_by_sale_order" domain="[]" context="{'group_by': 'order_id'}"/>
                         <filter string="產品" name="group_by_product" domain="[]" context="{'group_by': 'product_id'}"/>

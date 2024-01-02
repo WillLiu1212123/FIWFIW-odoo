@@ -176,9 +176,10 @@
             <field name="name">fable.sol.mo.free.search</field>
             <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
+                <search string="">
                 <filter string="我的訂單" name="my_order" domain="[('user_id', '=', uid)]"/>
                     <separator/>
-                <search string="">
+
                     <group expand="0" string="Group By...">
                         <filter string="銷售訂單" name="group_by_sale_order" domain="[]"
                                 context="{'group_by': 'order_id'}"/>

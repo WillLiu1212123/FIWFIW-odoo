@@ -8,7 +8,7 @@
     'description': "1.透過HR,SASLE指定維護人員並派工",
     'depends': ['hr', 'hr_skills', 'sale', 'crm'],
     'data': [
-        'security/fable_custom_security.xml',
+        # 'security/fable_custom_security.xml',
         'security/ir.model.access.csv',
         # 'views/project_workitem_views.xml',
         # 'views/project_task_views.xml',
