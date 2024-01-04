@@ -21,6 +21,9 @@ class ResPartner(models.Model):
                                                   ('3', '消費者手機條碼')])
     ec_carrier_number = fields.Char(string="載具號碼")
 
+    ec_monthly_customer = fields.Boolean(string="月結顧客")
+    ec_birthday = fields.Date(string='生日')
+
     def _compute_uniform_invoice_count(self):
         uniform = self.env['uniform.invoice']
         self.uniform_invoice_count = len(uniform.search([
