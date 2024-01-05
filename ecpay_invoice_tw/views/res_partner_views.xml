@@ -28,6 +28,15 @@
                     </page>
 
                 </xpath>
+            <xpath expr="//field[@name='category_id']" position="attributes">
+                    <attribute name="string">如何得知我們</attribute>
+                    <attribute name="placeholder">如何得知我們</attribute>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="after">
+                <xpath expr="//field[@name='category_id']" position="move"/>
+                <field name="ec_birthday"/>
+                <field name="ec_monthly_customer"/>
+            </xpath>
         </field>
 
     </record>
