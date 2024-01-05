@@ -90,7 +90,6 @@
               <field name="suitable_user_ids" widget="many2many_tags" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
           </xpath>
           <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='product_id']" position="before">
-              <button name="button_clear" type="object" string="清除"/>
               <field name="product_kind_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
               <field name="product_servicetype_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
               <field name="product_servicecontent_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>

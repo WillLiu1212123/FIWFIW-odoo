@@ -61,6 +61,8 @@ class SaleOrderLine(models.Model):
         found_products = self.env['product.product'].search(domain)
 
         if found_products:
+            if len(found_products) == 1:
+                self.product_id = found_products.id
 
             found_product_kind_id = found_products.mapped('product_kind_id')
             found_product_servicetype_id = found_products.mapped('product_servicetype_id')
@@ -80,16 +82,13 @@ class SaleOrderLine(models.Model):
                                'product_servicecontent_id': [('id', '=', False)],
                                'product_property_id': [('id', '=', False)],
                                'product_size_id': [('id', '=', False)]}}
-    def button_clear(self):
-        self.product_id = False
-        self.product_kind_id = False
-        self.product_servicetype_id = False
-        self.product_servicecontent_id = False
-        self.product_property_id = False
-        self.product_size_id = False
-
-
-
+    # def button_clear(self):
+    #     self.product_id = False
+    #     self.product_kind_id = False
+    #     self.product_servicetype_id = False
+    #     self.product_servicecontent_id = False
+    #     self.product_property_id = False
+    #     self.product_size_id = False
 
     def take_sol(self):
         self.order_line_state = '3'
