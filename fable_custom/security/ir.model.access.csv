@@ -4,6 +4,7 @@ access_product_servicetype,access product servicetype,model_product_servicetype,
 access_product_servicecontent,access product servicecontent,model_product_servicecontent,base.group_user,1,1,1,1
 access_product_property,access product property,model_product_property,base.group_user,1,1,1,1
 access_product_size,access product size,model_product_size,base.group_user,1,1,1,1
+access_product_color,access product color,model_product_color,base.group_user,1,1,1,1
 
 
 

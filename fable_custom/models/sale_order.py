@@ -97,7 +97,7 @@ class SaleOrder(models.Model):
     #
     # # 更多二進制字段
     # ff = fields.Binary(string="FF")
-    main_image = fields.Binary(string="Image")
+    main_image = fields.Binary(string="圖")
     #
     # # 貨幣字段
     outsourcing_quote = fields.Float(string="外包報價")

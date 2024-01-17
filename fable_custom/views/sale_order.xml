@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="view_quotation_tree_with_onboarding_fable" model="ir.ui.view">
+        <field name="name">view.quotation.tree.with_onboarding.fable</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="main_image" widget="image" class="oe_avatar ml-3 mr-3" options="{&quot;size&quot;:[0,60]}"/>
+            </xpath>
+
+        </field>
+    </record>
     <record id="view_order_form_fable" model="ir.ui.view">
         <field name="name">sale.order.form.fable</field>
         <field name="model">sale.order</field>
@@ -12,12 +24,11 @@
           <xpath expr="//group[@name='partner_details']" position="attributes">
             <attribute name="string">顧客資訊</attribute>
           </xpath>
-          <xpath expr="//field[@name='partner_invoice_id']" position="after">
-            <xpath expr="//field[@name='partner_shipping_id']" position="move"/>
+          <xpath expr="//field[@name='partner_shipping_id']" position="after">
             <xpath expr="//field[@name='team_id']" position="move"/>
-
             <xpath expr="//field[@name='tag_ids']" position="move"/>
           </xpath>
+
           <xpath expr="//field[@name='payment_term_id']" position="attributes">
               <attribute name="invisible">1</attribute>
           </xpath>
@@ -44,7 +55,7 @@
             <field name="rqc_date" string="RQC 日期" widget="date"/>
             <field name="delivery_date" string="出貨日期" widget="date"/>
             <field name="shipping_method"/>
-            <xpath expr="//field[@name='partner_shipping_id']" position="move"/>
+<!--            <xpath expr="//field[@name='partner_shipping_id']" position="move"/>-->
             <field name="tracking_number" string="物流單號"/>
             <label for="commitment_date" string="交貨日期"/>
             <div name="commitment_date_div" class="o_row">
@@ -59,7 +70,7 @@
           </xpath>
           <xpath expr="//group[@name='studio_group_EsERa_left']" position="inside">
             <xpath expr="//field[@name='client_order_ref']" position="move"/>
-            <xpath expr="//field[@name='tag_ids']" position="move"/>
+<!--            <xpath expr="//field[@name='tag_ids']" position="move"/>-->
             <field name="customer_name" string="顧客姓名" placeholder="如維修單上有顧客資訊請填寫"/>
             <field name="cost_category" string="費用類別" attrs="{}"/>
             <field name="description" attrs="{}" required="1" string="顧客/品牌指示需求" placeholder="顧客/品牌維修單原單說明"/>
@@ -75,10 +86,11 @@
           </xpath>
           <xpath expr="//group[@name='studio_group_EsERa']" position="inside">
             <group name="studio_group_EsERa_right" string="內部維修紀錄">
-              <field name="item_type" string="項目類型" attrs="{}" required="1"/>
-              <field name="repair_item" string="維修項目" attrs="{}" required="1"/>
+<!--              <field name="item_type" string="項目類型" attrs="{}" />-->
+<!--              <field name="repair_item" string="維修項目" attrs="{}" />-->
               <field name="repair_detail" string="維修細節" attrs="{}" required="1"/>
               <field name="workshop_advice" string="工坊維修建議" placeholder="提供品牌報價時的建議或事前聲明"/>
+              <field name="dispatch_communication" string="OP派件溝通紀錄" placeholder="內部派件給工匠的維修指示"/>
               <field name="is_original_parts"/>
               <field name="is_waiting_materials" string="待料"/>
               <field name="part_remarks"/>
@@ -97,7 +109,16 @@
               <field name="product_servicecontent_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
               <field name="product_property_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
               <field name="product_size_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
+              <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+              <field name="product_color_id" />
           </xpath>
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='product_id']" position="after">
+              <field name="product_memo" />
+          </xpath>
+          <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']" position="attributes">
+            <!-- 添加 context 來傳遞額外的值 -->
+            <attribute name="context">{'default_client_order_ref': client_order_ref}</attribute>
+        </xpath>
 <!--          <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='product_id']" position="attributes">-->
 <!--            <attribute name="domain">[('id','in',eval(filtered_product_id))]</attribute>-->
 <!--          </xpath>-->
@@ -142,9 +163,9 @@
 <!--          <xpath expr="//group[@name='sale_info']" position="attributes">-->
 <!--            <attribute name="groups">hr.group_hr_user</attribute>-->
 <!--          </xpath>-->
-          <xpath expr="//field[@name='commitment_date']" position="attributes">
-            <attribute name="widget">date</attribute>
-          </xpath>
+<!--          <xpath expr="//field[@name='commitment_date']" position="attributes">-->
+<!--            <attribute name="widget">date</attribute>-->
+<!--          </xpath>-->
 <!--          <xpath expr="//group[@name='technical']" position="attributes">-->
 <!--            <attribute name="groups">hr_attendance.group_hr_attendance_user</attribute>-->
 <!--          </xpath>-->
@@ -182,10 +203,8 @@
             <attribute name="string">品牌維修單號</attribute>
           </xpath>
           <xpath expr="//field[@name='tag_ids']" position="attributes">
-            <attribute name="attrs">{}</attribute>
-            <attribute name="force_save">True</attribute>
-            <attribute name="placeholder">FIWFIW填寫</attribute>
-            <attribute name="string">品牌Tags</attribute>
+            <attribute name="invisible">True</attribute>
+
           </xpath>
 <!--          <xpath expr="//field[@name='invoice_ids']" position="inside">-->
 <!--            <tree string="Invoices" js_class="account_tree" decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" sample="1">-->
@@ -237,6 +256,8 @@
 <!--            <attribute name="attrs">{}</attribute>-->
 <!--            <attribute name="required"></attribute>-->
 <!--          </xpath>-->
+
+
         </field>
     </record>
 

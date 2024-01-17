@@ -20,6 +20,7 @@ class EcpayInvoiceSaleOrder(models.Model):
 
     @api.onchange('partner_id')
     def onchange_partner_id(self):
+        super(EcpayInvoiceSaleOrder, self).onchange_partner_id()
         self.ec_print = self.partner_id.ec_print
         self.ec_donate = self.partner_id.ec_donate
         self.ec_donate_number = self.partner_id.ec_donate_number

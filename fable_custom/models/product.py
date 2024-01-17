@@ -15,9 +15,9 @@ from odoo.exceptions import ValidationError
 class Product(models.Model):
     _inherit = 'product.template'
 
-    product_kind_id = fields.Many2one(comodel_name="product.kind", string="類型", required=False, )
-    product_servicetype_id = fields.Many2one(comodel_name="product.servicetype", string="服務類別(部門)", required=False, )
-    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="服務內容", required=False, )
+    product_kind_id = fields.Many2one(comodel_name="product.kind", string="產品分類", required=False, )
+    product_servicetype_id = fields.Many2one(comodel_name="product.servicetype", string="服務類別", required=False, )
+    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="對應技能", required=False, )
     product_property_id = fields.Many2one(comodel_name="product.property", string="產品屬性", required=False, )
     product_size_id = fields.Many2one(comodel_name="product.size", string="產品尺吋", required=False, )
 
@@ -89,9 +89,9 @@ class Product(models.Model):
 class ProductKind(models.Model):
     _name = 'product.kind'
     _rec_name = 'name'
-    _description = '類型'
+    _description = '產品分類'
 
-    name = fields.Char(string="類型",required=True)
+    name = fields.Char(string="產品分類",required=True)
     code = fields.Char(string="代號", required=False)
 
 class ProductServicetype(models.Model):
@@ -105,9 +105,9 @@ class ProductServicetype(models.Model):
 class ProductServiceContent(models.Model):
     _name = 'product.servicecontent'
     _rec_name = 'name'
-    _description = '服務內容'
+    _description = '對應技能'
 
-    name = fields.Char(string="服務內容",required=True)
+    name = fields.Char(string="對應技能",required=True)
     code = fields.Char(string="代號", required=False)
     note = fields.Char(string="備註", required=False)
 
@@ -122,7 +122,15 @@ class ProductProperty(models.Model):
 class ProductSize(models.Model):
     _name = 'product.size'
     _rec_name = 'name'
-    _description = '產品大小'
+    _description = '產品尺吋'
 
-    name = fields.Char(string="產品大小",required=True)
+    name = fields.Char(string="產品尺吋",required=True)
+    note = fields.Char(string="備註", required=False)
+
+class ProductColor(models.Model):
+    _name = 'product.color'
+    _rec_name = 'name'
+    _description = '產品顏色'
+
+    name = fields.Char(string="產品顏色",required=True)
     note = fields.Char(string="備註", required=False)
