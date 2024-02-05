@@ -15,3 +15,7 @@ class EcpayInvocieResConfigSettings(models.TransientModel):
                                     selection=[('manual', '手動'), ('automatic', '自動'), ('hand in', '人工填入')],
                                     related='company_id.auto_invoice', readonly=False)
     seller_Identifier = fields.Char(string='賣方統編', related='company_id.seller_Identifier', readonly=False)
+
+    def_ecpay_addr = fields.Char(string='預設地址', related='company_id.def_ecpay_addr', readonly=False)
+    def_ecpay_phone = fields.Char(string='預設手機', related='company_id.def_ecpay_phone', readonly=False)
+    def_ecpay_email = fields.Char(string='預設email', related='company_id.def_ecpay_email', readonly=False)

@@ -14,3 +14,6 @@ class ResCompany(models.Model):
                                     selection=[('manual', '手動'), ('automatic', '自動'), ('hand in', '人工填入')],
                                     default='manual')
     seller_Identifier = fields.Char(string='賣方統編', default='53538851')
+    def_ecpay_addr = fields.Char(string='預設地址', default='台北市信義區')
+    def_ecpay_phone = fields.Char(string='預設手機', default='0912345678')
+    def_ecpay_email = fields.Char(string='預設email', default='default@ecpay.com')

@@ -142,11 +142,17 @@ class AccountMove(models.Model):
         # 新版抬頭寫法，取得電商抬頭，如果沒有預設取得partner 名稱
         ecpay_invoice.Send['CustomerName'] = self.ec_ident_name if self.ec_ident_name else self.partner_id.name
 
+        # 給予發票地址.電話.email預設值
+        company_id = self.env.company
+
+        if self.ec_print_address == False and self.partner_id.contact_address == False:
+            self.ec_print_address = company_id.def_ecpay_addr
+
         # 新版寄送地址寫法，取得電商發票寄送地址，如果沒有預設取得partner 地址
         ecpay_invoice.Send[
             'CustomerAddr'] = self.ec_print_address if self.ec_print_address else self.partner_id.contact_address
-        ecpay_invoice.Send['CustomerPhone'] = self.partner_id.mobile if self.partner_id.mobile else ''
-        ecpay_invoice.Send['CustomerEmail'] = self.partner_id.email if self.partner_id.email else ''
+        ecpay_invoice.Send['CustomerPhone'] = self.partner_id.mobile if self.partner_id.mobile else company_id.def_ecpay_phone
+        ecpay_invoice.Send['CustomerEmail'] = self.partner_id.email if self.partner_id.email else company_id.def_ecpay_email
         ecpay_invoice.Send['ClearanceMark'] = ''
 
     # 檢查發票邏輯

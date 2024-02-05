@@ -49,6 +49,18 @@
                                         <label for="ecpay_HashIV" class="col-md-3 o_light_label"/>
                                         <field name="ecpay_HashIV"/>
                                     </div>
+                                    <div class="row mt16">
+                                        <label for="def_ecpay_addr" class="col-md-3 o_light_label"/>
+                                        <field name="def_ecpay_addr"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="def_ecpay_phone" class="col-md-3 o_light_label"/>
+                                        <field name="def_ecpay_phone"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="def_ecpay_email" class="col-md-3 o_light_label"/>
+                                        <field name="def_ecpay_email"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>

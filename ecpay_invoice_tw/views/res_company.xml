@@ -20,6 +20,9 @@
                             <group>
                                 <field name="ecpay_demo_mode"/>
                                 <field name="auto_invoice"/>
+                                <field name="def_ecpay_addr"/>
+                                <field name="def_ecpay_phone"/>
+                                <field name="def_ecpay_email"/>
                             </group>
                         </group>
                     </page>
