@@ -117,7 +117,7 @@ class SaleOrder(models.Model):
         ],        string="寄件方式"    )
     cost_category = fields.Selection(
         selection=[('新品', '新品'), ('保固', '保固'), ('倉庫', '倉庫'), ('客修', '客修自費')],
-        string="費用類別")
+        string="費用類別", required=True)
     item_type = fields.Selection(selection=[('CRM', 'CRM'),('FUR皮草', 'FUR皮草'),('FRN 家具', 'FRN 家具'),('LUG 行李箱', 'LUG 旅箱'),('RTW 服飾', 'RTW 服飾'),
             ('SOX 鞋履', 'SOX 鞋履'),('GLS眼鏡', 'GLS眼鏡'),('ACC 飾品', 'ACC 飾品'),('背帶', 'STRAP 背帶'),('BELT 皮帶', 'BELT 皮帶'),
             ('小皮件', 'SLG 小皮件'),('BKP背包', 'BKP背包'),('手袋', 'LLG 手袋')],
