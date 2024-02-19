@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="fable_custom_invoice_view_form" model="ir.ui.view">
+            <field name="name">fable_custom_invoice_view_form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@id='header_right_group']/field[@name='currency_id']" position="after">
+                    <field name="invoice_origin" string="來源"/>
+                    <field name="ref" string="編碼"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

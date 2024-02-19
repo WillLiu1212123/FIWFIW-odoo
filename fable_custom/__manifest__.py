@@ -17,7 +17,6 @@
         'views/product_views.xml',
         'views/sale_order.xml',
         'views/sale_portal_templates.xml',
-
         'views/fable_sol_free.xml',
         'views/fable_sol_mo_free.xml',
         'views/fable_sol_accept.xml',
@@ -27,6 +26,7 @@
 
 
         'views/menu.xml',
+        'views/account_invoice_view.xml'
 
     ],
     'installable': True,
