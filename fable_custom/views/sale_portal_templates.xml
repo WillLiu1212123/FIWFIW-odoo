@@ -9,11 +9,22 @@
     </template>
 
     <template id="sale_order_portal_content_inherit_fable" inherit_id="sale.sale_order_portal_content">
+        <xpath expr="//table[@id='sales_order_table']" position="attributes">
+            <attribute name="style">table-layout: fixed;</attribute>
+        </xpath>
+        <xpath expr="//table[@id='sales_order_table']/thead/tr/th[@class='text-left']" position="replace">
+            <th class="text-left" colspan="4">產品</th>
+        </xpath>
         <xpath expr="//table[@id='sales_order_table']/thead/tr/th[@class='text-left']" position="after">
-            <th class="text-left">備註</th>
+            <th class="text-left" colspan="4">備註</th>
+        </xpath>
+        <xpath expr="//td[@id='product_name']" position="replace">
+            <td id="product_name" colspan="4">
+                <span t-field="line.name"/>
+            </td>
         </xpath>
         <xpath expr="//td[@id='product_name']" position="after">
-            <td id="product_memo">
+            <td id="product_memo" colspan="4">
                 <span t-field="line.product_memo"/>
             </td>
         </xpath>
