@@ -9,4 +9,4 @@ from odoo.tools.float_utils import float_round
 
 class AccountMove(models.Model):
     _inherit = "account.move"
-    print("AccountMove")
+    fc_invoice_number = fields.Char(string='手動輸入發票號碼', copy=False, tracking=True)
