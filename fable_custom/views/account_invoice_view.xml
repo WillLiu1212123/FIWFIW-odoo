@@ -10,6 +10,9 @@
                     <field name="invoice_origin" string="來源"/>
                     <field name="ref" string="編碼"/>
                 </xpath>
+                <xpath expr ="//group[@id='header_left_group']/field[@name='payment_reference']" position="after">
+                    <field name="fc_invoice_number" string="手動輸入發票號碼"/>
+                </xpath>
             </field>
         </record>
     </data>
