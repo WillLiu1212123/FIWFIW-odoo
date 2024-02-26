@@ -37,7 +37,7 @@ class SaleOrderLine(models.Model):
         string='驗收狀態', default='1')
 
     # 負責人欄位
-    user_id = fields.Many2one('res.users', string='Responsible',copy=False)
+    user_id = fields.Many2one('res.users', string='Responsible')
 
     suitable_user_ids = fields.Many2many('res.users', string='Suitable User')
 
@@ -130,33 +130,19 @@ class SaleOrderLine(models.Model):
     def _find_responsible_user(self):
         self.ensure_one()
 
-        #取得同產品分類的工作者
-        sibling_responsible_user_ids= self.env['sale.order.line'].search([('product_id.categ_id', '=', self.product_id.categ_id.id), ('order_line_state', '<=', 6), ('id', '!=', self.id)]).mapped('user_id')
-        # sibling_responsible_user_ids = self.mapped('order_id.order_line.user_id')
+        sibling_responsible_user_ids = self.mapped('order_id.order_line.user_id')
         # sibling_responsible_user_ids = self.user_id
         has_skill_user_ids = self.suitable_user_ids
 
-
-        # 同產品分類有技能優先
+        # 同工單有技能優先
         for user_id in sibling_responsible_user_ids:
             if user_id.id in has_skill_user_ids.ids:
                 return user_id
 
-        #依 has_skill_user_ids 中的，assign_sol_ids 筆數，比對，取得 assign_sol_ids 最少的人員
-        user_line_counts = {}
-        for user_id in has_skill_user_ids:
-            line_count = self.env['sale.order.line'].search_count([
-                ('order_line_state', '<=', 6),
-                ('user_id', '=', user_id.id)
-            ])
-            user_line_counts[user_id] = line_count
-        min_line_user_id = min(user_line_counts, key=user_line_counts.get)
-        return min_line_user_id
-
-        # # # 有技能task最少者優先
-        # return reduce(lambda return_user_id, next_user_id: return_user_id if return_user_id and len(
-        #     return_user_id.assign_sol_ids) <= len(next_user_id.assign_sol_ids) else next_user_id, has_skill_user_ids,
-        #               self.env['res.users'])
+        # # 有技能task最少者優先
+        return reduce(lambda return_user_id, next_user_id: return_user_id if return_user_id and len(
+            return_user_id.assign_sol_ids) <= len(next_user_id.assign_sol_ids) else next_user_id, has_skill_user_ids,
+                      self.env['res.users'])
 
     def _check_responsible_user_should_have_skill(self):
         if self.user_id.id in self.suitable_user_ids.ids:
@@ -176,7 +162,7 @@ class SaleOrderLine(models.Model):
         if self.product_id:
             self.suitable_user_ids = self.product_id.has_skill_user_ids.filtered(
                 lambda item: item.company_ids in self.company_id)
-            # self.user_id = self._find_responsible_user()._origin
+            self.user_id = self._find_responsible_user()._origin
 
     @api.onchange('user_id')
     def _onchange_user_id(self):
@@ -184,8 +170,6 @@ class SaleOrderLine(models.Model):
             check_result = self._check_responsible_user_should_have_skill()
             if (check_result):
                 return check_result
-
-
 
 
     # @api.model

@@ -169,7 +169,3 @@ class SaleOrder(models.Model):
     # text_field_lgQch = fields.Text(string="工坊維修建議")
     # text_field_vENCT = fields.Text(string="OP派件溝通紀錄")
 
-    def action_confirm(self):
-        for line in self.order_line:
-            line.user_id = line._find_responsible_user()._origin
-        return super(SaleOrder, self).action_confirm()
