@@ -2,11 +2,12 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models, _, exceptions
+
+
 # from odoo.exceptions import UserError
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
-
 
     # # 二進制字段
     # avatar_image = fields.Binary(string="頭像")
@@ -55,13 +56,13 @@ class SaleOrder(models.Model):
     brands = fields.Char(string="Brands")
     consumable_cost = fields.Char(string="耗材費用")
     part_remarks = fields.Char(string="零件備註")
-    repair_note_2 = fields.Char(string="維修筆記2")
-    repair_note_3 = fields.Char(string="維修筆記3")
+    # repair_note_2 = fields.Char(string="維修筆記2")
+    # repair_note_3 = fields.Char(string="維修筆記3")
     customer_name = fields.Char(string="顧客姓名")
-    dyeing = fields.Char(string="染整")
-    cleaning = fields.Char(string="清潔")
-    repair_note_4 = fields.Char(string="維修筆記4")
-    repair = fields.Char(string="維修")
+    # dyeing = fields.Char(string="染整")
+    # cleaning = fields.Char(string="清潔")
+    # repair_note_4 = fields.Char(string="維修筆記4")
+    # repair = fields.Char(string="維修")
     repair_details = fields.Char(string="維修細節")
     tracking_number = fields.Char(string="物流單號")
 
@@ -90,7 +91,6 @@ class SaleOrder(models.Model):
     outsourcing_date = fields.Date(string="外包日期")
     urgent_delivery_date = fields.Date(string="急件交貨日")
 
-
     #
     # # 更多字元字段
     description = fields.Char(string="顧客/品牌指示需求")
@@ -112,31 +112,39 @@ class SaleOrder(models.Model):
     # section_and_note_one2many = fields.One2many('your.model', 'reference_field', string="New One2many")
     #
     # # 選擇字段
-    shipping_method = fields.Selection(selection=[('GBG 全球', 'GBG 全球快遞'),('便利袋', '便利箱'),('匯宇', '匯宇'),
-            ('大榮', 'KTJ嘉里大榮'),('快遞', 'STYLUX 行得利'), ('迪', '迪生 行得利'),('郵局', '郵局'), ('顧客', '顧客親取'),('馥馥', '馥馥親送'), ('黑貓宅急便', '黑貓宅急便')
-        ],        string="寄件方式"    )
+    shipping_method = fields.Selection(selection=[('GBG 全球', 'GBG 全球快遞'), ('便利袋', '便利箱'), ('匯宇', '匯宇'),
+                                                  ('大榮', 'KTJ嘉里大榮'), ('快遞', 'STYLUX 行得利'),
+                                                  ('迪', '迪生 行得利'), ('郵局', '郵局'), ('顧客', '顧客親取'),
+                                                  ('馥馥', '馥馥親送'), ('黑貓宅急便', '黑貓宅急便')
+                                                  ], string="寄件方式")
     cost_category = fields.Selection(
         selection=[('新品', '新品'), ('保固', '保固'), ('倉庫', '倉庫'), ('客修', '客修自費')],
         string="費用類別", required=True)
-    item_type = fields.Selection(selection=[('CRM', 'CRM'),('FUR皮草', 'FUR皮草'),('FRN 家具', 'FRN 家具'),('LUG 行李箱', 'LUG 旅箱'),('RTW 服飾', 'RTW 服飾'),
-            ('SOX 鞋履', 'SOX 鞋履'),('GLS眼鏡', 'GLS眼鏡'),('ACC 飾品', 'ACC 飾品'),('背帶', 'STRAP 背帶'),('BELT 皮帶', 'BELT 皮帶'),
-            ('小皮件', 'SLG 小皮件'),('BKP背包', 'BKP背包'),('手袋', 'LLG 手袋')],
+    item_type = fields.Selection(
+        selection=[('CRM', 'CRM'), ('FUR皮草', 'FUR皮草'), ('FRN 家具', 'FRN 家具'), ('LUG 行李箱', 'LUG 旅箱'),
+                   ('RTW 服飾', 'RTW 服飾'),
+                   ('SOX 鞋履', 'SOX 鞋履'), ('GLS眼鏡', 'GLS眼鏡'), ('ACC 飾品', 'ACC 飾品'), ('背帶', 'STRAP 背帶'),
+                   ('BELT 皮帶', 'BELT 皮帶'),
+                   ('小皮件', 'SLG 小皮件'), ('BKP背包', 'BKP背包'), ('手袋', 'LLG 手袋')],
         string="項目類型")
-    repair_item = fields.Selection(selection=[('風衣防水服務', '風衣防水服務'),('服裝修改', '服裝修改'),('邊油+染整', '邊油+染整'),
-            ('維修+染整', '維修+染整'),('清潔+染整', '清潔+染整'),('清潔+維修', '清潔+維修'),('清潔+維修+染整', '清潔+維修+染整'),
-            ('維修+邊油', '維修+邊油'),('邊油', '邊油'),('維修', '維修'),('整染', '染整'),('清潔', '清潔')],
+    repair_item = fields.Selection(
+        selection=[('風衣防水服務', '風衣防水服務'), ('服裝修改', '服裝修改'), ('邊油+染整', '邊油+染整'),
+                   ('維修+染整', '維修+染整'), ('清潔+染整', '清潔+染整'), ('清潔+維修', '清潔+維修'),
+                   ('清潔+維修+染整', '清潔+維修+染整'),
+                   ('維修+邊油', '維修+邊油'), ('邊油', '邊油'), ('維修', '維修'), ('整染', '染整'), ('清潔', '清潔')],
         string="維修項目")
-    repair_detail = fields.Selection(selection=[('釦子', '釦子'),('拉座', '拉座'),('拉練', '拉練'),
-            ('皮帶改短', '皮帶改短'),('背帶改短', '背帶改短'),('皮(背)帶打洞', '皮(背)帶打洞'),('手把', '手把'),
-            ('皮耳', '皮耳'),('皮蓋', '皮蓋'),('其他', '其他')],
-            string="維修細節")
+    repair_detail = fields.Selection(selection=[('釦子', '釦子'), ('拉座', '拉座'), ('拉練', '拉練'),
+                                                ('皮帶改短', '皮帶改短'), ('背帶改短', '背帶改短'),
+                                                ('皮(背)帶打洞', '皮(背)帶打洞'), ('手把', '手把'),
+                                                ('皮耳', '皮耳'), ('皮蓋', '皮蓋'), ('其他', '其他')],
+                                     string="維修細節")
 
     # is_urgent = fields.Selection(selection=[('yes', '是'), ('no', '否')], string="是否為急件？")
     # internal_communication = fields.Selection(selection=[('option1', '選項1'), ('option2', '選項2')], string="內部溝通")
     # new_priority = fields.Selection(selection=[('option1', '選項1'), ('option2', '選項2')], string="新優先級")
     # cost_category = fields.Selection(selection=[('option1', '選項1'), ('option2', '選項2')], string="費用類別")
     # item_type = fields.Selection(selection=[('option1', '選項1'), ('option2', '選項2')], string="項目類型")
-        # repair_detail = fields.Selection(selection=[('option1', '選項1'), ('option2', '選項2')], string="維修細節")
+    # repair_detail = fields.Selection(selection=[('option1', '選項1'), ('option2', '選項2')], string="維修細節")
     # difficulty_level = fields.Selection(selection=[('option1', '選項1'), ('option2', '選項2')], string="處理難度")
     # repair_item = fields.Selection(selection=[('option1', '選項1'), ('option2', '選項2')], string="維修項目")
     # logistics = fields.Selection(selection=[('option1', '選項1'), ('option2', '選項2')], string="物流")
@@ -153,17 +161,15 @@ class SaleOrder(models.Model):
     # selection_field_z1wtg = fields.Selection(selection=[('option1', '選項1'), ('option2', '選項2')], string="物流")
     #
     # # 文字字段
-    repair_note_1 = fields.Text(string="維修筆記1")
+    # repair_note_1 = fields.Text(string="維修筆記1")
     workshop_advice = fields.Text(string="工坊維修建議")
     dispatch_communication = fields.Text(string="OP派件溝通紀錄")
+
     # text_field_dQehx = fields.Text(string="維修筆記1")
     # text_field_lgQch = fields.Text(string="工坊維修建議")
     # text_field_vENCT = fields.Text(string="OP派件溝通紀錄")
-
-
 
     def action_confirm(self):
         for line in self.order_line:
             line.user_id = line._find_responsible_user()._origin
         return super(SaleOrder, self).action_confirm()
-
