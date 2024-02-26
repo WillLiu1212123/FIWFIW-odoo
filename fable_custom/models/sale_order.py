@@ -2,6 +2,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models, _, exceptions
+from odoo.exceptions import UserError
 
 
 # from odoo.exceptions import UserError
@@ -168,8 +169,52 @@ class SaleOrder(models.Model):
     # text_field_dQehx = fields.Text(string="維修筆記1")
     # text_field_lgQch = fields.Text(string="工坊維修建議")
     # text_field_vENCT = fields.Text(string="OP派件溝通紀錄")
+    product_kind_name = fields.Char(string="產品分類")
+    product_service_type_name = fields.Char(string="服務類別")
+    tag_name = fields.Char(string="品牌")
 
-    def action_confirm(self):
-        for line in self.order_line:
-            line.user_id = line._find_responsible_user()._origin
-        return super(SaleOrder, self).action_confirm()
+    # @api.model
+    # def write(self, vals):
+    #     # Perform your custom logic here before updating the sale order
+    #     # For example, modify the values passed to the write method
+    #     # or perform additional checks/validation
+    #     product_kind_name = self._update_product_kind_name(vals)
+    #     if product_kind_name:
+    #         # 在vals中設置產品分類名稱
+    #         vals['product_kind_name'] = product_kind_name
+    #
+    #     return super(SaleOrder, self).write(vals)
+
+    # @api.model
+    # def create(self, vals):
+    #     # Perform your custom logic here before creating the sale order
+    #     # For example, modify the values passed to the create method
+    #     # or perform additional checks/validation
+    #     product_kind_name = self._update_product_kind_name(vals)
+    #     if product_kind_name:
+    #         # 在vals中設置產品分類名稱
+    #         vals.setdefault('product_kind_name', product_kind_name)
+    #     print(vals)
+    #     return super(SaleOrder, self).create(vals)
+
+    # @api.model
+    # def _update_product_kind_name(self, vals):
+    #     if 'order_line' in vals:
+    #         order_line_id_to_check = -1
+    #         for first_order_line in self.order_line:
+    #             if first_order_line.product_kind_id:
+    #                 order_line_id_to_check = first_order_line.id
+    #                 break
+    #
+    #         for operation, line_id, line_data in vals.get('order_line', []):
+    #             if line_id == order_line_id_to_check and line_data:
+    #                 product_kind_id = line_data.get('product_kind_id')
+    #                 if product_kind_id:
+    #                     # 透過product_kind_id找到對應的product_kind記錄
+    #                     product_kind = self.env['product.kind'].browse(product_kind_id)
+    #                     if product_kind:
+    #                         # 返回產品分類名稱
+    #                         return product_kind.name
+    #                     else:
+    #                         raise UserError('找不到指定的產品分類記錄！')
+    #     return False

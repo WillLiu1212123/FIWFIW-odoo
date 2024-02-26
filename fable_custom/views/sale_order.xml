@@ -101,7 +101,7 @@
           </xpath>
           <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='name']" position="after">
               <field name="user_id" domain="[('company_ids', 'in', company_id)]" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
-              <field name="suitable_user_ids" widget="many2many_tags" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
+              <field optional="show" name="suitable_user_ids" widget="many2many_tags" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
           </xpath>
           <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='product_id']" position="before">
               <field name="product_kind_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
@@ -267,6 +267,9 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='create_date']" position="after">
                 <field name="rqc_date" string="RQC 日期" widget="date" optional="show"/>
+                <field name="product_kind_name" string ="產品分類" optional="show"/>
+                <field name="product_service_type_name" string ="服務類別" optional="show"/>
+                <field name="tag_name" string ="品牌" optional="show"/>
             </xpath>
         </field>
     </record>
