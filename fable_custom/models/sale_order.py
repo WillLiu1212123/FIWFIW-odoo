@@ -162,5 +162,8 @@ class SaleOrder(models.Model):
 
 
 
-
+    def action_confirm(self):
+        for line in self.order_line:
+            line.user_id = line._find_responsible_user()._origin
+        return super(SaleOrder, self).action_confirm()
 

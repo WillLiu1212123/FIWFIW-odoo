@@ -19,6 +19,21 @@
         <xpath expr="//table[@id='sales_order_table']/thead/tr/th[@class='text-left']" position="after">
             <th class="text-left" colspan="4">備註</th>
         </xpath>
+        <xpath expr="//table[@id='sales_order_table']/thead/tr/th[7]" position="replace">
+            <th class="text-right">
+                <span groups="account.group_show_line_subtotals_tax_excluded">合計</span>
+                <span groups="account.group_show_line_subtotals_tax_included">總計</span>
+            </th>
+        </xpath>
+        <xpath expr="//table[@id='sales_order_table']/tbody/t[2]/tr/t[1]/td[2]" position="replace">
+            <td class="text-right">
+                <div id="quote_qty">
+                    <t t-set="formatted_value" t-value="('{:.0f}' if line.product_uom_qty == int(line.product_uom_qty) else '{:.2f}').format(line.product_uom_qty)" />
+                    <t t-esc="formatted_value" />
+                    <span t-field="line.product_uom"/>
+                </div>
+            </td>
+        </xpath>
         <xpath expr="//td[@id='product_name']" position="replace">
             <td id="product_name" colspan="4">
                 <span t-field="line.name"/>
@@ -29,30 +44,42 @@
                 <span t-field="line.product_memo"/>
             </td>
         </xpath>
+
         <xpath expr="//table[@id='sales_order_table']/tbody/t[2]/tr/t[2]/td" position="replace">
             <!-- for line_section 添加小節-->
-            <t t-set="current_col_span" t-value="display_discount and 13 or 12"/>
-            <td t-att-colspan="current_col_span">
+            <td colspan="8">
                 <span t-field="line.name"/>
             </td>
+            <td id="dumb_space" colspan="1"/>
+            <td id="dumb_space2" t-attf-class="{{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"/>
+            <td id="dumb_space3" t-if="display_discount" t-attf-class="{{ 'd-none d-sm-table-cell' if report_type == 'html' else '' }}"/>
+
+            <td id="dumb_space4" t-attf-class="{{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"/>
+            <td id="dumb_space5" colspan="1"/>
         </xpath>
         <xpath expr="//table[@id='sales_order_table']/tbody/t[2]/tr/t[3]/td" position="replace">
             <!-- for line_note 添加備註-->
-            <t t-set="current_col_span" t-value="display_discount and 13 or 12"/>
-            <td t-att-colspan="current_col_span">
+            <td colspan="8">
                 <span t-field="line.name"/>
             </td>
+            <td id="dumb_space" colspan="1"/>
+            <td id="dumb_space2" t-attf-class="{{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"/>
+            <td id="dumb_space3" t-if="display_discount" t-attf-class="{{ 'd-none d-sm-table-cell' if report_type == 'html' else '' }}"/>
+
+            <td id="dumb_space4" t-attf-class="{{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"/>
+            <td id="dumb_space5" colspan="1"/>
         </xpath>
 
         <xpath expr="//table[@id='sales_order_table']/tbody/t[2]/t[3]/tr/td" position="replace">
-            <t t-set="current_col_span" t-value="display_discount and 13 or 12"/>
-            <td t-att-colspan="current_col_span">
-                <strong class="mr16">Subtotal</strong>
-                    <span
-                        t-esc="current_subtotal"
-                        t-options='{"widget": "monetary", "display_currency": sale_order.pricelist_id.currency_id}'
-                    />
-            </td>
+<!--            <t t-set="current_col_span" t-value="display_discount and 13 or 12"/>-->
+<!--            <td t-att-colspan="current_col_span">-->
+<!--                <strong class="mr16">Subtotal</strong>-->
+<!--                    <span-->
+<!--                        t-esc="current_subtotal"-->
+<!--                        t-options='{"widget": "monetary", "display_currency": sale_order.pricelist_id.currency_id}'-->
+<!--                    />-->
+<!--            </td>-->
+            <td id="dumb_space" colspan="10"/>
         </xpath>
     </template>
 
