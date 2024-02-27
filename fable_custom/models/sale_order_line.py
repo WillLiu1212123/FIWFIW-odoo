@@ -142,7 +142,7 @@ class SaleOrderLine(models.Model):
             if user_id.id in has_skill_user_ids.ids:
                 return user_id
 
-        #依 has_skill_user_ids 中的，assign_sol_ids 筆數，比對，取得 assign_sol_ids 最少的人員
+        # 依 has_skill_user_ids 中的，assign_sol_ids 筆數，比對，取得 assign_sol_ids 最少的人員
         user_line_counts = {}
         for user_id in has_skill_user_ids:
             line_count = self.env['sale.order.line'].search_count([
@@ -150,8 +150,12 @@ class SaleOrderLine(models.Model):
                 ('user_id', '=', user_id.id)
             ])
             user_line_counts[user_id] = line_count
-        min_line_user_id = min(user_line_counts, key=user_line_counts.get)
-        return min_line_user_id
+        if user_line_counts:
+            min_line_user_id = min(user_line_counts, key=user_line_counts.get)
+            return min_line_user_id
+        else:
+            if has_skill_user_ids:
+                return has_skill_user_ids[0]
 
         # # # 有技能task最少者優先
         # return reduce(lambda return_user_id, next_user_id: return_user_id if return_user_id and len(
