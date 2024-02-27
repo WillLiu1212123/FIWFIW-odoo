@@ -7,7 +7,6 @@ from bs4 import BeautifulSoup
 from datetime import timedelta
 
 
-
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
@@ -20,9 +19,9 @@ class SaleOrderLine(models.Model):
                 return client_order_ref
         return ''
 
-    customer_ref = fields.Char(related='order_id.client_order_ref', string='顧客單號 請添加小節複寫',store=True)
+    customer_ref = fields.Char(related='order_id.client_order_ref', string='顧客單號 請添加小節複寫', store=True)
     team_id = fields.Many2one(related='order_id.team_id', store=True)
-    name = fields.Text(string='說明', required=True ,default=_get_customer_ref)
+    name = fields.Text(string='說明', required=True, default=_get_customer_ref)
 
     sales_delay = fields.Integer(string="前置時間")
     take_date = fields.Date(string="領件日")
@@ -30,14 +29,15 @@ class SaleOrderLine(models.Model):
     done_date = fields.Date(string="實際完成日")
 
     order_line_state = fields.Selection(
-        [('1', '接收訂單'), ('2', '派案'), ('3', '接案'), ('4', '維修完成'), ('5', '驗收完成'), ('6', '訂單出貨'), ('7', '訂單取消')],
+        [('1', '接收訂單'), ('2', '派案'), ('3', '接案'), ('4', '維修完成'), ('5', '驗收完成'), ('6', '訂單出貨'),
+         ('7', '訂單取消')],
         string='訂單狀態', default='1')
     test_state = fields.Selection(
         [('1', '尚未檢查'), ('2', '通過'), ('3', '不通過'), ('4', '複檢後通過')],
         string='驗收狀態', default='1')
 
     # 負責人欄位
-    user_id = fields.Many2one('res.users', string='Responsible',copy=False)
+    user_id = fields.Many2one('res.users', string='Responsible', copy=False)
 
     suitable_user_ids = fields.Many2many('res.users', string='Suitable User')
 
@@ -45,7 +45,8 @@ class SaleOrderLine(models.Model):
 
     product_kind_id = fields.Many2one(comodel_name="product.kind", string="產品分類", required=False, )
     product_servicetype_id = fields.Many2one(comodel_name="product.servicetype", string="服務類別", required=False, )
-    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="對應技能", required=False, )
+    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="對應技能",
+                                                required=False, )
     product_property_id = fields.Many2one(comodel_name="product.property", string="產品屬性", required=False, )
     product_size_id = fields.Many2one(comodel_name="product.size", string="產品尺吋", required=False, )
     # filtered_product_id = fields.Many2one(comodel_name="product.product", string="產品", required=False, )
@@ -55,7 +56,8 @@ class SaleOrderLine(models.Model):
     tag_ids = fields.Many2many('crm.tag', 'sale_order_line_tag_rel', 'order_line_id', 'tag_id', string='品牌')
     product_color_id = fields.Many2one(comodel_name="product.color", string="顏色", required=False, )
 
-    @api.onchange('product_kind_id', 'product_servicetype_id', 'product_servicecontent_id', 'product_property_id', 'product_size_id')
+    @api.onchange('product_kind_id', 'product_servicetype_id', 'product_servicecontent_id', 'product_property_id',
+                  'product_size_id')
     def _onchange_filtered_product(self):
         self.ensure_one()
         domain = []
@@ -96,6 +98,7 @@ class SaleOrderLine(models.Model):
                                'product_servicecontent_id': [('id', '=', False)],
                                'product_property_id': [('id', '=', False)],
                                'product_size_id': [('id', '=', False)]}}
+
     # def button_clear(self):
     #     self.product_id = False
     #     self.product_kind_id = False
@@ -111,15 +114,18 @@ class SaleOrderLine(models.Model):
             self.tobe_date = fields.Date.today() + timedelta(days=self.sales_delay)
         else:
             self.tobe_date = fields.Date.today()
-    #維修完成
+
+    # 維修完成
     def done_sol(self):
         self.order_line_state = '4'
         self.done_date = fields.Date.today()
-    #驗收完成
+
+    # 驗收完成
     def accept_sol(self):
         self.order_line_state = '5'
         self.done_date = fields.Date.today()
-    #出貨完成
+
+    # 出貨完成
     def ship_sol(self):
         self.order_line_state = '6'
         self.done_date = fields.Date.today()
@@ -130,12 +136,13 @@ class SaleOrderLine(models.Model):
     def _find_responsible_user(self):
         self.ensure_one()
 
-        #取得同產品分類的工作者
-        sibling_responsible_user_ids= self.env['sale.order.line'].search([('product_id.categ_id', '=', self.product_id.categ_id.id), ('order_line_state', '<=', 6), ('id', '!=', self.id)]).mapped('user_id')
+        # 取得同產品分類的工作者
+        sibling_responsible_user_ids = self.env['sale.order.line'].search(
+            [('product_id.categ_id', '=', self.product_id.categ_id.id), ('order_line_state', '<=', 6),
+             ('id', '!=', self.id)]).mapped('user_id')
         # sibling_responsible_user_ids = self.mapped('order_id.order_line.user_id')
         # sibling_responsible_user_ids = self.user_id
         has_skill_user_ids = self.suitable_user_ids
-
 
         # 同產品分類有技能優先
         for user_id in sibling_responsible_user_ids:
@@ -174,7 +181,6 @@ class SaleOrderLine(models.Model):
                 }
             }
 
-
     @api.onchange('product_id')
     def _onchange_product_id(self):
         if self.product_id:
@@ -189,16 +195,67 @@ class SaleOrderLine(models.Model):
             if (check_result):
                 return check_result
 
+    @api.model
+    def create(self, vals):
+        # 创建销售订单行
+        new_line = super(SaleOrderLine, self).create(vals)
+        # print(vals)
+        # print(new_line)
+        self._update_display_fields(False)
+        return new_line
 
+    @api.model
+    def write(self, vals):
+        # print(f"on sale order line write vals :{vals}")
+        result = super(SaleOrderLine, self).write(vals)
+        # print(f"on sale order line write results:{result}")
+        self._update_display_fields(False)
+        # for line in self.order_id.order_line:
+        #     print(f"all line id is {line.id}")
+        #     product_kind_id = line.product_kind_id.id
+        #     if product_kind_id:
+        #         print(f"product kind id is {product_kind_id}")
+        # for pid in self.order_id.order_line.product_kind_id:
+        #     if pid:
+        #         print(f"order lin product kind id is {pid}")
+        return result
 
+    @api.model
+    def unlink(self):
+        # print(f"on sale order line unlink ")
+        self._update_display_fields(True)
+        result = super(SaleOrderLine, self).unlink()
+        return result
 
-    # @api.model
-    # def create(self, vals):
-    #     return super(SaleOrderLine, self).create(vals)
-    #
-    # def write(self, vals):
-    #     return super(SaleOrderLine, self).write(vals)
+    def _update_display_fields(self, is_from_unlink):
+        product_kind_name = ''
+        product_service_type_name = ''
+        tag_name = ''
 
+        # 當 is_from_unlink 為 False，修改 sale order line 中有 product id 的第一筆資料
+        # 當 is_from_unlink 為 True，修改 sale order line 中有 product id 且不是自身的第一筆資料
+        for line in self.order_id.order_line:
+            if (not is_from_unlink or (is_from_unlink and line.id != self.id)) and line.product_id:
+                product_kind_id = line.product_kind_id.id
+                product_service_type_id = line.product_servicetype_id.id
+                tag_id = line.tag_ids.id
+                if product_kind_id:
+                    product_kind = self.env['product.kind'].browse(product_kind_id)
+                    if product_kind:
+                        product_kind_name = product_kind.name
 
+                if product_service_type_id:
+                    product_service_type = self.env['product.servicetype'].browse(product_service_type_id)
+                    if product_service_type:
+                        product_service_type_name = product_service_type.name
 
+                if tag_id:
+                    tag = self.env['crm.tag'].browse(tag_id)
+                    if tag:
+                        tag_name = tag.name
+                break
 
+        # 將 product_kind_name 賦值給 self.order_id.product_kind_name
+        self.order_id.product_kind_name = product_kind_name
+        self.order_id.product_service_type_name = product_service_type_name
+        self.order_id.tag_name = tag_name
