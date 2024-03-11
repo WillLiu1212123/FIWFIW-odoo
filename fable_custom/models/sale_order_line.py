@@ -43,7 +43,7 @@ class SaleOrderLine(models.Model):
 
     skill_ids = fields.Many2one('hr.skill', 'Skill', related='product_id.skill_id')
 
-    product_kind_id = fields.Many2one(comodel_name="product.kind", string="產品分類", required=False, )
+    product_kind_id = fields.Many2one(comodel_name="product.kind", string="物件類別", required=False, )
     product_servicetype_id = fields.Many2one(comodel_name="product.servicetype", string="服務類別", required=False, )
     product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="對應技能",
                                                 required=False, )

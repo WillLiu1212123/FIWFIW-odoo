@@ -267,7 +267,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='create_date']" position="after">
                 <field name="rqc_date" string="RQC 日期" widget="date" optional="show"/>
-                <field name="product_kind_name" string ="產品分類" optional="show"/>
+                <field name="product_kind_name" string ="物件類別" optional="show"/>
                 <field name="product_service_type_name" string ="服務類別" optional="show"/>
                 <field name="tag_name" string ="品牌" optional="show"/>
             </xpath>
