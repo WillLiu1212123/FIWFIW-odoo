@@ -173,6 +173,11 @@ class SaleOrder(models.Model):
     product_service_type_name = fields.Char(string="服務類別")
     tag_name = fields.Char(string="品牌")
 
+    def action_confirm(self):
+        for line in self.order_line:
+            line.user_id = line._find_responsible_user()._origin
+        return super(SaleOrder, self).action_confirm()
+
     # @api.model
     # def write(self, vals):
     #     # Perform your custom logic here before updating the sale order
