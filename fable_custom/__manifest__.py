@@ -22,6 +22,8 @@
         'views/fable_sol_accept.xml',
         'views/fable_sol_ship.xml',
 
+        'wizard/sol_complete_wizard.xml',
+
 
 
 

@@ -7,6 +7,7 @@ access_product_size,access product size,model_product_size,base.group_user,1,1,1
 access_product_color,access product color,model_product_color,base.group_user,1,1,1,1
 
 
+access_sol_complete_wizard,access sol_complete_wizard,model_sol_complete_wizard,base.group_user,1,1,1,1
 
 
 
