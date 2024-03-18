@@ -175,7 +175,9 @@ class SaleOrder(models.Model):
 
     def action_confirm(self):
         for line in self.order_line:
-            line.user_id = line._find_responsible_user()._origin
+            user_id = line._find_responsible_user()
+            if user_id:
+                line.user_id = user_id.id
         return super(SaleOrder, self).action_confirm()
 
     # @api.model

@@ -163,6 +163,8 @@ class SaleOrderLine(models.Model):
         else:
             if has_skill_user_ids:
                 return has_skill_user_ids[0]
+            else:
+                return False
 
         # # # 有技能task最少者優先
         # return reduce(lambda return_user_id, next_user_id: return_user_id if return_user_id and len(
