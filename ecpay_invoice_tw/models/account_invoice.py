@@ -29,7 +29,7 @@ class AccountMove(models.Model):
                                    string='載具類別')
 
     lovecode = fields.Char(string='捐贈碼', readonly=True, copy=False)
-    carrierNum = fields.Char(string='載具號碼', related='ecpay_invoice_id.IIS_Carrier_Num', readonly=True, copy=False)
+    carrierNum = fields.Char(string='載具號碼', copy=False)
     ecpay_CustomerIdentifier = fields.Char(string='統一編號', readonly=True, copy=False)
     ec_print_address = fields.Char(string='發票寄送地址', readonly=True, copy=False)
     ec_ident_name = fields.Char(string='發票抬頭', readonly=True, copy=False)
@@ -262,6 +262,9 @@ class AccountMove(models.Model):
 
         # 設定Odoo發票為已開電子發票
         self.uniform_state = 'invoiced'
+        if self.ecpay_invoice_id:
+            self.carrierType = self.ecpay_invoice_id.IIS_Carrier_Type
+            self.carrierNum = self.ecpay_invoice_id.IIS_Carrier_Num
 
     def action_run_invoice_invalid(self):
         return {
