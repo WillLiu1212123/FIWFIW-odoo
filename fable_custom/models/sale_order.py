@@ -3,6 +3,7 @@
 
 from odoo import api, fields, models, _, exceptions
 from odoo.exceptions import UserError
+import re
 
 
 # from odoo.exceptions import UserError
@@ -173,12 +174,37 @@ class SaleOrder(models.Model):
     product_service_type_name = fields.Char(string="服務類別")
     tag_name = fields.Char(string="品牌")
 
+    is_order_line_state_4 = fields.Boolean(string='待驗收', compute='_compute_is_order_line_state_4')
+
+    order_line_4 = fields.One2many('sale.order.line', 'order_id', string='待驗收',
+                                   domain=[('order_line_state', '=', '4')],
+                                   states={'cancel': [('readonly', True)], 'done': [('readonly', True)]}, copy=False,
+                                   auto_join=True)
+
+    @api.depends('order_line.order_line_state')
+    def _compute_is_order_line_state_4(self):
+        for order in self:
+            order.is_order_line_state_4 = any(line.order_line_state == '4' for line in order.order_line)
+
     def action_confirm(self):
         for line in self.order_line:
             user_id = line._find_responsible_user()
             if user_id:
                 line.user_id = user_id.id
         return super(SaleOrder, self).action_confirm()
+
+    # 計算欄位來篩選包含圖片的訊息
+    filtered_message_ids = fields.One2many(
+        comodel_name='mail.message',
+        compute='_compute_filtered_message_ids',
+        string='Filtered Messages'
+    )
+
+    @api.depends('message_ids')
+    def _compute_filtered_message_ids(self):
+        for record in self:
+            # record.filtered_message_ids = record.message_ids.filtered(lambda m: re.search(r'<img[^>]*>', m.body))
+            record.filtered_message_ids = record.message_ids.filtered(lambda m: m.attachment_ids)
 
     # @api.model
     # def write(self, vals):

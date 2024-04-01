@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
 
             <xpath expr="//field[@name='name']" position="after">
+                <field name="is_order_line_state_4"/>
                 <field name="main_image" widget="image" class="oe_avatar ml-3 mr-3" options="{&quot;size&quot;:[0,60]}"/>
             </xpath>
 
@@ -204,7 +205,30 @@
           </xpath>
           <xpath expr="//field[@name='tag_ids']" position="attributes">
             <attribute name="invisible">True</attribute>
-
+          </xpath>
+          <xpath expr="//notebook" position="inside">
+                <page string="驗收內容" name="sol_accept">
+                  	<field name="order_line_4" mode="tree">
+                        <tree string="驗收進度表" multi_edit="1" expand="context.get('expand', False)" editable="bottom"
+                          create="false" delete="false" default_order='take_date,tobe_date desc'>
+                            <button name="accept_sol" type="object" string="驗收" class="oe_highlight"/>
+                            <button name="accept_sol_return" type="object" string="退回" class="oe_highlight"/>
+                            <field name="company_id" invisible="1"/>
+                            <!--基礎欄位-->
+        <!--                    <field name="production_no" string="編號" optional="show" readonly="1"/>-->
+                            <field name="order_line_state" optional="show" readonly="1"/>
+                            <field name="test_state" optional="show" />
+                            <field name="order_id" string="訂單編號" optional="show" readonly="1"/>
+                            <field name="product_id" optional="show" readonly="1"/>
+                            <field name="user_id" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="suitable_user_ids" widget="many2many_tags" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="sales_delay" optional="show" readonly="1"/>
+                            <field name="take_date" optional="show" readonly="1"/>
+                            <field name="tobe_date" optional="show" readonly="1"/>
+                            <field name="done_date" optional="show" readonly="1"/>
+                        </tree>
+                    </field>
+                </page>
           </xpath>
 <!--          <xpath expr="//field[@name='invoice_ids']" position="inside">-->
 <!--            <tree string="Invoices" js_class="account_tree" decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" sample="1">-->
@@ -273,4 +297,22 @@
             </xpath>
         </field>
     </record>
+
+<!--    <record id="inherit_sale_order_view_search_fable" model="ir.ui.view">-->
+<!--        <field name="name">shopee.sale.order.search.inherit.fable</field>-->
+<!--        <field name="model">sale.order</field>-->
+<!--        <field name="inherit_id" ref="sale.view_sales_order_filter"/>-->
+<!--        <field name="arch" type="xml">-->
+
+<!--&lt;!&ndash;            <xpath expr="//filter[@name='my_sale_orders_filter']" position="after">&ndash;&gt;-->
+<!--&lt;!&ndash;            </xpath>&ndash;&gt;-->
+<!--			<xpath expr="//filter[@name='my_sale_orders_filter']" position="after">-->
+
+<!--				<separator/>-->
+<!--&lt;!&ndash;                <filter string="待驗收" name="wait_check" domain="[('is_order_line_state_4', '=', True)]"/>&ndash;&gt;-->
+<!--			</xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
 </odoo>

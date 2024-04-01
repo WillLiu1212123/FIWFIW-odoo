@@ -10,6 +10,7 @@
                       create="false" delete="false" default_order='take_date,tobe_date desc'>
                     <button name="take_sol" type="object" string="領件" class="oe_highlight"/>
                     <button name="done_sol" type="object" string="完成" class="oe_highlight"/>
+                    <button name="open_order_fable_form" string="開啓訂單" type="object"/>
                     <field name="test_state"/>
                     <field name="company_id" invisible="1"/>
                     <!--基礎欄位-->
@@ -208,18 +209,184 @@
             <field name="context">{'search_default_my_order': 1}</field>
         </record>
 
-<!--        <record id="fable_sol_mo_production_free_action" model="ir.actions.act_window">-->
-<!--            <field name="name">產線維修運作</field>-->
-<!--            <field name="type">ir.actions.act_window</field>-->
-<!--            <field name="res_model">sale.order.line</field>-->
-<!--            <field name="view_ids"-->
-<!--                   eval="[(5, 0, 0),-->
-<!--                          (0, 0, {'view_mode': 'kanban', 'view_id': ref('fable_sol_mo_free_kanban')})]"/>-->
-<!--            <field name="search_view_id" ref="fable_sol_mo_production_free_search"/>-->
-<!--            <field name="view_mode">kanban</field>-->
-<!--            <field name="domain">[('project_ok', '=', True), ('production_task', '=', True),('state', 'in', ['sale','done'])]]</field>-->
-<!--            <field name="context">{'search_default_group_by_production_line': 1, 'expand': 1}</field>-->
-<!--        </record>-->
+    <record id="view_order_form_fable_custom" model="ir.ui.view">
+        <field name="name">sale.order.form.fable.custom</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <form string="銷售訂單" class="o_sale_order" js_class="sale_discount_form">
+                <header>
+                    <field name="state" widget="statusbar" readonly="1"/>
+                </header>
+                <sheet>
+
+                    <field name="main_image" widget="image" class="oe_avatar ml-3 mr-3" options="{&quot;size&quot;:[0,90]}" readonly="1"/>
+
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group name="sale_header">
+                        <group name="partner_details" string="顧客資訊">
+                            <field name="partner_id" readonly="1"/>
+                            <field name="team_id" readonly="1"/>
+                        </group>
+                        <group name="order_details" string="進出貨紀錄" readonly="1">
+
+                            <field name="receipt_date" string="收貨日期" readonly="1"/>
+                            <field name="urgent_delivery_date" string="急件交貨日" widget="date" readonly="1"/>
+
+                            <div class="o_td_label" >
+                                <label for="date_order" string="報價日期"/>
+                            </div>
+                            <field name="date_order" nolabel="1" readonly="1"/>
+                            <div class="o_td_label" >
+                                <label for="date_order" string="訂單確認日期" readonly="1"/>
+                            </div>
+                            <field name="date_order" readonly="1"/>
+                            <field name="rqc_date" string="RQC 日期" readonly="1"/>
+                            <field name="delivery_date" string="出貨日期" readonly="1"/>
+                            <field name="shipping_method" readonly="1"/>
+
+                            <field name="tracking_number" string="物流單號" readonly="1"/>
+                            <label for="commitment_date" string="交貨日期"/>
+                            <div name="commitment_date_div" class="o_row">
+                                <field name="commitment_date" readonly="1"/>
+                                <span name="expected_date_span" class="text-muted">預期: <field name="expected_date" /></span>
+                            </div>
+                            <field name="currency_id" />
+                            <field name="tax_country_id" invisible="1" />
+<!--                            <field name="payment_term_id" invisible="1" />-->
+                        </group>
+                    </group>
+            <group name="studio_group_EsERa">
+                <group name="studio_group_EsERa_left" string="維修單資訊">
+                    <field name="client_order_ref" readonly="1"/>
+                    <field name="customer_name" string="顧客姓名" readonly="1"/>
+                    <field name="cost_category" string="費用類別" readonly="1"/>
+                    <field name="description" readonly="1"/>
+                    <field name="brand_repair_quote" readonly="1"/>
+                    <field name="create_date" readonly="1"/>
+                    <field name="is_outsourcing" readonly="1"/>
+                    <field name="outsourcing_quote" string="外包報價" readonly="1"/>
+                    <field name="consumable_cost" string="耗材費用" readonly="1"/>
+                </group>
+
+                <group name="studio_group_EsERa_right" string="內部維修紀錄" readonly="1">
+                  <field name="repair_detail" string="維修細節" readonly="1"/>
+                  <field name="workshop_advice" string="工坊維修建議" readonly="1"/>
+                  <field name="dispatch_communication" string="OP派件溝通紀錄" readonly="1"/>
+                  <field name="is_original_parts" readonly="1"/>
+                  <field name="is_waiting_materials" string="待料" readonly="1"/>
+                  <field name="part_remarks" readonly="1"/>
+                </group>
+            </group>
+            <notebook>
+                <page string="訂單明細" name="order_lines">
+                    <field name="order_line" widget="section_and_note_one2many" mode="tree" readonly="1" >
+                        <tree string="訂單明細" editable="bottom">
+                            <field optional="show" name="customer_ref" string="顧客單號"/>
+                              <field name="product_kind_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
+                              <field name="product_servicetype_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
+                              <field name="product_servicecontent_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
+                              <field name="product_property_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
+                              <field name="product_size_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
+                              <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                              <field name="product_color_id" />
+                            <field name="product_id"/>
+                            <field name="name"/>
+                            <field name="user_id" optional="show"/>
+                            <field name="suitable_user_ids" optional="hide"/>
+                        </tree>
+                    </field>
+                    <group name="note_group" col="6" class="mt-2 mt-md-0">
+                        <group colspan="4" attrs="{}" invisible="1" modifiers="{&quot;invisible&quot;: true}">
+                            <field name="note" class="oe-bordered-editor" nolabel="1" placeholder="條款和條件..." widget="text" modifiers="{}"/>
+                        </group>
+                        <div class="oe_clear"/>
+                    </group>
+                </page>
+<!--                <page string="交貨資訊" name="other_information">-->
+<!--                    <group>-->
+<!--                        <group name="sales_person" string="銷售">-->
+<!--                            <field name="user_id" widget="many2one_avatar_user" on_change="1" can_create="true" can_write="true" modifiers="{}"/>-->
+
+<!--                            <field name="website_id" attrs="{'invisible': [('website_id', '=', False)]}" on_change="1" can_create="true" can_write="true" modifiers="{&quot;invisible&quot;: [[&quot;website_id&quot;, &quot;=&quot;, false]], &quot;readonly&quot;: true}"/>-->
+<!--            -->
+<!--                            <field name="is_abandoned_cart" invisible="1" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>-->
+<!--                            <field name="cart_recovery_email_sent" invisible="1" modifiers="{&quot;invisible&quot;: true}"/>-->
+
+
+<!--                            <field name="require_signature" modifiers="{&quot;readonly&quot;: [[&quot;state&quot;, &quot;not in&quot;, [&quot;draft&quot;, &quot;sent&quot;]]]}"/>-->
+<!--                            <field name="require_payment" modifiers="{&quot;readonly&quot;: [[&quot;state&quot;, &quot;not in&quot;, [&quot;draft&quot;, &quot;sent&quot;]]]}"/>-->
+<!--                            <field name="reference" readonly="1" attrs="{'invisible': [('reference', '=', False)]}" modifiers="{&quot;invisible&quot;: [[&quot;reference&quot;, &quot;=&quot;, false]], &quot;readonly&quot;: true}"/>-->
+
+
+<!--                            <field name="report_grids" modifiers="{}"/>-->
+<!--                    </group>-->
+<!--                                <group name="sale_info" string="會計">-->
+<!--                                    <field name="fiscal_position_id" options="{'no_create': True}" on_change="1" can_create="true" can_write="true" modifiers="{}"/>-->
+<!--                                    <field name="analytic_account_id" context="{'default_partner_id':partner_invoice_id, 'default_name':name}" force_save="1" can_create="true" can_write="true" invisible="1" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: [[&quot;state&quot;, &quot;in&quot;, [&quot;sale&quot;, &quot;done&quot;, &quot;cancel&quot;]]]}"/>-->
+<!--                <field name="visible_project" invisible="1" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>-->
+<!--                <field name="project_id" options="{'no_create': True}" attrs="{'invisible': [('visible_project', '=', False)]}" on_change="1" can_create="true" can_write="true" modifiers="{&quot;invisible&quot;: [[&quot;visible_project&quot;, &quot;=&quot;, false]], &quot;readonly&quot;: [[&quot;state&quot;, &quot;not in&quot;, [&quot;draft&quot;, &quot;sent&quot;]]]}"/>-->
+
+<!--                                    <field name="invoice_status" states="sale,done" modifiers="{&quot;invisible&quot;: [[&quot;state&quot;, &quot;not in&quot;, [&quot;sale&quot;, &quot;done&quot;]]], &quot;readonly&quot;: true}"/>-->
+<!--                                </group>-->
+<!--                            </group>-->
+<!--                            <group>-->
+<!--                                <group name="sale_shipping" string="交貨">-->
+
+<!--                    <field name="warehouse_id" options="{'no_create': True}" force_save="1" on_change="1" can_create="true" can_write="true" invisible="1" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: [[&quot;state&quot;, &quot;not in&quot;, [&quot;draft&quot;, &quot;sent&quot;]]], &quot;required&quot;: true}"/>-->
+<!--                    <field name="incoterm" options="{'no_open': True, 'no_create': True}" can_create="true" can_write="true" invisible="1" modifiers="{&quot;invisible&quot;: true}"/>-->
+<!--                    <field name="picking_policy" required="True" on_change="1" modifiers="{&quot;readonly&quot;: [[&quot;state&quot;, &quot;not in&quot;, [&quot;draft&quot;, &quot;sent&quot;]]], &quot;required&quot;: true}"/>-->
+<!--                <label for="commitment_date" string="交貨日期"/>-->
+<!--                                    <div class="o_row">-->
+<!--                        <field name="commitment_date" on_change="1" modifiers="{&quot;readonly&quot;: [[&quot;state&quot;, &quot;in&quot;, [&quot;done&quot;, &quot;cancel&quot;]]]}"/>-->
+<!--                        <span class="text-muted" attrs="{'invisible': [('effective_date', '!=', False), ('commitment_date', '!=', False)]}" modifiers="{&quot;invisible&quot;: [[&quot;effective_date&quot;, &quot;!=&quot;, false], [&quot;commitment_date&quot;, &quot;!=&quot;, false]]}">預期： <field name="expected_date" widget="date" on_change="1" modifiers="{&quot;readonly&quot;: true}"/>-->
+<!--                    <field name="show_json_popover" invisible="1" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>-->
+<!--                    <field string=" " name="json_popover" widget="stock_rescheduling_popover" attrs="{'invisible': [('show_json_popover', '=', False)]}" modifiers="{&quot;invisible&quot;: [[&quot;show_json_popover&quot;, &quot;=&quot;, false]], &quot;readonly&quot;: true}"/>-->
+<!--                </span>-->
+<!--                    </div>-->
+<!--                    <field name="effective_date" attrs="{'invisible': [('effective_date', '=', False)]}" modifiers="{&quot;invisible&quot;: [[&quot;effective_date&quot;, &quot;=&quot;, false]], &quot;readonly&quot;: true}"/>-->
+<!--                </group>-->
+<!--                                <group string="追蹤" name="sale_reporting">-->
+<!--                                    <group name="technical" colspan="2" class="mb-0">-->
+<!--                                        <field name="origin" modifiers="{}"/>-->
+
+<!--                <field name="opportunity_id" help="登入到訂單所屬商機的會話" can_create="true" can_write="true" modifiers="{}"/>-->
+<!--            </group>-->
+<!--                                    <group name="utm_link" colspan="2" class="mt-0">-->
+<!--                                        <field name="campaign_id" can_create="true" can_write="true" modifiers="{}"/>-->
+<!--                                        <field name="medium_id" can_create="true" can_write="true" modifiers="{}"/>-->
+<!--                                        <field name="source_id" can_create="true" can_write="true" modifiers="{}"/>-->
+<!--                                    </group>-->
+<!--                                </group>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="客戶簽名" name="customer_signature" attrs="{'invisible': [('require_signature', '=', False), ('signed_by', '=', False), ('signature', '=', False), ('signed_on', '=', False)]}" modifiers="{&quot;invisible&quot;: [[&quot;require_signature&quot;, &quot;=&quot;, false], [&quot;signed_by&quot;, &quot;=&quot;, false], [&quot;signature&quot;, &quot;=&quot;, false], [&quot;signed_on&quot;, &quot;=&quot;, false]]}">-->
+<!--                            <group>-->
+<!--                                <field name="signed_by" modifiers="{}"/>-->
+<!--                                <field name="signed_on" modifiers="{}"/>-->
+<!--                                <field name="signature" widget="image" modifiers="{}"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+
+<!--                <page string="驗收內容" name="sol_accept">-->
+<!--                  <field name="order_line" mode="tree" on_change="1" modifiers="{&quot;readonly&quot;: [[&quot;state&quot;, &quot;in&quot;, [&quot;cancel&quot;, &quot;done&quot;]]]}">-->
+<!--                        </field>-->
+<!--                </page>-->
+          </notebook>
+<!--                    <field name="filtered_message_ids" />-->
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+<!--                    <field name="filtered_message_ids" />-->
+                    <field name="message_ids" />
+                </div>
+              </form>
+        </field>
+    </record>
 
 
     </data>

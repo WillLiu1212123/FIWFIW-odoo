@@ -9,10 +9,12 @@
                 <tree string="驗收進度表" multi_edit="1" expand="context.get('expand', False)" editable="bottom"
                       create="false" delete="false" default_order='take_date,tobe_date desc'>
                     <button name="accept_sol" type="object" string="驗收" class="oe_highlight"/>
+                    <button name="accept_sol_return" type="object" string="退回" class="oe_highlight"/>
                     <field name="company_id" invisible="1"/>
                     <!--基礎欄位-->
 <!--                    <field name="production_no" string="編號" optional="show" readonly="1"/>-->
-                    <field name="order_line_state" string="訂單編號" optional="show" readonly="1"/>
+                    <field name="order_line_state" optional="show" />
+                    <field name="test_state" optional="show" />
                     <field name="order_id" string="訂單編號" optional="show" readonly="1"/>
                     <field name="product_id" optional="show" readonly="1"/>
                     <field name="user_id" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>

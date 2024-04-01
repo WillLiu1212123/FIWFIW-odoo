@@ -124,6 +124,9 @@ class SaleOrderLine(models.Model):
     def accept_sol(self):
         self.order_line_state = '5'
         self.done_date = fields.Date.today()
+    def accept_sol_return(self):
+        self.order_line_state = '3'
+        # self.done_date = fields.Date.today()
 
     # 出貨完成
     def ship_sol(self):
@@ -261,3 +264,15 @@ class SaleOrderLine(models.Model):
         self.order_id.product_kind_name = product_kind_name
         self.order_id.product_service_type_name = product_service_type_name
         self.order_id.tag_name = tag_name
+
+    def open_order_fable_form(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Sales Order',
+            'res_model': 'sale.order',
+            'res_id': self.order_id.id,
+            'view_mode': 'form',
+            'view_id': self.env.ref('fable_custom.view_order_form_fable_custom').id,
+            'target': 'current',
+        }
