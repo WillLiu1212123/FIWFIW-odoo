@@ -8,8 +8,8 @@
             <field name="arch" type="xml">
                 <tree string="驗收進度表" multi_edit="1" expand="context.get('expand', False)" editable="bottom"
                       create="false" delete="false" default_order='take_date,tobe_date desc'>
-                    <button name="accept_sol" type="object" string="驗收" class="oe_highlight"/>
-                    <button name="accept_sol_return" type="object" string="退回" class="oe_highlight"/>
+                    <button name="accept_sol" type="object" string="驗收通過" class="oe_highlight" attrs="{'invisible': [('order_line_state','!=', '4')]}"/>
+                    <button name="accept_sol_return" type="object" string="驗收不通過" class="oe_highlight" attrs="{'invisible': [('order_line_state','!=', '4')]}"/>
                     <field name="company_id" invisible="1"/>
                     <!--基礎欄位-->
 <!--                    <field name="production_no" string="編號" optional="show" readonly="1"/>-->
@@ -32,6 +32,7 @@
             <field name="model">sale.order.line</field>
             <field name="arch" type="xml">
                 <search string="">
+                     <field name="order_id"/>
                      <filter string="我的訂單" name="my_order" domain="[('user_id', '=', uid)]"/>
                     <separator/>
                     <searchpanel>
@@ -82,7 +83,7 @@
                           (0, 0, {'view_mode': 'tree', 'view_id': ref('fable_sol_accept_view_tree')})]"/>
             <field name="search_view_id" ref="fable_sol_accept_search"/>
             <field name="view_mode">tree</field>
-            <field name="domain">[('order_line_state', '=', 4),]</field>
+            <field name="domain">[('order_line_state', '=', 4),('display_type', '=', False)]</field>
             <field name="context">{'search_default_my_order': 1}</field>
         </record>
 

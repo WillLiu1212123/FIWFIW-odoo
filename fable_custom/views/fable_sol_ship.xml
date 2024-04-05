@@ -9,10 +9,12 @@
                 <tree string="出貨進度表" multi_edit="1" expand="context.get('expand', False)" editable="bottom"
                       create="false" delete="false" default_order='take_date,tobe_date desc'>
                     <button name="ship_sol" type="object" string="出貨" class="oe_highlight"/>
+                    <field name="order_line_state" optional="show" readonly="1"/>
+                    <field name="test_state"/>
                     <field name="company_id" invisible="1"/>
                     <!--基礎欄位-->
 <!--                    <field name="production_no" string="編號" optional="show" readonly="1"/>-->
-                    <field name="order_line_state" string="訂單編號" optional="show" readonly="1"/>
+
                     <field name="order_id" string="訂單編號" optional="show" readonly="1"/>
                     <field name="product_id" optional="show" readonly="1"/>
                     <field name="user_id" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
@@ -80,7 +82,7 @@
                           (0, 0, {'view_mode': 'tree', 'view_id': ref('fable_sol_ship_view_tree')})]"/>
             <field name="search_view_id" ref="fable_sol_ship_search"/>
             <field name="view_mode">tree</field>
-            <field name="domain">[('order_line_state', '=', 5)]</field>
+            <field name="domain">[('order_line_state', '=', 5), ('display_type', '=', False)]</field>
             <field name="context">{'search_default_my_order': 1}</field>
         </record>
         

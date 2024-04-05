@@ -29,11 +29,11 @@ class SaleOrderLine(models.Model):
     done_date = fields.Date(string="實際完成日")
 
     order_line_state = fields.Selection(
-        [('1', '接收訂單'), ('2', '派案'), ('3', '接案'), ('4', '維修完成'), ('5', '驗收完成'), ('6', '訂單出貨'),
+        [('1', '接收訂單'), ('2', '派案'), ('3', '維修中'), ('4', '維修完成'), ('5', '驗收完成'), ('6', '訂單出貨'),
          ('7', '訂單取消')],
         string='訂單狀態', default='1')
     test_state = fields.Selection(
-        [('1', '尚未檢查'), ('2', '通過'), ('3', '不通過'), ('4', '複檢後通過')],
+        [('1', '未檢查'), ('2', '待檢查'), ('3', '通過'), ('4', '不通過'), ('5', '不通過待複檢'), ('6', '複檢後通過')],
         string='驗收狀態', default='1')
 
     # 負責人欄位
@@ -118,14 +118,25 @@ class SaleOrderLine(models.Model):
     # 維修完成
     def done_sol(self):
         self.order_line_state = '4'
+        if self.test_state == '1': #未檢查
+            self.test_state = '2' #待檢查
+        else:
+            self.test_state = '5' #不通過待複檢
         self.done_date = fields.Date.today()
 
-    # 驗收完成
+    # 驗收通過
     def accept_sol(self):
         self.order_line_state = '5'
+        if self.test_state == '2':  # 未檢查
+            self.test_state = '3' #通過
+        if self.test_state == '5':  # 不通過待複檢
+            self.test_state = '6' #複檢後通過
         self.done_date = fields.Date.today()
+
+    # 驗收不過通
     def accept_sol_return(self):
-        self.order_line_state = '3'
+        self.order_line_state = '1'
+        self.test_state = '4' #不通過
         # self.done_date = fields.Date.today()
 
     # 出貨完成

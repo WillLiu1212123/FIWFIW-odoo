@@ -177,7 +177,7 @@ class SaleOrder(models.Model):
     is_order_line_state_4 = fields.Boolean(string='待驗收', compute='_compute_is_order_line_state_4')
 
     order_line_4 = fields.One2many('sale.order.line', 'order_id', string='待驗收',
-                                   domain=[('order_line_state', '=', '4')],
+                                   domain=[('display_type', '=', False)],
                                    states={'cancel': [('readonly', True)], 'done': [('readonly', True)]}, copy=False,
                                    auto_join=True)
 
@@ -193,18 +193,18 @@ class SaleOrder(models.Model):
                 line.user_id = user_id.id
         return super(SaleOrder, self).action_confirm()
 
-    # 計算欄位來篩選包含圖片的訊息
-    filtered_message_ids = fields.One2many(
-        comodel_name='mail.message',
-        compute='_compute_filtered_message_ids',
-        string='Filtered Messages'
-    )
-
-    @api.depends('message_ids')
-    def _compute_filtered_message_ids(self):
-        for record in self:
-            # record.filtered_message_ids = record.message_ids.filtered(lambda m: re.search(r'<img[^>]*>', m.body))
-            record.filtered_message_ids = record.message_ids.filtered(lambda m: m.attachment_ids)
+    # # 計算欄位來篩選包含圖片的訊息
+    # filtered_message_ids = fields.One2many(
+    #     comodel_name='mail.message',
+    #     compute='_compute_filtered_message_ids',
+    #     string='Filtered Messages'
+    # )
+    #
+    # @api.depends('message_ids')
+    # def _compute_filtered_message_ids(self):
+    #     for record in self:
+    #         # record.filtered_message_ids = record.message_ids.filtered(lambda m: re.search(r'<img[^>]*>', m.body))
+    #         record.filtered_message_ids = record.message_ids.filtered(lambda m: m.attachment_ids)
 
     # @api.model
     # def write(self, vals):

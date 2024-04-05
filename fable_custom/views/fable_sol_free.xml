@@ -162,7 +162,7 @@
                           (0, 0, {'view_mode': 'pivot', 'view_id': ref('fable_sol_free_pivot')}),
                           ]"/>
             <field name="search_view_id" ref="fable_sol_free_search"/>
-            <field name="domain">[('state', 'in', ['sale','done'])]</field>
+            <field name="domain">[('state', 'in', ['sale','done']), ('display_type', '=', False)]</field>
             <field name="context">{'search_default_group_by_sale_order': 1, 'expand': 1, 'search_default_my_order': 1}</field>
         </record>
 
@@ -177,7 +177,7 @@
                           (0, 0, {'view_mode': 'form', 'view_id': ref('sale_order_line_view_form')}),
                           ]"/>
             <field name="search_view_id" ref="fable_sol_kanban_search"/>
-            <field name="domain">[('state', 'in', ['sale','done'])]</field>
+            <field name="domain">[('state', 'in', ['sale','done']), ('display_type', '=', False)]</field>
             <field name="context">{'search_default_group_by_order_line_state': 1, 'expand': 1, 'search_default_my_order': 1}</field>
         </record>
 
