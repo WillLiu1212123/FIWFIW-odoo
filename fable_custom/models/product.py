@@ -15,11 +15,11 @@ from odoo.exceptions import ValidationError
 class Product(models.Model):
     _inherit = 'product.template'
 
-    product_kind_id = fields.Many2one(comodel_name="product.kind", string="產品分類", required=False, )
-    product_servicetype_id = fields.Many2one(comodel_name="product.servicetype", string="服務類別", required=False, )
-    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="對應技能", required=False, )
-    product_property_id = fields.Many2one(comodel_name="product.property", string="產品屬性", required=False, )
-    product_size_id = fields.Many2one(comodel_name="product.size", string="產品尺吋", required=False, )
+    product_kind_id = fields.Many2one(comodel_name="product.kind", string="物件", required=False, )
+    product_servicetype_id = fields.Many2one(comodel_name="product.servicetype", string="服務", required=False, )
+    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="技能", required=False, )
+    product_property_id = fields.Many2one(comodel_name="product.property", string="屬性", required=False, )
+    product_size_id = fields.Many2one(comodel_name="product.size", string="尺吋", required=False, )
 
     skill_id = fields.Many2one('hr.skill', 'Skill')
     minimal_skill_level_progress = fields.Integer('Minimal Progress of Skill', default=60,
@@ -89,48 +89,48 @@ class Product(models.Model):
 class ProductKind(models.Model):
     _name = 'product.kind'
     _rec_name = 'name'
-    _description = '產品分類'
+    _description = '物件'
 
-    name = fields.Char(string="產品分類",required=True)
+    name = fields.Char(string="物件",required=True)
     code = fields.Char(string="代號", required=False)
 
 class ProductServicetype(models.Model):
     _name = 'product.servicetype'
     _rec_name = 'name'
-    _description = '服務類別'
+    _description = '服務'
 
-    name = fields.Char(string="服務類別",required=True)
+    name = fields.Char(string="服務",required=True)
     code = fields.Char(string="代號", required=False)
 
 class ProductServiceContent(models.Model):
     _name = 'product.servicecontent'
     _rec_name = 'name'
-    _description = '對應技能'
+    _description = '技能'
 
-    name = fields.Char(string="對應技能",required=True)
+    name = fields.Char(string="技能",required=True)
     code = fields.Char(string="代號", required=False)
     note = fields.Char(string="備註", required=False)
 
 class ProductProperty(models.Model):
     _name = 'product.property'
     _rec_name = 'name'
-    _description = '產品屬性'
+    _description = '屬性'
 
-    name = fields.Char(string="產品屬性",required=True)
+    name = fields.Char(string="屬性",required=True)
     note = fields.Char(string="備註", required=False)
 
 class ProductSize(models.Model):
     _name = 'product.size'
     _rec_name = 'name'
-    _description = '產品尺吋'
+    _description = '尺吋'
 
-    name = fields.Char(string="產品尺吋",required=True)
+    name = fields.Char(string="尺吋",required=True)
     note = fields.Char(string="備註", required=False)
 
 class ProductColor(models.Model):
     _name = 'product.color'
     _rec_name = 'name'
-    _description = '產品顏色'
+    _description = '顏色'
 
-    name = fields.Char(string="產品顏色",required=True)
+    name = fields.Char(string="顏色",required=True)
     note = fields.Char(string="備註", required=False)
