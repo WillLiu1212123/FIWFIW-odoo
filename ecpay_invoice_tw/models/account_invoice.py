@@ -25,7 +25,7 @@ class AccountMove(models.Model):
     is_donation = fields.Boolean(string='是否捐贈發票', readonly=True, copy=False)
     is_print = fields.Boolean(string='是否索取紙本發票', readonly=True, copy=False)
 
-    carrierType = fields.Selection(selection=[('1', '綠界科技電子發票載具'), ('2', '自然人憑證'), ('3', '手機條碼')],
+    carrierType = fields.Selection(selection=[('1', '聯絡人Email'), ('2', '自然人憑證'), ('3', '手機條碼')],
                                    string='載具類別')
 
     lovecode = fields.Char(string='捐贈碼', readonly=True, copy=False)
