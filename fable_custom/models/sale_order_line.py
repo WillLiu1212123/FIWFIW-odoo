@@ -33,7 +33,7 @@ class SaleOrderLine(models.Model):
          ('7', '訂單取消')],
         string='訂單狀態', default='1')
     test_state = fields.Selection(
-        [('1', '未檢查'), ('2', '待檢查'), ('3', '通過'), ('4', '不通過'), ('5', '不通過待複檢'), ('6', '複檢後通過')],
+        [('1', '未完成'), ('2', '待檢查'), ('3', '通過'), ('4', '不通過'), ('5', '不通過待複檢'), ('6', '複檢後通過')],
         string='驗收狀態', default='1')
 
     # 負責人欄位
@@ -108,7 +108,7 @@ class SaleOrderLine(models.Model):
     #     self.product_size_id = False
 
     def take_sol(self):
-        self.order_line_state = '3'
+        self.order_line_state = '3' #維修中
         self.take_date = fields.Date.today()
         if self.sales_delay:
             self.tobe_date = fields.Date.today() + timedelta(days=self.sales_delay)
@@ -117,8 +117,8 @@ class SaleOrderLine(models.Model):
 
     # 維修完成
     def done_sol(self):
-        self.order_line_state = '4'
-        if self.test_state == '1': #未檢查
+        self.order_line_state = '4' #維修完成
+        if self.test_state == '1': #未完成
             self.test_state = '2' #待檢查
         else:
             self.test_state = '5' #不通過待複檢
@@ -126,22 +126,22 @@ class SaleOrderLine(models.Model):
 
     # 驗收通過
     def accept_sol(self):
-        self.order_line_state = '5'
-        if self.test_state == '2':  # 未檢查
+        self.order_line_state = '5' # 驗收完成
+        if self.test_state == '2':  # 待檢查
             self.test_state = '3' #通過
         if self.test_state == '5':  # 不通過待複檢
             self.test_state = '6' #複檢後通過
         self.done_date = fields.Date.today()
 
-    # 驗收不過通
+    # 驗收不通過
     def accept_sol_return(self):
-        self.order_line_state = '1'
+        self.order_line_state = '1' #接收訂單
         self.test_state = '4' #不通過
         # self.done_date = fields.Date.today()
 
     # 出貨完成
     def ship_sol(self):
-        self.order_line_state = '6'
+        self.order_line_state = '6' #訂單出貨
         self.done_date = fields.Date.today()
 
     # 優先順序
@@ -213,7 +213,7 @@ class SaleOrderLine(models.Model):
 
     @api.model
     def create(self, vals):
-        # 创建销售订单行
+        # 創建銷售訂單行
         new_line = super(SaleOrderLine, self).create(vals)
         # print(vals)
         # print(new_line)

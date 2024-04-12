@@ -65,7 +65,7 @@ class SaleOrder(models.Model):
     # cleaning = fields.Char(string="清潔")
     # repair_note_4 = fields.Char(string="維修筆記4")
     # repair = fields.Char(string="維修")
-    repair_details = fields.Char(string="維修細節")
+    repair_details = fields.Char(string="維修細節(舊)")
     tracking_number = fields.Char(string="物流單號")
 
     # char_field_Nx6ii = fields.Char(string="耗材費用")
