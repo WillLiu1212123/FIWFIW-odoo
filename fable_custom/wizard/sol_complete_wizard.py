@@ -6,7 +6,7 @@ from odoo.exceptions import UserError
 
 class SaleOrderLineCompleteWizard(models.TransientModel):
     _name = 'sol.complete.wizard'
-    _description = '接單完成'
+    _description = '維修完成'
 
     remark = fields.Text(string='備註')
     image_ids = fields.Many2many('ir.attachment', string='圖片上傳')
@@ -26,7 +26,12 @@ class SaleOrderLineCompleteWizard(models.TransientModel):
             order.message_post(body=message_body, attachment_ids=self.image_ids.ids)
 
         for line in sale_order_lines:
-            line.done_sol()
+            line.order_line_state = '4'
+            if line.test_state == '1':  # 未檢查
+                line.test_state = '2'  # 待檢查
+            else:
+                line.test_state = '5'  # 不通過待複檢
+            line.done_date = fields.Date.today()
 
             # return {
             #     'type': 'ir.actions.act_window',

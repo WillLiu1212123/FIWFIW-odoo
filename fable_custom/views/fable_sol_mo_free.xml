@@ -8,6 +8,9 @@
             <field name="arch" type="xml">
                 <tree string="維修進度表" multi_edit="1" expand="context.get('expand', False)" editable="bottom"
                       create="false" delete="false" default_order='take_date,tobe_date desc'>
+                    <header>
+                        <button name="%(sol_complete_action)d" type="action" string="批次維修完成" />
+                    </header>
                     <button name="take_sol" type="object" string="領件" class="oe_highlight" attrs="{'invisible': [('order_line_state','!=', '1')]}"/>
                     <button name="done_sol" type="object" string="維修完成" class="oe_highlight" attrs="{'invisible': [('order_line_state','!=', '3')]}"/>
                     <button name="open_order_fable_form" string="開啓訂單" type="object"/>

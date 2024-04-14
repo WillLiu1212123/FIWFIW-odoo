@@ -117,12 +117,25 @@ class SaleOrderLine(models.Model):
 
     # 維修完成
     def done_sol(self):
-        self.order_line_state = '4'
-        if self.test_state == '1': #未檢查
-            self.test_state = '2' #待檢查
-        else:
-            self.test_state = '5' #不通過待複檢
-        self.done_date = fields.Date.today()
+        # self.order_line_state = '4'
+        # if self.test_state == '1': #未檢查
+        #     self.test_state = '2' #待檢查
+        # else:
+        #     self.test_state = '5' #不通過待複檢
+        # self.done_date = fields.Date.today()
+
+        # 返回一个动作调用向导
+        return {
+            'type': 'ir.actions.act_window',
+            'name': '維修批次完成',
+            'res_model': 'sol.complete.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'active_ids': self.id,  # 假设向导中有一个字段名为 order_line_id 用于存放当前订单行 ID
+                'form_view_initial_mode': 'edit',  # 打开表单视图时默认处于编辑状态
+            }
+        }
 
     # 驗收通過
     def accept_sol(self):

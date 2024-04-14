@@ -21,7 +21,7 @@
         </record>
 
         <record id="sol_complete_action" model="ir.actions.act_window">
-            <field name="name">批次完成</field>
+            <field name="name">批次維修完成</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">sol.complete.wizard</field>
             <field name="view_mode">form</field>
