@@ -17,7 +17,7 @@ class ResPartner(models.Model):
     ec_ident_name = fields.Char(string="發票抬頭")
     ec_ident = fields.Char(string="統一編號")
     ec_carrier_type = fields.Selection(string='載具類別',
-                                       selection=[('1', '綠界科技電子發票載具'), ('2', '消費者自然人憑證'),
+                                       selection=[('1', 'Email寄送'), ('2', '消費者自然人憑證'),
                                                   ('3', '消費者手機條碼')])
     ec_carrier_number = fields.Char(string="載具號碼")
 
