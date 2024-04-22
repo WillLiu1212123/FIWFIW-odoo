@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xml:space="preserve">
+    <t t-name="ks_ListView.buttons">
+            <div id="ks_dropdown" class="dropdown">
+                <button type="button" class="btn btn-primary toggle_button dropdown-toggle o_button_lvm ml-1"
+                        data-toggle="dropdown" title="Dynamic List Settings"
+                        aria-expanded="false">
+                    <span class="fa fa-lg fa fa-cog"/>
+
+                    <span class="caret"/>
+                </button>
+                <div class="ks_lvm_dd">
+                    <ul class="dropdown-menu ks_columns ks_list_view_dropdown_container">
+                        <div class="d-flex mb-2">
+                            <input type="text" id="myInput" placeholder="Search for Columns.."
+                                   title="Search For Columns"
+                                   autocomplete="off"/>
+
+                            <button type="button" class="btn btn-primary restore_button o_button_lvm"
+                                    title="Restore to Default View">
+                                <span class="fa fa-lg fa fa-undo"/>
+                            </button>
+                        </div>
+
+                        <t t-call="ks_list_view_fields_selection_list"/>
+                    </ul>
+                </div>
+
+            </div>
+
+            <button type="button" class="btn btn-primary refresh_button o_button_lvm mx-1" title="Refresh Data">
+                <span class="fa fa-lg fa fa-refresh"/>
+            </button>
+            <button type="button" class="btn btn-primary copy_button o_button_lvm mr-1" style="display : none;" title="Duplicate Records">
+                <span class="fa fa-copy"/>
+            </button>
+            <label class="switch mr-1 mode_button o_button_lvm" data-toggle="tooltip" title="Read/Edit Mode">
+                <input type="checkbox" id="mode"/>
+                <span class="slider round"/>
+            </label>
+        </t>
+</template>
