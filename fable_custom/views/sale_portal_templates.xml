@@ -79,7 +79,7 @@
             <td id="dumb_space4" t-attf-class="{{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"/>
             <td id="dumb_space5" colspan="1"/>
             <td t-att-colspan="8">
-                <strong class="mr16">Subtotal</strong>
+                <strong class="mr16">小計</strong>
                     <span
                         t-esc="current_subtotal"
                         t-options='{"widget": "monetary", "display_currency": sale_order.pricelist_id.currency_id}'
