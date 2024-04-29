@@ -52,7 +52,7 @@ class SaleOrderLine(models.Model):
     # filtered_product_id = fields.Many2one(comodel_name="product.product", string="產品", required=False, )
     filtered_product_id = fields.Char(string="", required=False, )
 
-    product_memo = fields.Char(string="備註", required=False, )
+    product_memo = fields.Text(string="備註", required=False, )
     tag_ids = fields.Many2many('crm.tag', 'sale_order_line_tag_rel', 'order_line_id', 'tag_id', string='品牌')
     product_color_id = fields.Many2one(comodel_name="product.color", string="顏色", required=False, )
 
