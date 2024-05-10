@@ -69,25 +69,25 @@
         </record>
 
         <record id="action_product_kind" model="ir.actions.act_window">
-            <field name="name">物件</field>
+            <field name="name">類型</field>
             <field name="res_model">product.kind</field>
             <field name="view_mode">tree,form</field>
         </record>
 
         <record id="action_product_servicetype" model="ir.actions.act_window">
-            <field name="name">服務</field>
+            <field name="name">類別</field>
             <field name="res_model">product.servicetype</field>
             <field name="view_mode">tree,form</field>
         </record>
 
         <record id="action_product_servicecontent" model="ir.actions.act_window">
-            <field name="name">技能</field>
+            <field name="name">材質</field>
             <field name="res_model">product.servicecontent</field>
             <field name="view_mode">tree,form</field>
         </record>
 
         <record id="action_product_property" model="ir.actions.act_window">
-            <field name="name">屬性</field>
+            <field name="name">內容</field>
             <field name="res_model">product.property</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -103,10 +103,10 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem id="menu_product_kind" name="物件" parent="sale.menu_sales_config" action="action_product_kind"/>
-        <menuitem id="menu_product_servicetype" name="服務" parent="sale.menu_sales_config" action="action_product_servicetype"/>
-        <menuitem id="menu_product_servicecontent" name="技能" parent="sale.menu_sales_config" action="action_product_servicecontent"/>
-        <menuitem id="menu_product_property" name="屬性" parent="sale.menu_sales_config" action="action_product_property"/>
+        <menuitem id="menu_product_kind" name="類型" parent="sale.menu_sales_config" action="action_product_kind"/>
+        <menuitem id="menu_product_servicetype" name="類別" parent="sale.menu_sales_config" action="action_product_servicetype"/>
+        <menuitem id="menu_product_servicecontent" name="材質" parent="sale.menu_sales_config" action="action_product_servicecontent"/>
+        <menuitem id="menu_product_property" name="內容" parent="sale.menu_sales_config" action="action_product_property"/>
         <menuitem id="menu_product_size" name="尺吋" parent="sale.menu_sales_config" action="action_product_size"/>
         <menuitem id="menu_product_color" name="顏色" parent="sale.menu_sales_config" action="action_product_color"/>
 
