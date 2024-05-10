@@ -15,10 +15,10 @@ from odoo.exceptions import ValidationError
 class Product(models.Model):
     _inherit = 'product.template'
 
-    product_kind_id = fields.Many2one(comodel_name="product.kind", string="物件", required=False, )
-    product_servicetype_id = fields.Many2one(comodel_name="product.servicetype", string="服務", required=False, )
-    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="技能", required=False, )
-    product_property_id = fields.Many2one(comodel_name="product.property", string="屬性", required=False, )
+    product_kind_id = fields.Many2one(comodel_name="product.kind", string="類型", required=False, )
+    product_servicetype_id = fields.Many2one(comodel_name="product.servicetype", string="類別", required=False, )
+    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="材質", required=False, )
+    product_property_id = fields.Many2one(comodel_name="product.property", string="內容", required=False, )
     product_size_id = fields.Many2one(comodel_name="product.size", string="尺吋", required=False, )
 
     skill_id = fields.Many2one('hr.skill', 'Skill')
@@ -89,34 +89,34 @@ class Product(models.Model):
 class ProductKind(models.Model):
     _name = 'product.kind'
     _rec_name = 'name'
-    _description = '物件'
+    _description = '類型'
 
-    name = fields.Char(string="物件",required=True)
+    name = fields.Char(string="類型",required=True)
     code = fields.Char(string="代號", required=False)
 
 class ProductServicetype(models.Model):
     _name = 'product.servicetype'
     _rec_name = 'name'
-    _description = '服務'
+    _description = '類別'
 
-    name = fields.Char(string="服務",required=True)
+    name = fields.Char(string="類別",required=True)
     code = fields.Char(string="代號", required=False)
 
 class ProductServiceContent(models.Model):
     _name = 'product.servicecontent'
     _rec_name = 'name'
-    _description = '技能'
+    _description = '材質'
 
-    name = fields.Char(string="技能",required=True)
+    name = fields.Char(string="材質",required=True)
     code = fields.Char(string="代號", required=False)
     note = fields.Char(string="備註", required=False)
 
 class ProductProperty(models.Model):
     _name = 'product.property'
     _rec_name = 'name'
-    _description = '屬性'
+    _description = '內容'
 
-    name = fields.Char(string="屬性",required=True)
+    name = fields.Char(string="內容",required=True)
     note = fields.Char(string="備註", required=False)
 
 class ProductSize(models.Model):
