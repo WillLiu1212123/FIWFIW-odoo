@@ -185,13 +185,15 @@ class SaleOrder(models.Model):
     def _compute_is_order_line_state_4(self):
         for order in self:
             order.is_order_line_state_4 = any(line.order_line_state == '4' for line in order.order_line)
-# 0415因為派工不準所以先註解
-    # def action_confirm(self):
-    #     for line in self.order_line:
-    #         user_id = line._find_responsible_user()
-    #         if user_id:
-    #             line.user_id = user_id.id
-    #     return super(SaleOrder, self).action_confirm()
+
+    def action_confirm(self):
+        for line in self.order_line:
+            if not line.user_id :
+                user_id = line._find_responsible_user()
+                if user_id:
+                    line.user_id = user_id.id
+
+        return super(SaleOrder, self).action_confirm()
 
     # # 計算欄位來篩選包含圖片的訊息
     # filtered_message_ids = fields.One2many(

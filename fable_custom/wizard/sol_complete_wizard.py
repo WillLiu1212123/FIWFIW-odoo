@@ -2,6 +2,7 @@
 from odoo.exceptions import Warning
 from odoo import models, fields, exceptions, api, _
 from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 
 class SaleOrderLineCompleteWizard(models.TransientModel):
@@ -10,6 +11,12 @@ class SaleOrderLineCompleteWizard(models.TransientModel):
 
     remark = fields.Text(string='備註')
     image_ids = fields.Many2many('ir.attachment', string='圖片上傳')
+
+    @api.constrains('image_ids')
+    def check_image_ids(self):
+        for record in self:
+            if not record.image_ids:
+                raise ValidationError("圖片上傳不行為空.")
 
     def action_confirm(self):
         self.ensure_one()
