@@ -23,7 +23,7 @@
                     <field name="order_id" string="訂單編號" optional="show" readonly="1"/>
                     <field name="product_id" optional="show" readonly="1"/>
                     <field name="user_id" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
-                    <field name="suitable_user_ids" widget="many2many_tags" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
+<!--                    <field name="suitable_user_ids" widget="many2many_tags" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>-->
                     <field name="sales_delay" optional="show" readonly="1"/>
                     <field name="take_date" optional="show" readonly="1"/>
                     <field name="tobe_date" optional="show" readonly="1"/>

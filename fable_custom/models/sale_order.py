@@ -170,9 +170,9 @@ class SaleOrder(models.Model):
     # text_field_dQehx = fields.Text(string="維修筆記1")
     # text_field_lgQch = fields.Text(string="工坊維修建議")
     # text_field_vENCT = fields.Text(string="OP派件溝通紀錄")
-    product_kind_name = fields.Char(string="產品分類")
-    product_service_type_name = fields.Char(string="服務類別")
-    tag_name = fields.Char(string="品牌")
+    product_kind_name = fields.Char(string="產品分類", compute='_compute_product_kind_name', store=True)
+    product_service_type_name = fields.Char(string="服務類別", compute='_compute_product_kind_name', store=True)
+    tag_name = fields.Char(string="品牌", compute='_compute_product_kind_name', store=True)
 
     is_order_line_state_4 = fields.Boolean(string='待驗收', compute='_compute_is_order_line_state_4')
 
@@ -194,6 +194,45 @@ class SaleOrder(models.Model):
                     line.user_id = user_id.id
 
         return super(SaleOrder, self).action_confirm()
+
+    @api.depends('order_line.product_id', 'order_line.product_kind_id', 'order_line.product_servicetype_id', 'order_line.tag_ids')
+    def _compute_product_kind_name(self):
+        for order in self:
+
+            for line in order.order_line:
+                if line.product_id:
+                    if not order.product_kind_name:
+                        if line.product_kind_id:
+                            order.product_kind_name = line.product_kind_id.name
+
+                    if not order.product_service_type_name:
+                        if line.product_servicetype_id:
+                            order.product_service_type_name = line.product_servicetype_id.name
+
+                    if not order.tag_name:
+                        if line.tag_ids:
+                            for tag in line.tag_ids:
+                                order.tag_name = tag.name
+
+    # @api.onchange('order_line')
+    # def _onchange_order_line(self):
+    #     for line in self.order_line:
+    #         if line.product_id:
+    #             if not self.product_kind_name:
+    #                 if line.product_kind_id:
+    #                     self.product_kind_name = line.product_kind_id.name
+    #
+    #             if not self.product_service_type_name:
+    #                 if line.product_servicetype_id:
+    #                     self.product_service_type_name = line.product_servicetype_id.name
+    #
+    #             if not self.tag_name:
+    #                 if line.tag_ids:
+    #                     for tag in line.tag_ids:
+    #                         self.tag_name = tag.name
+    #     return True
+
+
 
     # # 計算欄位來篩選包含圖片的訊息
     # filtered_message_ids = fields.One2many(

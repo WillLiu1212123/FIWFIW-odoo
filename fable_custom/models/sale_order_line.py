@@ -222,70 +222,70 @@ class SaleOrderLine(models.Model):
             if (check_result):
                 return check_result
 
-    @api.model
-    def create(self, vals):
-        # 创建销售订单行
-        new_line = super(SaleOrderLine, self).create(vals)
-        # print(vals)
-        # print(new_line)
-        self._update_display_fields(False)
-        return new_line
-
-    @api.model
-    def write(self, vals):
-        # print(f"on sale order line write vals :{vals}")
-        result = super(SaleOrderLine, self).write(vals)
-        # print(f"on sale order line write results:{result}")
-        self._update_display_fields(False)
-        # for line in self.order_id.order_line:
-        #     print(f"all line id is {line.id}")
-        #     product_kind_id = line.product_kind_id.id
-        #     if product_kind_id:
-        #         print(f"product kind id is {product_kind_id}")
-        # for pid in self.order_id.order_line.product_kind_id:
-        #     if pid:
-        #         print(f"order lin product kind id is {pid}")
-        return result
-
-    @api.model
-    def unlink(self):
-        # print(f"on sale order line unlink ")
-        self._update_display_fields(True)
-        result = super(SaleOrderLine, self).unlink()
-        return result
-
-    def _update_display_fields(self, is_from_unlink):
-        product_kind_name = ''
-        product_service_type_name = ''
-        tag_name = ''
-
-        # 當 is_from_unlink 為 False，修改 sale order line 中有 product id 的第一筆資料
-        # 當 is_from_unlink 為 True，修改 sale order line 中有 product id 且不是自身的第一筆資料
-        for line in self.order_id.order_line:
-            if (not is_from_unlink or (is_from_unlink and line.id != self.id)) and line.product_id:
-                product_kind_id = line.product_kind_id.id
-                product_service_type_id = line.product_servicetype_id.id
-                tag_id = line.tag_ids.id
-                if product_kind_id:
-                    product_kind = self.env['product.kind'].browse(product_kind_id)
-                    if product_kind:
-                        product_kind_name = product_kind.name
-
-                if product_service_type_id:
-                    product_service_type = self.env['product.servicetype'].browse(product_service_type_id)
-                    if product_service_type:
-                        product_service_type_name = product_service_type.name
-
-                if tag_id:
-                    tag = self.env['crm.tag'].browse(tag_id)
-                    if tag:
-                        tag_name = tag.name
-                break
-
-        # 將 product_kind_name 賦值給 self.order_id.product_kind_name
-        self.order_id.product_kind_name = product_kind_name
-        self.order_id.product_service_type_name = product_service_type_name
-        self.order_id.tag_name = tag_name
+    # @api.model
+    # def create(self, vals):
+    #     # 创建销售订单行
+    #     new_line = super(SaleOrderLine, self).create(vals)
+    #     # print(vals)
+    #     # print(new_line)
+    #     self._update_display_fields(False)
+    #     return new_line
+    #
+    # @api.model
+    # def write(self, vals):
+    #     # print(f"on sale order line write vals :{vals}")
+    #     result = super(SaleOrderLine, self).write(vals)
+    #     # print(f"on sale order line write results:{result}")
+    #     self._update_display_fields(False)
+    #     # for line in self.order_id.order_line:
+    #     #     print(f"all line id is {line.id}")
+    #     #     product_kind_id = line.product_kind_id.id
+    #     #     if product_kind_id:
+    #     #         print(f"product kind id is {product_kind_id}")
+    #     # for pid in self.order_id.order_line.product_kind_id:
+    #     #     if pid:
+    #     #         print(f"order lin product kind id is {pid}")
+    #     return result
+    #
+    # @api.model
+    # def unlink(self):
+    #     # print(f"on sale order line unlink ")
+    #     self._update_display_fields(True)
+    #     result = super(SaleOrderLine, self).unlink()
+    #     return result
+    #
+    # def _update_display_fields(self, is_from_unlink):
+    #     product_kind_name = ''
+    #     product_service_type_name = ''
+    #     tag_name = ''
+    #
+    #     # 當 is_from_unlink 為 False，修改 sale order line 中有 product id 的第一筆資料
+    #     # 當 is_from_unlink 為 True，修改 sale order line 中有 product id 且不是自身的第一筆資料
+    #     for line in self.order_id.order_line:
+    #         if (not is_from_unlink or (is_from_unlink and line.id != self.id)) and line.product_id:
+    #             product_kind_id = line.product_kind_id.id
+    #             product_service_type_id = line.product_servicetype_id.id
+    #             tag_id = line.tag_ids.id
+    #             if product_kind_id:
+    #                 product_kind = self.env['product.kind'].browse(product_kind_id)
+    #                 if product_kind:
+    #                     product_kind_name = product_kind.name
+    #
+    #             if product_service_type_id:
+    #                 product_service_type = self.env['product.servicetype'].browse(product_service_type_id)
+    #                 if product_service_type:
+    #                     product_service_type_name = product_service_type.name
+    #
+    #             if tag_id:
+    #                 tag = self.env['crm.tag'].browse(tag_id)
+    #                 if tag:
+    #                     tag_name = tag.name
+    #             break
+    #
+    #     # 將 product_kind_name 賦值給 self.order_id.product_kind_name
+    #     self.order_id.product_kind_name = product_kind_name
+    #     self.order_id.product_service_type_name = product_service_type_name
+    #     self.order_id.tag_name = tag_name
 
     def open_order_fable_form(self):
         self.ensure_one()
