@@ -181,6 +181,15 @@ class SaleOrder(models.Model):
                                    states={'cancel': [('readonly', True)], 'done': [('readonly', True)]}, copy=False,
                                    auto_join=True)
 
+    @api.model
+    def _get_share_button_action(self):
+        action = self.env.ref('sale.model_sale_order_action_share')
+        if action:
+            action.write({
+                'groups_id': [(6, 0, [self.env.ref('sales_team.group_sale_manager').id])]
+            })
+        return action
+
     @api.depends('order_line.order_line_state')
     def _compute_is_order_line_state_4(self):
         for order in self:

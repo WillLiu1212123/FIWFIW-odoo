@@ -56,6 +56,12 @@ class SaleOrderLine(models.Model):
     tag_ids = fields.Many2many('crm.tag', 'sale_order_line_tag_rel', 'order_line_id', 'tag_id', string='品牌')
     product_color_id = fields.Many2one(comodel_name="product.color", string="顏色", required=False, )
 
+    order_id_name = fields.Char(compute='_compute_order_id_name')
+
+    def _compute_order_id_name(self):
+        for record in self:
+            record.order_id_name = record.order_id.name if record.order_id else ''
+
     @api.onchange('product_kind_id', 'product_servicetype_id', 'product_servicecontent_id', 'product_property_id',
                   'product_size_id')
     def _onchange_filtered_product(self):
@@ -214,6 +220,13 @@ class SaleOrderLine(models.Model):
             self.suitable_user_ids = self.product_id.has_skill_user_ids.filtered(
                 lambda item: item.company_ids in self.company_id)
             # self.user_id = self._find_responsible_user()._origin
+            list = []
+            result = {}
+            for line in self.product_id.has_skill_user_ids.filtered(
+                lambda item: item.company_ids in self.company_id):
+                list.append(line.id)
+            result['domain'] = {'suitable_user_ids': [('id', 'in', list)]}
+            return result
 
     @api.onchange('user_id')
     def _onchange_user_id(self):

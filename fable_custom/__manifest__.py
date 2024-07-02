@@ -10,6 +10,7 @@
     'data': [
         # 'security/fable_custom_security.xml',
         'security/ir.model.access.csv',
+        'data/sale_data.xml',
         # 'views/project_workitem_views.xml',
         # 'views/project_task_views.xml',
         #
