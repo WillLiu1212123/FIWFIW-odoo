@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <function model="sale.order" name="_get_share_button_action"/>
+</data>
+</odoo>
