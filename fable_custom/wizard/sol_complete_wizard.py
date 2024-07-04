@@ -28,17 +28,22 @@ class SaleOrderLineCompleteWizard(models.TransientModel):
         if len(sale_orders) > 1:
             raise UserError(_('一次袛能選一張銷售訂單'))
 
-        for order in sale_orders:
-            message_body = f"Remark: {self.remark}"
-            order.message_post(body=message_body, attachment_ids=self.image_ids.ids)
-
         for line in sale_order_lines:
+            if line.order_line_state == '1':
+                raise UserError(_('不能有正在領件的單子'))
+
             line.order_line_state = '4'
             if line.test_state == '1':  # 未檢查
                 line.test_state = '2'  # 待檢查
             else:
                 line.test_state = '5'  # 不通過待複檢
             line.done_date = fields.Date.today()
+
+        for order in sale_orders:
+            message_body = f"Remark: {self.remark}"
+            order.message_post(body=message_body, attachment_ids=self.image_ids.ids)
+
+
 
             # return {
             #     'type': 'ir.actions.act_window',
