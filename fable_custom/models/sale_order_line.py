@@ -161,6 +161,22 @@ class SaleOrderLine(models.Model):
         self.order_line_state = '6'
         self.done_date = fields.Date.today()
 
+    # 批次領料
+    def bath_take_sol(self):
+        for record in self.browse(self.env.context['active_ids']):
+            if record.order_line_state == '1':
+                record.take_sol()
+
+    def bath_accept_sol_action(self):
+        for record in self.browse(self.env.context['active_ids']):
+            if record.order_line_state == '4':
+                record.accept_sol()
+
+    def bath_accept_sol_return_action(self):
+        for record in self.browse(self.env.context['active_ids']):
+            if record.order_line_state == '4':
+                record.accept_sol_return()
+
     # 優先順序
     priority = fields.Integer('Priority', default=10)
 
@@ -234,6 +250,7 @@ class SaleOrderLine(models.Model):
             check_result = self._check_responsible_user_should_have_skill()
             if (check_result):
                 return check_result
+
 
     # @api.model
     # def create(self, vals):

@@ -12,8 +12,10 @@
         <menuitem id="fable_sol_mo_menu" name="個人維修管理排程" parent="fable_sol_root" action="fable_sol_mo_free_action"
                   sequence="20"/>
         <menuitem id="fable_sol_accept_menu" name="維修驗收" parent="fable_sol_root" action="fable_sol_accept_action"
+                  groups="sales_team.group_sale_manager"
                   sequence="30"/>
         <menuitem id="fable_sol_ship_menu" name="訂單出貨" parent="fable_sol_root" action="fable_sol_ship_action"
+                  groups="sales_team.group_sale_manager"
                   sequence="40"/>
         
 <!--        20230513 產線生產運作此功能先隱藏-->

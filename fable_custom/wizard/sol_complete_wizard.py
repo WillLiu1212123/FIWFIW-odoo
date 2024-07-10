@@ -29,8 +29,8 @@ class SaleOrderLineCompleteWizard(models.TransientModel):
             raise UserError(_('一次袛能選一張銷售訂單'))
 
         for line in sale_order_lines:
-            if line.order_line_state == '1':
-                raise UserError(_('不能有正在領件的單子'))
+            if line.order_line_state != '3':
+                raise UserError(_('袛能處理正在維修中的單子'))
 
             line.order_line_state = '4'
             if line.test_state == '1':  # 未檢查
