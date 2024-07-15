@@ -15,14 +15,14 @@
                     <button name="done_sol" type="object" string="維修完成" class="oe_highlight" attrs="{'invisible': [('order_line_state','!=', '3')]}"/>
                     <button name="open_order_fable_form" string="開啓訂單" type="object"/>
                     <field name="order_line_state" optional="show" readonly="1"/>
-                    <field name="test_state"/>
+                    <field name="test_state" readonly="1"/>
                     <field name="company_id" invisible="1"/>
                     <!--基礎欄位-->
 <!--                    <field name="production_no" string="編號" optional="show" readonly="1"/>-->
 
                     <field name="order_id_name" string="訂單編號" optional="show" readonly="1" />
                     <field name="product_id" optional="show" readonly="1"/>
-                    <field name="user_id" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
+                    <field name="user_id" readonly="1" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>
 <!--                    <field name="suitable_user_ids" widget="many2many_tags" optional="show" options="{'not_delete': True, 'no_create': True, 'no_open': True}"/>-->
                     <field name="sales_delay" optional="show" readonly="1"/>
                     <field name="take_date" optional="show" readonly="1"/>
@@ -175,8 +175,8 @@
                           (0, 0, {'view_mode': 'pivot', 'view_id': ref('fable_sol_mo_free_pivot')}),]"/>
             <field name="search_view_id" ref="fable_sol_mo_free_search"/>
             <field name="view_mode">tree,form,pivot,calendar</field>
-            <field name="domain">[('display_type', '=', False)]</field>
-            <field name="context">{'search_default_my_order': 1}</field>
+            <field name="domain">[('display_type', '=', False), ('user_id', '=', uid)]</field>
+<!--            <field name="context">{'search_default_my_order': 1}</field>-->
         </record>
 
         <record id="view_order_form_fable_custom" model="ir.ui.view">

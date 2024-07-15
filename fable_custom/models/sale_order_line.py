@@ -167,12 +167,12 @@ class SaleOrderLine(models.Model):
             if record.order_line_state == '1':
                 record.take_sol()
 
-    def bath_accept_sol_action(self):
+    def bath_accept_sol(self):
         for record in self.browse(self.env.context['active_ids']):
             if record.order_line_state == '4':
                 record.accept_sol()
 
-    def bath_accept_sol_return_action(self):
+    def bath_accept_sol_return(self):
         for record in self.browse(self.env.context['active_ids']):
             if record.order_line_state == '4':
                 record.accept_sol_return()
