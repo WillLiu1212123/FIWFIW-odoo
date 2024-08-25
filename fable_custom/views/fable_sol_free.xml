@@ -119,6 +119,17 @@
                 <search string="">
                 <filter string="我的訂單" name="my_order" domain="[('user_id', '=', uid)]"/>
                     <separator/>
+                         <field name="state" string="訂單狀態" />
+                        <field name="order_partner_id" />
+                        <field name="customer_ref" string="顧客單號"/>
+                        <field name="product_id" />
+                        <field name="name" />
+                        <field name="order_id" string="訂單編號" />
+                        <field name="order_line_state" string="維修狀態" />
+                        <field name="test_state" string="驗收狀態" />
+
+
+
 
 <!--                    <filter string="排單日" name="filter_schedule_mo_date" date="schedule_mo_date"/>-->
                       <separator/>
