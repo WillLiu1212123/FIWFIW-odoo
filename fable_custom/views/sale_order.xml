@@ -106,10 +106,18 @@
           </xpath>
           <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='product_id']" position="before">
               <field name="product_kind_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
-              <field name="product_servicetype_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
-              <field name="product_servicecontent_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
-              <field name="product_property_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
-              <field name="product_size_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>
+              <field name="product_servicetype_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"
+                 attrs="{'invisible': [('product_kind_id', '=', False)], 'readonly': [('product_kind_id', '=', False)]}"/>
+              <field name="product_servicecontent_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"
+                attrs="{'invisible': [('product_servicetype_id', '=', False)], 'readonly': [('product_servicetype_id', '=', False)]}"/>
+                <field name="product_property_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"
+                       attrs="{'invisible': [('product_servicecontent_id', '=', False)], 'readonly': [('product_servicecontent_id', '=', False)]}"/>
+                <field name="product_size_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"
+                       attrs="{'invisible': [('product_property_id', '=', False)], 'readonly': [('product_property_id', '=', False)]}"/>
+<!--              <field name="product_servicetype_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>-->
+<!--              <field name="product_servicecontent_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>-->
+<!--              <field name="product_property_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>-->
+<!--              <field name="product_size_id" options="{'not_delete': True ,'no_create': True, 'no_open': True}"/>-->
               <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
               <field name="product_color_id" />
           </xpath>
