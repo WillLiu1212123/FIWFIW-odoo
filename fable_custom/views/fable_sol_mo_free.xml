@@ -265,6 +265,7 @@
                               <field name="product_color_id" />
                             <field name="product_id"/>
                             <field name="name"/>
+                            <field name="product_memo"/>
                             <field name="user_id" optional="show"/>
                             <field name="suitable_user_ids" optional="hide"/>
                         </tree>
