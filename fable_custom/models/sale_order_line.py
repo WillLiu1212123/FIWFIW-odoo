@@ -45,9 +45,9 @@ class SaleOrderLine(models.Model):
 
     product_kind_id = fields.Many2one(comodel_name="product.kind", string="類型", required=False, )
     product_servicetype_id = fields.Many2one(comodel_name="product.servicetype", string="類別", required=False, )
-    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="材質",
+    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="內容",
                                                 required=False, )
-    product_property_id = fields.Many2one(comodel_name="product.property", string="內容", required=False, )
+    product_property_id = fields.Many2one(comodel_name="product.property", string="材質", required=False, )
     product_size_id = fields.Many2one(comodel_name="product.size", string="尺吋", required=False, )
     # filtered_product_id = fields.Many2one(comodel_name="product.product", string="產品", required=False, )
     filtered_product_id = fields.Char(string="", required=False, )

@@ -121,6 +121,9 @@
               <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
               <field name="product_color_id" />
           </xpath>
+<!--          <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='product_template_id']" position="attributes">-->
+<!--              <attribute name="invisible">1</attribute>-->
+<!--          </xpath>-->
             <xpath expr="." position="inside">
                 <link rel="stylesheet" href="/fable_custom/static/src/css/style.css"/>
             </xpath>

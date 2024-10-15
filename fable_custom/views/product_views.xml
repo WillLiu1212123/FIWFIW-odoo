@@ -105,8 +105,8 @@
 
         <menuitem id="menu_product_kind" name="類型" parent="sale.menu_sales_config" action="action_product_kind"/>
         <menuitem id="menu_product_servicetype" name="類別" parent="sale.menu_sales_config" action="action_product_servicetype"/>
-        <menuitem id="menu_product_servicecontent" name="材質" parent="sale.menu_sales_config" action="action_product_servicecontent"/>
-        <menuitem id="menu_product_property" name="內容" parent="sale.menu_sales_config" action="action_product_property"/>
+        <menuitem id="menu_product_servicecontent" name="內容" parent="sale.menu_sales_config" action="action_product_servicecontent"/>
+        <menuitem id="menu_product_property" name="材質" parent="sale.menu_sales_config" action="action_product_property"/>
         <menuitem id="menu_product_size" name="尺吋" parent="sale.menu_sales_config" action="action_product_size"/>
         <menuitem id="menu_product_color" name="顏色" parent="sale.menu_sales_config" action="action_product_color"/>
 

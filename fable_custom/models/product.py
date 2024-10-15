@@ -17,8 +17,8 @@ class Product(models.Model):
 
     product_kind_id = fields.Many2one(comodel_name="product.kind", string="類型", required=False, )
     product_servicetype_id = fields.Many2one(comodel_name="product.servicetype", string="類別", required=False, )
-    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="材質", required=False, )
-    product_property_id = fields.Many2one(comodel_name="product.property", string="內容", required=False, )
+    product_servicecontent_id = fields.Many2one(comodel_name="product.servicecontent", string="內容", required=False, )
+    product_property_id = fields.Many2one(comodel_name="product.property", string="材質", required=False, )
     product_size_id = fields.Many2one(comodel_name="product.size", string="尺吋", required=False, )
 
     skill_id = fields.Many2one('hr.skill', 'Skill')
@@ -105,18 +105,18 @@ class ProductServicetype(models.Model):
 class ProductServiceContent(models.Model):
     _name = 'product.servicecontent'
     _rec_name = 'name'
-    _description = '材質'
+    _description = '內容'
 
-    name = fields.Char(string="材質",required=True)
+    name = fields.Char(string="內容",required=True)
     code = fields.Char(string="代號", required=False)
     note = fields.Char(string="備註", required=False)
 
 class ProductProperty(models.Model):
     _name = 'product.property'
     _rec_name = 'name'
-    _description = '內容'
+    _description = '材質'
 
-    name = fields.Char(string="內容",required=True)
+    name = fields.Char(string="材質",required=True)
     note = fields.Char(string="備註", required=False)
 
 class ProductSize(models.Model):
